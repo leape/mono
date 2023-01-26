@@ -22,7 +22,7 @@ To achieve this we started with [web-components](https://github.com/db-ui/elemen
 
 ### Decision Criteria
 
--   Mitosis generates `.json' files that are compiled into native components for each framework.
+-   Mitosis generates `.json` files that are compiled into native components for each framework.
 -   The plugin structure helps us to create custom outputs for frameworks like MS Power-Apps.
 -   It's open source and backed by a company.
 -   Supports most frameworks and web components
