@@ -6,7 +6,7 @@ To reduce the amount of time spent deploying and linking dependant packages, we 
 
 ## Problem description and context
 
-We hab the problem that issues inside elements often occurs on the token level (base).
+We had the problem that issues inside UI elements often occurs on the token level (base).
 For developers, it was a time-consuming task to link the projects, find and fix the issue. Sometimes base or core had to be deployed to test if the solution really works, which leads to countless hours waiting for deployments until the result was fine.
 
 ## General conditions and decision criteria
