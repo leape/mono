@@ -44,7 +44,7 @@ To achieve this we started with [web-components](https://github.com/db-ui/elemen
 
 #### Evaluation
 
--   Generated artefacts are only slightly larger than vanilla JS
+-   Generated artefacts are only slightly larger than Vanilla JS
 -   Polyfills are handled automatically
 -   Flexible build system
 -   With Ionic, a larger project is behind it as a maintainer
