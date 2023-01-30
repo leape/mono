@@ -38,7 +38,7 @@ To achieve this we started with [web-components](https://github.com/db-ui/elemen
 -   Flexible build system with plugin
 -   Builder.io as maintainer
 -   TypeScript (tsx)
--   No wired wrappers around web components
+-   No wired wrappers around Web Components
 
 ### B - Stencil
 
