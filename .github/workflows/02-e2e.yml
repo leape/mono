@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [chromium, firefox, webkit]
+        project: [chromium, firefox, webkit, "Mobile Chrome", "Mobile Safari"]
         framework: [react, vue/vue3]
 
     steps:
@@ -55,7 +55,7 @@ jobs:
 
       - name: 👩‍🔬 Test with Playwright 🎭
         working-directory: ./output/${{ matrix.framework}}
-        run: npx playwright test --project=${{ matrix.project }}
+        run: npx playwright test --project=${{ matrix.project }} --grep @fast"
 
       - name: 🆙 Upload test results
         if: failure()
