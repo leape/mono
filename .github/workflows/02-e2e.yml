@@ -55,7 +55,7 @@ jobs:
 
       - name: 👩‍🔬 Test with Playwright 🎭
         working-directory: ./output/${{ matrix.framework}}
-        run: npx playwright test --project=${{ matrix.project }} --grep @fast"
+        run: npx playwright test --project=${{ matrix.project }} --grep @fast
 
       - name: 🆙 Upload test results
         if: failure()
