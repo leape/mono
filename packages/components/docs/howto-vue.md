@@ -2,7 +2,7 @@
 
 ## Purpose
 
-You are an Application Developer and you want to use DB UI Elements in your own Vue app.
+You are an Application Developer and you want to use DB UI Components in your own Vue app.
 
 ## Install via npm
 
