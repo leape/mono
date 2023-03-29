@@ -10,7 +10,7 @@ You are an Application Developer and you want to use DB UI Components in your ow
 npm i -save @db-ui/ngx-components
 ```
 
-As a result you should have 3 new folders in your `node_modules`:
+As a result you should have three new folders in your `node_modules`:
 
 ```javascript
 @db-ui

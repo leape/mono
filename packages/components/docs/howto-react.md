@@ -10,7 +10,7 @@ You are an Application Developer and you want to use DB UI Elements in your own 
 npm i -save @db-ui/react-components
 ```
 
-As a result you should have 3 new folders in your `node_modules`:
+As a result you should have three new folders in your `node_modules`:
 
 ```javascript
 @db-ui
