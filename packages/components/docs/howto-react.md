@@ -21,7 +21,6 @@ As a result you should have three new folders in your `node_modules`:
 
 ### Integrate in your app
 
-You can use db-ui-element components like default React components.
 Import your component like this:
 
 ```typescript
