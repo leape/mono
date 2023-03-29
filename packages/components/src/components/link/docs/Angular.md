@@ -1,12 +1,12 @@
 ## Angular
 
-Load SCSS globally somewhere in your app:
+Load SCSS globally within `styles.scss` in your app:
 
 ```scss
 @use "@db-ui/components/build/styles/db-ui-42-webpack" as *;
 ```
 
-Load component:
+Load component within `app.module.ts`:
 
 ```typescript
 import { DBLinkModule } from '@db-ui/ngx-components';
@@ -22,5 +22,5 @@ import { DBLinkModule } from '@db-ui/ngx-components';
 Use component in template:
 
 ```html
-<db-link variant="primary">Link</db-link>
+<DBLink variant="primary" href="#">Link</DBLink>
 ```

@@ -1,24 +1,19 @@
 ## Vue
 
-Load SCSS globally somewhere in your app:
+Load SCSS globally in a `index.scss` file and import it in your `main.ts`/`main.js` file in your app:
 
-```
-@use "@db-ui/foundations/build/scss/variables.global" as *;
+```scss
 @use "@db-ui/components/build/styles/db-ui-42-rollup" as *;
-@use "@db-ui/foundations/build/scss/color-classes" as *;
-
 ```
 
 Use component:
 
-```
-
+```vue
 <script>
-import { DBLink } from '@db-ui/v-components';
+import { DBLink } from "@db-ui/v-components";
 </script>
 
 <template>
-  <DBLink variant="primary">Link</DBLink>
+	<DBLink variant="primary" href="#">Link</DBLink>
 </template>
-
 ```

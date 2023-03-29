@@ -1,25 +1,15 @@
 ## React
 
-Load SCSS globally somewhere in your app:
+Load SCSS globally in a `index.scss` file inside `main.tsx`/`main.jsx` within your app:
 
-```
-@use "@db-ui/foundations/build/scss/variables.global" as *;
+```scss
 @use "@db-ui/components/build/styles/db-ui-42-rollup" as *;
-@use "@db-ui/foundations/build/scss/color-classes" as *;
-
 ```
 
 Import component:
 
-```
-import { DBLink } from '@db-ui/react-components';
+```typescript
+import { DBLink } from "@db-ui/react-components";
 
-	<DBLink
-		href="#"
-		variant={variant}
-		disabled={disabled}
-		size={size}
-		content={content}>
-		{children}
-</DBLink>
+<DBLink href="#">{children}</DBLink>;
 ```
