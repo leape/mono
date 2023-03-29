@@ -24,7 +24,7 @@ As a result you should have three new folders in your `node_modules`:
 Import your component like this:
 
 ```typescript
-import { DbButton } from "@db-ui/react-components";
+import { DBButton } from "@db-ui/react-components";
 ```
 
 | WARNING: Some components require fonts and/or icons to work properly |

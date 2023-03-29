@@ -26,7 +26,7 @@ Import a DB UI Components component into a vue component (\*.vue) like this:
 ```vue
 <script setup lang="ts">
 import {
-  DbButton,
+  DBButton,
 } from '@db-ui/v-components';
 ...
 </script>
