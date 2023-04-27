@@ -17,6 +17,10 @@
  */
 const getComponents = () => [
 	{
+		name: 'textarea'
+	},
+
+	{
 		name: 'code-docs'
 	},
 

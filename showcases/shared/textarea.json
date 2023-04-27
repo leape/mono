@@ -1,0 +1,55 @@
+[
+	{
+		"name": "Variant",
+		"examples": [
+			{
+				"name": "(Default) Basic",
+				"props": {
+					"label": "Label",
+					"description": "(Default) Basic"
+				}
+			},
+			{
+				"name": "Informational",
+				"props": {
+					"label": "Label",
+					"description": "Informational",
+					"variant": "informational"
+				}
+			},
+			{
+				"name": "Warning",
+				"props": {
+					"label": "Label",
+					"description": "Warning",
+					"variant": "warning"
+				}
+			},
+			{
+				"name": "Critical",
+				"props": {
+					"label": "Label",
+					"description": "Critical",
+					"variant": "critical"
+				}
+			},
+			{
+				"name": "Successful",
+				"props": {
+					"label": "Label",
+					"description": "Successful",
+					"variant": "successful"
+				}
+			}
+		]
+	},
+	{
+		"name": "TODO: Edit me in ./showcases/shared/textarea.json",
+		"examples": [
+			{
+				"name": "(Default) textarea",
+				"props": { "value": "qwer" }
+			}
+		]
+	}
+]

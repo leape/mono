@@ -17,7 +17,11 @@
 @use "../components/radio/radio" as *;
 @use "../components/code-docs/code-docs" as *;
 
+@use "../components/textarea/textarea" as *;
+
 // angular-workaround
+dbtextarea,
+db-textarea,
 dbalert,
 db-alert,
 dbcodedocs,

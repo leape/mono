@@ -1,3 +1,4 @@
+import { TextareaComponent } from '../components/textarea/textarea.component';
 import { InputComponent } from '../components/input/input.component';
 import { ButtonComponent } from '../components/button/button.component';
 import { FormComponent } from '../components/form/form.component';
@@ -10,6 +11,7 @@ import { CardComponent } from '../components/card/card.component';
 import { DividerComponent } from '../components/divider/divider.component';
 
 export const NAVIGATION_ITEMS = [
+	{ path: 'textarea', label: 'Textarea', component: TextareaComponent },
 	{ path: 'divider', label: 'Divider', component: DividerComponent },
 	{ path: 'radio', label: 'Radio', component: RadioComponent },
 	{ path: 'alert', label: 'Alert', component: AlertComponent },

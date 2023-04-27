@@ -1,0 +1,56 @@
+/* Add styles for component here */
+@charset "utf-8";
+@use "sass:map";
+@use "@db-ui/foundations/build/scss/default.assets-paths" as *;
+@use "@db-ui/foundations/build/scss/variables" as *;
+@use "@db-ui/foundations/build/scss/variables.global" as *;
+@use "@db-ui/foundations/build/scss/helpers/functions" as *;
+@use "@db-ui/foundations/build/scss/icon/icons.helpers" as *;
+@use "@db-ui/foundations/build/scss/body-styles" as *;
+@use "@db-ui/foundations/build/scss/color-placeholder" as *;
+@use "@db-ui/foundations/build/scss/color/color-variants" as *;
+@use "@db-ui/foundations/build/scss/helpers/component" as *;
+
+.db-textarea {
+	textarea {
+		@extend %bg-transparent-hover;
+		@extend %default-interactive-component;
+		@extend %component-border;
+		@include get-variant-bg-color(0.08);
+	}
+
+	@each $name, $colors in $component-variants {
+		@if ($name == "critical") {
+			&[data-variant="critical"] {
+				color: nth($colors, 3);
+			}
+		}
+
+		&[data-variant="#{$name}"] textarea {
+			--db-current-border-color: #{map.get($colors, "border")};
+			@if ($name == "critical") {
+				@extend %adaptive-critical-component;
+			} @else if ($name == "informational") {
+				@extend %adaptive-informational-component;
+			} @else if ($name == "warning") {
+				@extend %adaptive-warning-component;
+			} @else if ($name == "successful") {
+				@extend %adaptive-successful-component;
+			}
+
+			& + label {
+				color: map.get($colors, "on-bg");
+			}
+
+			// & ~ .db-icon {
+			// 	color: $db-colors-informational-on-bg-enabled;
+			// }
+
+			& ~ .description,
+			& ~ .icon-state,
+			& ~ .icon-state .db-icon {
+				color: map.get($colors, "element");
+			}
+		}
+	}
+}

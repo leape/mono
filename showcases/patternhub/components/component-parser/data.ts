@@ -5,7 +5,8 @@ export type ComponentParserType = {
 export type ComponentType = {
 	index?: string | number;
 	type?: /* hygen type */
-	| 'h1'
+	| 'textarea'
+		| 'h1'
 		| 'h2'
 		| 'h3'
 		| 'h4'
@@ -27,6 +28,5 @@ export type ComponentType = {
 		| string;
 	content?: string | ComponentType[];
 	props?: any;
-
 	className?: string;
 };

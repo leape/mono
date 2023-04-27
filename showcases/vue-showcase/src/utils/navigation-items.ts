@@ -1,3 +1,5 @@
+import Textarea from '../components/textarea/Textarea.vue';
+
 import Form from '../components/form/Form.vue';
 import Button from '../components/button/Button.vue';
 import Input from '../components/input/Input.vue';
@@ -10,6 +12,8 @@ import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
 
 export const navigationItems: any = [
+	{ path: '/textarea', label: 'Textarea', component: Textarea },
+
 	{ path: '/', label: 'Home', component: Form },
 	{ path: '/divider', label: 'Divider', component: Divider },
 	{ path: '/radio', label: 'Radio', component: Radio },

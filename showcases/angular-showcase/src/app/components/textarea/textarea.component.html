@@ -1,0 +1,15 @@
+<app-default-component
+	title="Textarea"
+	[variants]="variants"
+	[exampleTemplate]="exampleTemplate"
+>
+	<ng-template
+		#exampleTemplate
+		let-exampleProps="exampleProps"
+		let-exampleName="exampleName"
+		let-exampleIndex="exampleIndex"
+		let-variantIndex="variantIndex"
+	>
+		<db-textarea>{{ exampleName }}</db-textarea>
+	</ng-template>
+</app-default-component>

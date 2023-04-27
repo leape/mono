@@ -1,3 +1,5 @@
+import { TextareaComponent } from './components/textarea/textarea.component';
+
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +17,8 @@ import {
 	DBCodeDocsModule,
 	DBAlertModule,
 	DBSectionModule,
-	DBInfotextModule
+	DBInfotextModule,
+	DBTextareaModule
 } from '../../../../output/angular/src';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -33,6 +36,8 @@ import { DefaultComponent } from './components/default.component';
 
 @NgModule({
 	declarations: [
+		TextareaComponent,
+
 		AppComponent,
 		DefaultComponent,
 		FormComponent,
@@ -47,6 +52,8 @@ import { DefaultComponent } from './components/default.component';
 		DividerComponent
 	],
 	imports: [
+		DBTextareaModule,
+
 		AppRoutingModule,
 		BrowserModule,
 		DBButtonModule,
