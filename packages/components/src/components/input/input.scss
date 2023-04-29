@@ -332,7 +332,7 @@
 		}
 		// :user-invalid workaround
 		@supports not selector(:user-invalid) {
-			&:invalid:not(:placeholder-shown),
+			&:invalid:not(:placeholder-shown) {
 				@extend %adaptive-critical-component;
 			}
 		}
