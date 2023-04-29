@@ -327,9 +327,15 @@
 	}
 
 	input {
-		&:is(:user-invalid):not([aria-invalid]),
-		// :user-invalid workaround, listing all relevant form validation attributes: https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation#validation-related_attributes
-		&:is(:required, [pattern], [min], [max], [step], [minlength], [maxlength]):invalid:not(:placeholder-shown),
+		&:is(:user-invalid):not([aria-invalid]) {
+			@extend %adaptive-critical-component;
+		}
+		// :user-invalid workaround
+		@supports not selector(:user-invalid) {
+			&:invalid:not(:placeholder-shown),
+				@extend %adaptive-critical-component;
+			}
+		}
 		// Programmatic invalid status, most likely set via JavaScript
 		&[aria-invalid="true"] {
 			@extend %adaptive-critical-component;
