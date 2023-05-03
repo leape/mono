@@ -1,0 +1,32 @@
+{
+  "name": "@db-ui/mitosis",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "generate:component": "hygen mitosis new",
+    "generate:icon-types": "node scripts/generate-icon-types.js"
+  },
+  "devDependencies": {
+    "@builder.io/eslint-plugin-mitosis": "^0.0.14",
+    "@builder.io/mitosis": "^0.0.99",
+    "@builder.io/mitosis-cli": "^0.0.58",
+    "@react-docgen/cli": "^1.0.0-alpha.1",
+    "cpr": "3.0.1",
+    "eslint": "^8.39.0",
+    "hygen": "^6.2.11",
+    "nodemon": "2.0.22",
+    "sass": "^1.62.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
