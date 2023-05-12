@@ -12,6 +12,7 @@ import {
 
 export interface DBTextareaDefaultProps {
 	variant?: DefaultVariantProps;
+	infomsg?: string;
 }
 
 export type DBTextareaProps = DBTextareaDefaultProps &
@@ -21,7 +22,9 @@ export type DBTextareaProps = DBTextareaDefaultProps &
 	FormProps &
 	DefaultVariantProps;
 
-export interface DBTextareaDefaultState {}
+export interface DBTextareaDefaultState {
+	_infomsg: string;
+}
 
 export type DBTextareaState = DBTextareaDefaultState &
 	GlobalState &

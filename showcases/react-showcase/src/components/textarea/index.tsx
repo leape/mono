@@ -7,11 +7,13 @@ import { getVariants } from '../data';
 const handleChange = (evt) => {
 	console.log('Change: ', evt);
 };
-const getTextarea = ({ value, variant }: DBTextareaProps) => (
+const getTextarea = ({ value, variant, infomsg, label }: DBTextareaProps) => (
 	<DBTextarea
 		onChange={handleChange}
 		value={value}
-		variant={variant}></DBTextarea>
+		variant={variant}
+		label={label}
+		infomsg={infomsg}></DBTextarea>
 );
 
 const TextareaComponent = () => {

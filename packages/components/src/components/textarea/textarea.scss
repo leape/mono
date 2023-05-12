@@ -17,6 +17,9 @@
 		@extend %default-interactive-component;
 		@extend %component-border;
 		@include get-variant-bg-color(0.08);
+		padding: $db-spacing-fixed-xs $db-spacing-fixed-sm;
+		display: flex;
+		flex-direction: column;
 	}
 
 	@each $name, $colors in $component-variants {
@@ -51,6 +54,44 @@
 			& ~ .icon-state .db-icon {
 				color: map.get($colors, "element");
 			}
+		}
+	}
+
+	@mixin label-focus-animation(
+		$translationX: var(--db-input-padding-inline-start)
+	) {
+		$transformScale: -1.25;
+		transition: opacity 0.08s, transform 0.15s;
+		opacity: var(--db-input-focus-opacity);
+		// add 0.1em to adjust label with input padding-inline-start
+		transform: translate(
+				calc($translationX + 0.1em),
+				calc($db-sizing-md * $transformScale)
+			)
+			scale(var(--db-input-label-scale));
+	}
+
+	label {
+		@extend %default-color;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		font-size: var(--db-type-body-font-size-md);
+		transform-origin: left;
+		transform: translate(
+			var(--db-input-padding-inline-start),
+			calc(-1 * var(--db-sizing-md))
+		);
+		transition: transform 0.2s $db-transition-functional-timing;
+		will-change: transform;
+		height: $db-sizing-md;
+		cursor: text;
+		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
+		max-width: var(--db-input-label-max-width, 80%);
+		span:first-child {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 	}
 }
