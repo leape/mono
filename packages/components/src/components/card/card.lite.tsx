@@ -8,6 +8,7 @@ useMetadata({
 		// MS Power Apps
 		includeIcon: false,
 		properties: [
+			{ name: 'children', type: 'SingleLine.Text' },
 			{
 				name: 'variant',
 				type: 'Enum',
@@ -23,6 +24,24 @@ useMetadata({
 						value: 'interactive'
 					}
 				]
+			},
+			{
+				name: 'elevation',
+				type: 'Enum',
+				values: [
+					{ key: 'Default', name: 'Default', value: 'default' },
+					{ key: 'None', name: 'None', value: 'none' }
+				]
+			},
+			{
+				name: 'spacing',
+				type: 'Enum',
+				values: [
+					{ key: 'None', name: 'None', value: 'none' },
+					{ key: 'Medium', name: 'Medium', value: 'medium' },
+					{ key: 'Small', name: 'Small', value: 'small' }
+				]
+
 			}
 		]
 	}
