@@ -35,8 +35,14 @@ const updateNestedComponents = (input, rootComponentName, powerAppsFolder) => {
 
 			Replace.sync({
 				files: `../../output/power-apps/${rootComponentName}/${nestedComponent.name}/model.ts`,
-				from: `../../shared/`,
-				to: `../shared/`
+				from: `../../shared/model`,
+				to: `../shared/model`
+			});
+
+			Replace.sync({
+				files: `../../output/power-apps/${rootComponentName}/${nestedComponent.name}/model.ts`,
+				from: `../../shared/constants`,
+				to: `../shared/constants`
 			});
 		}
 	}
