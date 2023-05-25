@@ -11,15 +11,370 @@
 @use "@db-ui/foundations/build/scss/color/color-variants" as *;
 @use "@db-ui/foundations/build/scss/helpers/component" as *;
 
+:root,
+.db-ui-regular,
+.db-ui-expressive {
+	--db-textarea-disabled-label-opacity: 0.25;
+}
+
+.db-ui-functional {
+	--db-textarea-disabled-label-opacity: 0;
+}
+
+@mixin label-focus-animation(
+	$translationX: var(--db-textarea-padding-inline-start)
+) {
+	$transformScale: -1.25;
+
+	transition: opacity 0.08s, transform 0.15s;
+	opacity: var(--db-textarea-focus-opacity);
+
+	// add 0.1em to adjust label with textarea padding-inline-start
+	transform: translate(
+			calc($translationX + 0.1em),
+			calc($db-sizing-md * $transformScale)
+		)
+		scale(var(--db-textarea-label-scale));
+}
+
 .db-textarea {
+	--db-textarea-padding-inline-start: #{$db-spacing-fixed-sm};
+	--db-textarea-padding-end-icon-after: 0;
+	--db-textarea-end-data-variant: 0;
+	--db-textarea-padding-end-datalist: 0;
+	--icon-margin-after: 0;
+	--db-textarea-label-max-width: 80%;
+
+	position: relative;
+
+	// padding-inline-end according to current amount of icons
+	// &:has(> .icon-before) {
+	// 	--db-textarea-padding-inline-start: #{calc(#{$db-sizing-md})};
+	// 	--db-textarea-label-max-width: 70%;
+
+	// 	textarea {
+	// 		padding-inline-start: var(--db-textarea-padding-inline-start);
+	// 	}
+	// }
+
+	// &:has(> .icon-after) {
+	// 	--db-textarea-padding-end-icon-after: 1;
+	// }
+
+	&[data-variant] {
+		--db-textarea-padding-end-data-variant: 1;
+	}
+
+	// two trailing icons
+	// &[data-variant]:has(> .icon-after) {
+	// 	--db-textarea-label-max-width: 61%;
+	// }
+
+	// &:has(> datalist):has(> .icon-after) {
+	// 	.icon-after {
+	// 		padding-inline-start: $db-spacing-fixed-xs;
+	// 	}
+	// }
+
+	// &:has(> datalist) {
+	// 	--db-textarea-padding-end-datalist: 1;
+
+	// 	// Datalist icon
+	// 	@include icon(glyph(expand-more), 24, "outline", "after");
+
+	// 	&::after {
+	// 		transition: transform $db-transition-emotional-straight;
+	// 	}
+
+	// 	&:has(textarea:is(:focus, :not(:placeholder-shown))) {
+	// 		&::after {
+	// 			transform: rotate(180deg);
+	// 		}
+	// 	}
+
+	// 	textarea {
+	// 		&::-webkit-calendar-picker-indicator {
+	// 			display: none !important;
+	// 		}
+	// 	}
+	// }
+
+	// .db-icon,
+	// db-icon,
+	// &:has(> datalist)::after {
+	// 	--icon-font-family: var(--db-base-icon-font-family);
+	// 	--icon-font-size: var(--db-base-icon-font-size);
+
+	// 	@extend %db-body-sm;
+
+	// 	font-size: var(--icon-font-size);
+
+	// 	height: $db-sizing-md;
+	// 	display: flex;
+	// 	align-items: center;
+	// 	position: absolute;
+	// 	top: 0;
+	// 	margin-inline: $db-spacing-fixed-sm;
+	// }
+
+	// .icon-after,
+	// // angular specific nesting
+	// dbicon.icon-after > .db-icon,
+	// &:has(> datalist)::after {
+	// 	right: 0;
+	// }
+
+	// .icon-after {
+	// 	margin-inline-end: calc(
+	// 		#{$db-spacing-fixed-sm} + var(--db-textarea-padding-end-datalist) * #{$db-sizing-md} -
+	// 			var(--db-textarea-padding-end-datalist) * #{$db-spacing-fixed-sm}
+	// 	);
+	// }
+
+	// currently not supported by firefox
+	// &:has(> textarea:disabled) {
+	// 	.db-icon,
+	// 	.icon-state,
+	// 	&:has(> datalist)::after {
+	// 		opacity: 0.5;
+	// 	}
+	// }
+
+	label {
+		@extend %default-color;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		font-size: var(--db-type-body-font-size-md);
+
+		transform-origin: left;
+		transform: translate(
+			var(--db-textarea-padding-inline-start),
+			calc(-1 * var(--db-sizing-md))
+		);
+		transition: transform 0.2s $db-transition-functional-timing;
+		will-change: transform;
+		height: $db-sizing-md;
+		cursor: text;
+		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
+		max-width: var(--db-textarea-label-max-width, 80%);
+
+		span:first-child {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+	}
+
+	.description {
+		@extend %db-body-xs;
+		margin: $db-spacing-fixed-2xs $db-spacing-fixed-sm 0;
+
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
 	textarea {
+		--db-textarea-padding-inline-end: calc(
+			(
+					var(--db-textarea-padding-end-icon-after) +
+						var(--db-textarea-padding-end-data-variant) +
+						var(--db-textarea-padding-end-datalist)
+				) * #{$db-sizing-md}
+		);
+
 		@extend %bg-transparent-hover;
 		@extend %default-interactive-component;
 		@extend %component-border;
 		@include get-variant-bg-color(0.08);
-		padding: $db-spacing-fixed-xs $db-spacing-fixed-sm;
+
+		height: $db-sizing-md;
+		max-width: 100%;
+		width: 100%;
+		padding: $db-spacing-fixed-xs var(--db-textarea-padding-inline-end)
+			$db-spacing-fixed-xs var(--db-textarea-padding-inline-start);
+
+		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
+		&:focus,
+		&:not(:placeholder-shown) {
+			padding-bottom: calc(
+				$db-spacing-fixed-xs - var(--db-textarea-focus-opacity) *
+					$db-spacing-fixed-xs
+			);
+			// move filled text for expressive and regular to center with focused label
+			padding-top: calc(
+				var(--db-spacing-fixed-xs) + 0.25em *
+					var(--db-textarea-focus-opacity)
+			);
+
+			+ label {
+				@include label-focus-animation();
+			}
+		}
+
+		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
+		&:disabled,
+		fieldset:disabled & {
+			&,
+			& + label {
+				// Decided against cursor: not-allowed, compare to e.g. https://phabricator.wikimedia.org/T121960
+				opacity: 0.25;
+				pointer-events: none;
+			}
+		}
+
+		&:required {
+			+ label::after {
+				content: " *";
+				padding-left: 0.2rem;
+			}
+		}
+
+		// disabled and prefilled value – different in tonalities
+		&:disabled:not(:placeholder-shown) {
+			+ label {
+				opacity: var(--db-textarea-disabled-label-opacity);
+			}
+		}
+
+		&[type="color"],
+		&[type="date"],
+		&[type="datetime-local"],
+		&[type="email"],
+		&[type="month"],
+		&[type="number"],
+		&[type="password"],
+		&[type="search"],
+		&[type="tel"],
+		&[type="text"],
+		&[type="time"],
+		&[type="url"],
+		&[type="week"] {
+			@extend %db-body-sm;
+
+			&:not([type="date"]):not([type="datetime-local"]):not(
+					[type="month"]
+				):not([type="time"]):not([type="week"])
+				+ label {
+				// Adopted by https://www.heise.de/developer/artikel/a11y-Reduced-Motion-4356171.html
+				@media (prefers-reduced-motion: reduce) {
+					transition-duration: 0.01s !important;
+				}
+			}
+
+			// Hiding textarea placeholder for floating label
+			&::placeholder {
+				opacity: 0;
+			}
+
+			&:focus {
+				&::placeholder {
+					opacity: 0.5;
+				}
+			}
+		}
+
+		&[type="search"] {
+			// TODO: Change rem to a x times db-sizing-md
+			$paddingLeft: calc($db-spacing-fixed-sm * 2 + 0.625rem);
+
+			padding-inline-start: var(--db-textarea-padding-inline-start);
+
+			&,
+			& + label {
+				--db-textarea-padding-inline-start: #{calc(
+						$db-spacing-fixed-sm * 2 + 0.625rem
+					)};
+			}
+
+			& ~ .icon-state {
+				// TODO replace with svg icon
+				@include icon(glyph(search), 20, "filled", "before");
+			}
+
+			+ label {
+				transform: translate(
+					$paddingLeft,
+					calc(-1 * var(--db-sizing-md))
+				);
+			}
+
+			~ .description {
+				padding-inline-start: $paddingLeft;
+			}
+
+			&:focus,
+			&:not(:placeholder-shown) {
+				&:not(:disabled) {
+					+ label {
+						padding-inline-start: 0;
+					}
+				}
+			}
+
+			// https://stackoverflow.com/questions/20804016/editing-textarea-type-search-pseudo-element-button-x
+			&::-webkit-search-cancel-button {
+				appearance: none;
+				position: absolute;
+				right: $db-spacing-fixed-sm;
+				top: 0;
+				height: $db-sizing-md;
+				width: 1em;
+				background: url(#{$icons-path}functional/images/navigation/db_ic_cancel_24.svg)
+					no-repeat 50% 50%;
+				background-size: contain;
+				cursor: pointer;
+				transition: opacity 0.12s;
+			}
+		}
+	}
+
+	// #variations
+	.icon-state {
+		--icon-textarea-margin-inline-end: calc(
+			(
+					var(--db-textarea-padding-end-icon-after) +
+						var(--db-textarea-padding-end-datalist)
+				) * #{$db-sizing-md} + #{$db-spacing-fixed-sm} -
+				var(--db-textarea-padding-end-datalist) * #{$db-spacing-fixed-sm} -
+				var(--db-textarea-padding-end-icon-after) * #{$db-spacing-fixed-sm}
+		);
+		--icon-font-family: var(--db-base-icon-font-family-filled);
+		--icon-font-size: var(--db-base-icon-font-size);
 		display: flex;
-		flex-direction: column;
+		align-items: center;
+		flex-direction: row;
+		position: absolute;
+		top: 0;
+		height: $db-sizing-md;
+
+		pointer-events: none;
+		right: 0;
+
+		margin-inline-end: var(--icon-textarea-margin-inline-end);
+
+		&::before {
+			--icon-font-family: var(--db-base-icon-font-family-filled);
+			--icon-font-size: var(--db-base-icon-font-size);
+		}
+
+		// angular specific nesting
+		> .db-icon {
+			position: static;
+			padding: 0;
+
+			// TODO: Check whether we could find a more general solution for this
+			&::before {
+				--icon-font-family: var(--db-base-icon-font-family-filled);
+				--icon-font-size: var(--db-base-icon-font-size);
+			}
+		}
+	}
+
+	textarea:required:invalid:not(:placeholder-shown),
+	textarea[aria-invalid="true"] {
+		@extend %adaptive-critical-component;
 	}
 
 	@each $name, $colors in $component-variants {
@@ -54,44 +409,6 @@
 			& ~ .icon-state .db-icon {
 				color: map.get($colors, "element");
 			}
-		}
-	}
-
-	@mixin label-focus-animation(
-		$translationX: var(--db-input-padding-inline-start)
-	) {
-		$transformScale: -1.25;
-		transition: opacity 0.08s, transform 0.15s;
-		opacity: var(--db-input-focus-opacity);
-		// add 0.1em to adjust label with input padding-inline-start
-		transform: translate(
-				calc($translationX + 0.1em),
-				calc($db-sizing-md * $transformScale)
-			)
-			scale(var(--db-input-label-scale));
-	}
-
-	label {
-		@extend %default-color;
-		position: absolute;
-		display: flex;
-		align-items: center;
-		font-size: var(--db-type-body-font-size-md);
-		transform-origin: left;
-		transform: translate(
-			var(--db-input-padding-inline-start),
-			calc(-1 * var(--db-sizing-md))
-		);
-		transition: transform 0.2s $db-transition-functional-timing;
-		will-change: transform;
-		height: $db-sizing-md;
-		cursor: text;
-		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
-		max-width: var(--db-input-label-max-width, 80%);
-		span:first-child {
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
 		}
 	}
 }

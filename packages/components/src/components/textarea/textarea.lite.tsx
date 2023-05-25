@@ -9,7 +9,15 @@ useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
 		includeIcon: false,
-		properties: []
+		properties: [
+			{ name: 'label', type: 'SingleLine.Text', required: true },
+			{ name: 'placeholder', type: 'SingleLine.Text' },
+			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' }, // $event.target["value"|"checked"|...]
+			{
+				name: 'variant',
+				type: 'DefaultVariant' // this is a custom type not provided by ms
+			}
+		]
 	}
 });
 
@@ -69,20 +77,21 @@ export default function DBTextarea(props: DBTextareaProps) {
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
-			<label
-				htmlFor={state._id}
-				aria-hidden="true"
-				id={state._id + '-label'}>
-				<span>{props.label ?? DEFAULT_VALUES.label}</span>
-			</label>
 			<textarea
 				id={state._id}
 				onChange={(event) => state.handleChange(event)}
 				value={state._value}
 				rows="5"
 				cols="33"
+				placeholder={props.placeholder ?? DEFAULT_VALUES.placeholder}
 			/>
-			<span class="db-textarea-info-msg">{state._infomsg}</span>
+			<label
+				htmlFor={state._id}
+				aria-hidden="true"
+				id={state._id + '-label'}>
+				<span>{props.label ?? DEFAULT_VALUES.label}</span>
+			</label>
+			<span class="description">{state._infomsg}</span>
 		</div>
 	);
 }
