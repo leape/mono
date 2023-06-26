@@ -12,13 +12,15 @@
 @mixin get-border-and-icon($colors) {
 	&:not(&[data-type="strong"]) {
 		--db-current-border-color: #{map.get($colors, "border")};
-		/*
-		.tag-label {
-			::before {
-				color: map.get($colors, "element");
+
+		// TODO: We should check if icons for tag & button should have element color
+		/*		.tag-label {
+			&[data-icon] {
+				&::before {
+					color: #{map.get($colors, "element")};
+				}
 			}
-		}
-*/
+		}*/
 	}
 }
 
@@ -139,11 +141,6 @@
 
 		&:not(.is-icon-text-replace) {
 			margin-inline: $db-spacing-fixed-2xs;
-			/*
-			::before {
-				margin-inline-end: $db-spacing-fixed-2xs;
-			}
-*/
 		}
 
 		&[data-overflow="true"] {
@@ -153,7 +150,7 @@
 		}
 
 		&[data-icon] {
-			--icon-margin-after: #{$db-spacing-fixed-3xs};
+			--icon-margin-after: #{$db-spacing-fixed-2xs};
 
 			&::before {
 				vertical-align: top;
