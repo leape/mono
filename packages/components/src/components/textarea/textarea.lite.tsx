@@ -9,6 +9,7 @@ useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
 		includeIcon: false,
+		hasDisabledProp: true,
 		properties: [
 			{ name: 'label', type: 'SingleLine.Text', required: true },
 			{ name: 'placeholder', type: 'SingleLine.Text' },
@@ -23,7 +24,9 @@ useMetadata({
 
 const DEFAULT_VALUES = {
 	label: DEFAULT_LABEL,
-	placeholder: ' '
+	placeholder: ' ',
+	rows: 2,
+	cols: 33
 };
 export default function DBTextarea(props: DBTextareaProps) {
 	// This is used as forwardRef
@@ -79,10 +82,11 @@ export default function DBTextarea(props: DBTextareaProps) {
 			</Show>
 			<textarea
 				id={state._id}
+				disabled={props.disabled}
 				onChange={(event) => state.handleChange(event)}
 				value={state._value}
-				rows="5"
-				cols="33"
+				rows={props.rows ?? DEFAULT_VALUES.rows}
+				cols={props.cols ?? DEFAULT_VALUES.cols}
 				placeholder={props.placeholder ?? DEFAULT_VALUES.placeholder}
 			/>
 			<label

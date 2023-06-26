@@ -35,7 +35,8 @@
 				"name": "(Default) Basic",
 				"props": {
 					"label": "Label",
-					"description": "(Default) Basic"
+					"description": "(Default) Basic",
+					"placeholder": "I am a placeholder"
 				}
 			},
 			{
@@ -87,6 +88,7 @@
 				"props": {
 					"label": "Label",
 					"value": "Input Text",
+					"disabled": true,
 					"description": "Filled"
 				}
 			},

@@ -15,6 +15,11 @@
 .db-ui-regular,
 .db-ui-expressive {
 	--db-textarea-disabled-label-opacity: 0.25;
+	.db-textarea {
+		label {
+			// top: 3.5rem;
+		}
+	}
 }
 
 .db-ui-functional {
@@ -30,9 +35,15 @@
 	opacity: var(--db-textarea-focus-opacity);
 
 	// add 0.1em to adjust label with textarea padding-inline-start
+	// transform: translate(
+	// 		calc($translationX + 0.1em),
+	// 		calc($db-sizing-md * $transformScale)
+	// 	)
+	// 	scale(var(--db-textarea-label-scale));
+
 	transform: translate(
-			calc($translationX + 0.1em),
-			calc($db-sizing-md * $transformScale)
+			var(--db-textarea-padding-inline-start),
+			calc(-0.5 * var(--db-spacing-fixed-2xs))
 		)
 		scale(var(--db-textarea-label-scale));
 }
@@ -46,7 +57,8 @@
 	--db-textarea-label-max-width: 80%;
 
 	position: relative;
-
+	display: flex;
+	flex-direction: column;
 	// padding-inline-end according to current amount of icons
 	// &:has(> .icon-before) {
 	// 	--db-textarea-padding-inline-start: #{calc(#{$db-sizing-md})};
@@ -61,9 +73,10 @@
 	// 	--db-textarea-padding-end-icon-after: 1;
 	// }
 
-	&[data-variant] {
-		--db-textarea-padding-end-data-variant: 1;
-	}
+	// &[data-variant] {
+	// 	--db-textarea-padding-end-data-variant: 1;
+	// }
+	--db-textarea-padding-end-data-variant: 1;
 
 	// two trailing icons
 	// &[data-variant]:has(> .icon-after) {
@@ -143,18 +156,23 @@
 	label {
 		@extend %default-color;
 		position: absolute;
+		// top: $db-spacing-fixed-xs;
 		display: flex;
 		align-items: center;
 		font-size: var(--db-type-body-font-size-md);
 
 		transform-origin: left;
+		// transform: translate(
+		// 	var(--db-textarea-padding-inline-start),
+		// 	calc(-1 * var(--db-sizing-md))
+		// );
 		transform: translate(
 			var(--db-textarea-padding-inline-start),
-			calc(-1 * var(--db-sizing-md))
+			var(--db-spacing-fixed-xs)
 		);
 		transition: transform 0.2s $db-transition-functional-timing;
 		will-change: transform;
-		height: $db-sizing-md;
+		// height: $db-sizing-md;
 		cursor: text;
 		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
 		max-width: var(--db-textarea-label-max-width, 80%);
@@ -181,7 +199,7 @@
 					var(--db-textarea-padding-end-icon-after) +
 						var(--db-textarea-padding-end-data-variant) +
 						var(--db-textarea-padding-end-datalist)
-				) * #{$db-sizing-md}
+				) * #{$db-sizing-xs}
 		);
 
 		@extend %bg-transparent-hover;
@@ -189,24 +207,28 @@
 		@extend %component-border;
 		@include get-variant-bg-color(0.08);
 
-		height: $db-sizing-md;
+		// height: $db-sizing-md;
 		max-width: 100%;
 		width: 100%;
-		padding: $db-spacing-fixed-xs var(--db-textarea-padding-inline-end)
-			$db-spacing-fixed-xs var(--db-textarea-padding-inline-start);
+		padding: calc(
+				var(--db-type-body-font-size-2xs) + var(--db-spacing-fixed-2xs)
+			)
+			var(--db-textarea-padding-inline-end) $db-spacing-fixed-xs
+			var(--db-textarea-padding-inline-start);
 
 		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
 		&:focus,
 		&:not(:placeholder-shown) {
-			padding-bottom: calc(
-				$db-spacing-fixed-xs - var(--db-textarea-focus-opacity) *
-					$db-spacing-fixed-xs
-			);
+			// top: $db-spacing-fixed-xs;
+			// padding-bottom: calc(
+			// 	$db-spacing-fixed-xs - var(--db-textarea-focus-opacity) *
+			// 		$db-spacing-fixed-xs
+			// );
 			// move filled text for expressive and regular to center with focused label
-			padding-top: calc(
-				var(--db-spacing-fixed-xs) + 0.25em *
-					var(--db-textarea-focus-opacity)
-			);
+			// padding-top: calc(
+			// 	var(--db-spacing-fixed-xs) + 0.25em *
+			// 		var(--db-textarea-focus-opacity)
+			// );
 
 			+ label {
 				@include label-focus-animation();
@@ -238,94 +260,16 @@
 			}
 		}
 
-		&[type="color"],
-		&[type="date"],
-		&[type="datetime-local"],
-		&[type="email"],
-		&[type="month"],
-		&[type="number"],
-		&[type="password"],
-		&[type="search"],
-		&[type="tel"],
-		&[type="text"],
-		&[type="time"],
-		&[type="url"],
-		&[type="week"] {
-			@extend %db-body-sm;
+		@extend %db-body-sm;
 
-			&:not([type="date"]):not([type="datetime-local"]):not(
-					[type="month"]
-				):not([type="time"]):not([type="week"])
-				+ label {
-				// Adopted by https://www.heise.de/developer/artikel/a11y-Reduced-Motion-4356171.html
-				@media (prefers-reduced-motion: reduce) {
-					transition-duration: 0.01s !important;
-				}
-			}
-
-			// Hiding textarea placeholder for floating label
-			&::placeholder {
-				opacity: 0;
-			}
-
-			&:focus {
-				&::placeholder {
-					opacity: 0.5;
-				}
-			}
+		// Hiding textarea placeholder for floating label
+		&::placeholder {
+			opacity: 0;
 		}
 
-		&[type="search"] {
-			// TODO: Change rem to a x times db-sizing-md
-			$paddingLeft: calc($db-spacing-fixed-sm * 2 + 0.625rem);
-
-			padding-inline-start: var(--db-textarea-padding-inline-start);
-
-			&,
-			& + label {
-				--db-textarea-padding-inline-start: #{calc(
-						$db-spacing-fixed-sm * 2 + 0.625rem
-					)};
-			}
-
-			& ~ .icon-state {
-				// TODO replace with svg icon
-				@include icon(glyph(search), 20, "filled", "before");
-			}
-
-			+ label {
-				transform: translate(
-					$paddingLeft,
-					calc(-1 * var(--db-sizing-md))
-				);
-			}
-
-			~ .description {
-				padding-inline-start: $paddingLeft;
-			}
-
-			&:focus,
-			&:not(:placeholder-shown) {
-				&:not(:disabled) {
-					+ label {
-						padding-inline-start: 0;
-					}
-				}
-			}
-
-			// https://stackoverflow.com/questions/20804016/editing-textarea-type-search-pseudo-element-button-x
-			&::-webkit-search-cancel-button {
-				appearance: none;
-				position: absolute;
-				right: $db-spacing-fixed-sm;
-				top: 0;
-				height: $db-sizing-md;
-				width: 1em;
-				background: url(#{$icons-path}functional/images/navigation/db_ic_cancel_24.svg)
-					no-repeat 50% 50%;
-				background-size: contain;
-				cursor: pointer;
-				transition: opacity 0.12s;
+		&:focus {
+			&::placeholder {
+				opacity: 0.5;
 			}
 		}
 	}
