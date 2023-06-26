@@ -7,8 +7,32 @@ import classNames from 'classnames';
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
-		includeIcon: false,
-		properties: []
+		// MS Power Apps
+		includeIcon: true,
+		properties: [
+			// jscpd:ignore-start
+			{ name: 'children', type: 'SingleLine.Text' },
+			{
+				name: 'variant',
+				type: 'Enum',
+				values: [
+					{ key: 'Adaptive', name: 'Adaptive', value: 'adaptive' },
+					{ key: 'Critical', name: 'Critical', value: 'critical' },
+					{ key: 'Informational', name: 'Informational', value: 'informational' },
+					{ key: 'Warning', name: 'Warning', value: 'warning' },
+					{ key: 'Successful', name: 'Successful', value: 'successful' },
+				]
+			},
+			{
+				name: 'size',
+				type: 'Enum',
+				values: [
+					{ key: 'Sedium', name: 'Medium', value: 'medium' },
+					{ key: 'Small', name: 'Small', value: 'small' }
+				]
+			}
+			// jscpd:ignore-end
+		]
 	}
 });
 

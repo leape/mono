@@ -13,9 +13,9 @@ export type GlobalProps = {
 	className?: string;
 
 	/**
-	 * React specific for render process.
+	 * [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) is used to link to the elements that describe the element with the set attribute.
 	 */
-	key?: string;
+	describedbyid?: string;
 
 	/**
 	 * [ID](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) of the component, generated automatically for some components as a fallback if unset.
@@ -23,14 +23,19 @@ export type GlobalProps = {
 	id?: string;
 
 	/**
-	 * [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) is used to link to the elements that describe the element with the set attribute.
+	 * React specific for render process.
 	 */
-	describedbyid?: string;
+	key?: string;
 
 	/**
 	 * Web Component specific: Adds a link tag with the path to show css inside Shadow DOM.
 	 */
 	stylePath?: string;
+
+	/**
+	 * The default tabindex (https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex?retiredLocale=de).
+	 */
+	tabIndex?: number;
 
 	/**
 	 * The [title attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title) specifies the tooltip of the component.
@@ -39,6 +44,7 @@ export type GlobalProps = {
 };
 
 export type GlobalState = {
+	_id?: string;
 	stylePath?: string;
 	getClassNames: (...args: classNames.ArgumentArray) => string;
 };
@@ -108,16 +114,28 @@ export type FormProps = {
 	invalid?: boolean;
 };
 
+export type FormCheckProps = {
+	/**
+	 * Define the radio or checkbox elements checked state
+	 */
+	checked?: boolean;
+};
+
 export type FormState = {
-	_id?: string;
 	_isValid?: boolean | undefined;
 	_value?: any;
+};
+
+export type FormCheckState = {
+	initialized: boolean;
 };
 
 export type GlobalTextProps = {
 	placeholder?: string;
 	maxLength?: number;
 	minLength?: number;
+	max?: number;
+	min?: number;
 	pattern?: string;
 };
 
@@ -168,6 +186,7 @@ export type LinkProps = {
 		| 'strict-origin-when-cross-origin'
 		| 'unsafe-url';
 	selected?: boolean;
+	text?: string;
 };
 
 export type CardProps = {
@@ -186,6 +205,25 @@ export type ClickEventProps = {
 
 export type ClickEventState = {
 	handleClick: (event: any) => void;
+};
+
+export type ToggleEventProps = {
+	onToggle?: (open: boolean) => void;
+};
+
+export type ToggleEventState = {
+	toggle?: () => void;
+};
+
+export type CloseEventProps = {
+	/**
+	 * Function to handle button click (close).
+	 */
+	onClose?: () => void;
+};
+
+export type CloseEventState = {
+	handleClose?: (event: any) => void;
 };
 
 export type ChangeEventProps = {
@@ -214,6 +252,17 @@ export type ValidEventProps = {
 };
 
 export type NestedRefComponentType = { getFormRef?: () => { current?: any } };
+
+export type InnerCloseButtonProps = {
+	/**
+	 * The closeButtonId attribute changes the id inside the close button.
+	 */
+	closeButtonId?: string;
+	/**
+	 * The closeButtonText attribute changes the text inside the close button.
+	 */
+	closeButtonText?: string;
+};
 
 export type KeyValueType = {
 	key: string;

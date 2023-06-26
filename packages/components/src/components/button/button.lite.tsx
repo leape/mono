@@ -6,6 +6,7 @@ import classNames from 'classnames';
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
+		// MS Power Apps
 		includeIcon: true,
 		hasDisabledProp: true,
 		hasOnClick: true,
@@ -73,12 +74,14 @@ export default function DBButton(props: DBButtonProps) {
 
 	return (
 		<button
+			id={props.id}
 			ref={component}
 			class={state.getClassNames('db-button', props.className, {
 				'is-icon-text-replace':
 					state.iconVisible(props.icon) && props.noText
 			})}
 			type={props.type}
+			title={props.title}
 			disabled={props.disabled}
 			aria-label={props.label}
 			data-icon={state.iconVisible(props.icon) ? props.icon : undefined}

@@ -8,6 +8,9 @@ import {
 	DBLink,
 	DBAlert,
 	DBInput,
+	DBSelect,
+	DBCheckbox,
+	DBTag,
 	DBRadio,
 	DBDivider,
 	DBCard,
@@ -150,6 +153,13 @@ const ComponentSwitch = ({
 			</DBInput>
 		);
 	}
+	if (type === 'checkbox') {
+		return (
+			<DBCheckbox className={className} {...props}>
+				{resolvedContent}
+			</DBCheckbox>
+		);
+	}
 	if (type === 'radio') {
 		return (
 			<DBRadio className={className} {...props}>
@@ -177,6 +187,22 @@ const ComponentSwitch = ({
 			<DBTextarea className={className} {...props}>
 				{resolvedContent}
 			</DBTextarea>
+		);
+	}
+      
+  if (type === 'select') {
+		return (
+			<DBSelect className={className} {...props}>
+				{resolvedContent}
+			</DBSelect>
+		);
+	}
+
+	if (type === 'tag') {
+		return (
+			<DBTag className={className} {...props}>
+				{resolvedContent}
+			</DBTag>
 		);
 	}
 

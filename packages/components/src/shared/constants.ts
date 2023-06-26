@@ -1,6 +1,7 @@
 export const DEFAULT_ID = 'OVERWRITE_DEFAULT_ID';
 export const DEFAULT_LABEL = 'LABEL SHOULD BE SET';
 
+export const DEFAULT_CLOSE_BUTTON = 'Close Button';
 export const TONALITY_CONST = 'tonality';
 export const COLOR_CONST = 'color';
 
@@ -12,6 +13,10 @@ export enum TONALITY {
 export const TONALITIES: TONALITY[] = Object.entries(TONALITY).map(
 	([, value]) => value
 );
+
+export enum COLOR_SIMPLE {
+	'PRIMARY' = 'primary'
+}
 
 export enum COLOR {
 	'NEUTRAL_0' = 'neutral-0',
@@ -42,6 +47,9 @@ export enum COLOR {
 }
 
 export const COLORS: COLOR[] = Object.entries(COLOR).map(([, value]) => value);
+export const COLORS_SIMPLE: COLOR_SIMPLE[] = Object.entries(COLOR_SIMPLE).map(
+	([, value]) => value
+);
 
 export enum VARIANT {
 	'CRITICAL' = 'critical',

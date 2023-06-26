@@ -1,5 +1,5 @@
 <app-default-component
-	title="Alert"
+	title="DBAlert"
 	[variants]="variants"
 	[exampleTemplate]="exampleTemplate"
 >
@@ -20,9 +20,6 @@
 			(click)="showAlert(exampleName)"
 		>
 			{{ exampleName }}
-			<span *ngIf="exampleProps.slotLink" #link>{{
-				exampleProps.slotLink
-			}}</span>
 		</db-alert>
 	</ng-template>
 </app-default-component>
