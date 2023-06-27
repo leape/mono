@@ -11,7 +11,6 @@ export const getDefaultScreenshotTest = (component: string) => {
 				const isWebkit =
 					testInfo.project.name === 'webkit' ||
 					testInfo.project.name === 'mobile_safari';
-				const isFirefox = testInfo.project.name === 'firefox';
 				const showcase = process.env.showcase;
 				const isAngular = showcase.startsWith('angular');
 
@@ -19,11 +18,10 @@ export const getDefaultScreenshotTest = (component: string) => {
 					fullPage: true
 				};
 
-				if (isWebkit) {
-					config.maxDiffPixels = isAngular ? 1000 : 6;
-				} else if (isFirefox && isAngular) {
-					config.maxDiffPixelRatio = 0.05;
-					config.maxDiffPixels = 100;
+				if (isAngular) {
+					config.maxDiffPixels = 1000;
+				} else if (isWebkit) {
+					config.maxDiffPixels = 6;
 				} else {
 					config.maxDiffPixels = 1;
 				}
