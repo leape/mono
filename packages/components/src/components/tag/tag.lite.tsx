@@ -10,7 +10,6 @@ useMetadata({
 		isFormComponent: true,
 		properties: [
 			{ name: 'children', type: 'SingleLine.Text' },
-			{ name: 'name', type: 'SingleLine.Text' },
 			// { name: 'disabled', type: 'TwoOptions' },
 			{
 				name: 'variant',
