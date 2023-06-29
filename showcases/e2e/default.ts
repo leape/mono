@@ -14,8 +14,11 @@ export const getDefaultScreenshotTest = (component: string) => {
 				const showcase = process.env.showcase;
 				const isAngular = showcase.startsWith('angular');
 
+				const header = await page.locator('header');
+
 				const config: any = {
-					fullPage: true
+					fullPage: true,
+					mask: [header]
 				};
 
 				if (isAngular) {
