@@ -17,6 +17,7 @@
 	@extend %bg-transparent-interactive;
 	@extend %default-button;
 
+	display: inline-flex;
 	height: $db-sizing-md;
 	padding: $db-spacing-fixed-xs $db-spacing-fixed-md;
 

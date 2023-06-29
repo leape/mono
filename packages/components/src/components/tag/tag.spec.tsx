@@ -5,7 +5,11 @@ import { DBTag } from './index';
 // @ts-ignore - vue can only find it with .ts as file ending
 import { VARIANTS } from '../../shared/constants.ts';
 
-const comp = <DBTag>Test</DBTag>;
+const comp = (
+	<DBTag>
+		<span>Test</span>
+	</DBTag>
+);
 
 const testComponent = () => {
 	test('should contain text', async ({ mount }) => {
@@ -25,7 +29,9 @@ const testVariants = () => {
 			mount
 		}) => {
 			const component = await mount(
-				<DBTag variant={variant}>Test</DBTag>
+				<DBTag variant={variant}>
+					<span>Test</span>
+				</DBTag>
 			);
 			await expect(component).toHaveScreenshot();
 		});

@@ -8,19 +8,13 @@
 @use "@db-ui/foundations/build/scss/body-styles" as *;
 @use "../../styles/button-components";
 @use "@db-ui/foundations/build/scss/helpers/functions" as *;
+@use "@db-ui/foundations/build/scss/icon/icons.placeholder" as *;
+@use "@db-ui/foundations/build/scss/icon/icons.helpers" as *;
+@use "@db-ui/foundations/build/scss/icon/icons.variables" as *;
 
 @mixin get-border-and-icon($colors) {
 	&:not(&[data-type="strong"]) {
 		--db-current-border-color: #{map.get($colors, "border")};
-
-		// TODO: We should check if icons for tag & button should have element color
-		/*		.tag-label {
-			&[data-icon] {
-				&::before {
-					color: #{map.get($colors, "element")};
-				}
-			}
-		}*/
 	}
 }
 
@@ -64,58 +58,99 @@
 	}
 }
 
+@mixin interactive {
+	&:has(input:checked),
+	.db-button:not(.db-tab-remove-button),
+	.db-link {
+		@content;
+	}
+}
+
+@mixin tag-types {
+	.db-button:not(.db-tab-remove-button),
+	.db-link,
+	&:has(input),
+	&:has(span) {
+		@content;
+	}
+}
+
 %interactive-colors {
+	@include interactive {
+		@extend %db-bg-neutral-4-ia;
+	}
+
 	&:has(input:not(:checked)) {
 		@extend %db-bg-neutral-0-ia;
 	}
 
-	&:has(input:checked) {
-		@extend %db-bg-neutral-4-ia;
-
-		&[data-type="strong"] {
+	&[data-type="strong"] {
+		@include interactive {
+			--db-colors-neutral-on-bg-hover: #{$db-colors-neutral-on-enabled};
+			--db-colors-neutral-on-bg-pressed: #{$db-colors-neutral-on-enabled};
 			@extend %db-neutral-component-ia;
 		}
+	}
 
-		@each $name, $colors in $component-variants {
-			&[data-variant="#{$name}"] {
-				@if ($name == "critical") {
+	@each $name, $colors in $component-variants {
+		&[data-variant="#{$name}"] {
+			@if ($name == "critical") {
+				@include interactive {
 					@extend %db-bg-critical-ia;
+				}
 
-					&[data-type="strong"] {
+				&[data-type="strong"] {
+					@include interactive {
 						@extend %db-critical-component-ia;
 					}
-				} @else if ($name == "informational") {
+				}
+			} @else if ($name == "informational") {
+				@include interactive {
 					@extend %db-bg-informational-ia;
+				}
 
-					&[data-type="strong"] {
+				&[data-type="strong"] {
+					@include interactive {
 						@extend %db-informational-component-ia;
 					}
-				} @else if ($name == "warning") {
+				}
+			} @else if ($name == "warning") {
+				@include interactive {
 					@extend %db-bg-warning-ia;
+				}
 
-					&[data-type="strong"] {
+				&[data-type="strong"] {
+					@include interactive {
 						@extend %db-warning-component-ia;
 					}
-				} @else if ($name == "successful") {
+				}
+			} @else if ($name == "successful") {
+				@include interactive {
 					@extend %db-bg-successful-ia;
+				}
 
-					&[data-type="strong"] {
+				&[data-type="strong"] {
+					@include interactive {
 						@extend %db-successful-component-ia;
 					}
 				}
+			}
 
+			@include interactive {
 				@include get-border-and-icon($colors);
 			}
 		}
 	}
 }
 
-.db-tag {
+%db-tag {
 	@extend %focus-placeholder;
 	@extend %default-interactive-component;
 	@extend %component-border;
 	@extend %db-body-sm;
 	@extend %default-button;
+
+	padding-block: 0;
 
 	height: $db-sizing-sm;
 	min-width: $db-sizing-sm;
@@ -123,48 +158,114 @@
 	transition: background-color $db-transition-color,
 		color $db-transition-color;
 
-	&:not(&[data-interactive="true"]) {
-		@extend %tag-colors;
-	}
-
-	&[data-interactive="true"] {
-		@extend %interactive-colors;
-	}
-
 	input {
 		@include a11y-visually-hidden();
 	}
 
-	.tag-label {
+	label,
+	span {
 		@extend %db-body-sm;
-		display: block;
+		margin-inline-start: 0;
+	}
 
-		&:not(.is-icon-text-replace) {
-			margin-inline: $db-spacing-fixed-2xs;
-		}
+	&:has(span) {
+		@extend %tag-colors;
+	}
+}
 
-		&[data-overflow="true"] {
-			max-width: $db-sizing-2xl;
-			text-overflow: ellipsis;
-			overflow: hidden;
-		}
-
+%interactive-icon-passing {
+	&:not(:has(span)) {
+		// only for interactive elements link/button/checkbox/radio
 		&[data-icon] {
-			--icon-margin-after: #{$db-spacing-fixed-2xs};
-
 			&::before {
-				vertical-align: top;
+				// don't show default icon
+				display: none;
+			}
+		}
+
+		@each $icon-name, $icon-glyph in $icon-glyphs {
+			&[data-icon="#{$icon-name}"] {
+				label,
+				.db-button:not(.db-tab-remove-button),
+				.db-link {
+					&::before {
+						@extend %icon;
+						content: "#{$icon-glyph}";
+						margin-inline-end: var(
+							--icon-margin-after,
+							#{$db-spacing-fixed-2xs}
+						);
+					}
+				}
+			}
+		}
+	}
+}
+
+%no-text {
+	&[data-no-text="true"] {
+		@include tag-types {
+			--icon-margin-after: 0;
+			@include is-icon-text-replace();
+			padding: 0;
+
+			label,
+			span {
+				@include is-icon-text-replace();
 			}
 		}
 	}
 
-	.db-button[data-size="small"] {
-		border-radius: to-rem(3);
-		height: 100%;
+	&:not(&[data-no-text="true"]) {
+		@include tag-types {
+			padding-inline: $db-spacing-fixed-2xs;
+		}
+
+		&:has(.db-tab-remove-button) {
+			padding-inline-end: 0;
+		}
+	}
+}
+
+.db-tag {
+	--icon-margin-after: #{$db-spacing-fixed-2xs};
+	@extend %interactive-colors;
+	@extend %interactive-icon-passing;
+	@extend %no-text;
+
+	display: flex;
+
+	@include tag-types {
+		@extend %db-tag;
+		text-decoration: none;
+
+		&::after {
+			display: none !important;
+		}
+	}
+
+	a {
+		display: inline-flex;
+	}
+
+	&[data-overflow="true"] {
+		span,
+		label,
+		a,
+		button {
+			max-width: $db-sizing-2xl;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 	}
 
 	&[data-disabled="true"] {
 		opacity: $default-opacity;
 		pointer-events: none;
+	}
+
+	.db-tab-remove-button {
+		border-radius: to-rem(3);
+		height: 100%;
 	}
 }

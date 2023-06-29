@@ -1,15 +1,6 @@
-import {
-	onMount,
-	Show,
-	useMetadata,
-	useStore,
-	useRef,
-	onUpdate
-} from '@builder.io/mitosis';
+import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBButton } from '../button';
-import { uuid } from '../../utils';
-import { DBTagState, DBTagProps } from './model';
-import { DEFAULT_ID } from '../../shared/constants';
+import { DBTagProps, DBTagState } from './model';
 import classNames from 'classnames';
 
 useMetadata({
@@ -53,21 +44,6 @@ export default function DBTag(props: DBTagProps) {
 	// This is used as forwardRef
 	let component: any;
 	const state = useStore<DBTagState>({
-		initialized: false,
-		_id: DEFAULT_ID,
-		_checked: false,
-		_isValid: undefined,
-		handleChange: (event: any) => {
-			if (props.onChange) {
-				props.onChange(event);
-			}
-
-			if (props.change) {
-				props.change(event);
-			}
-
-			state._checked = event.target?.checked;
-		},
 		iconVisible: (icon?: string) => {
 			return Boolean(icon && icon !== '_' && icon !== 'none');
 		},
@@ -79,7 +55,7 @@ export default function DBTag(props: DBTagProps) {
 				return undefined;
 			}
 
-			return props.tabIndex ?? undefined;
+			return props.tabIndex ?? -1;
 		},
 		handleRemove: () => {
 			if (props.onRemove) {
@@ -92,79 +68,39 @@ export default function DBTag(props: DBTagProps) {
 			}
 
 			return DEFAULT_VALUES.removeButtonText;
-		},
-		isInteractive: () => {
-			if (props.behaviour) {
-				return props.behaviour.includes('interactive');
-			}
-
-			return false;
 		}
 	});
 
 	onMount(() => {
-		state.initialized = true;
-		state._id = props.id || 'tag-' + uuid();
 		if (props.stylePath) {
 			state.stylePath = props.stylePath;
 		}
 	});
-
-	onUpdate(() => {
-		if (props.checked && state.initialized && document && state._id) {
-			const checkElement = document?.getElementById(
-				state._id
-			) as HTMLInputElement;
-			if (checkElement) {
-				checkElement.checked = true;
-				state.initialized = false;
-			}
-		}
-	}, [state.initialized]);
 
 	return (
 		<div
 			ref={component}
 			class={state.getClassNames('db-tag', props.className)}
 			tabIndex={state.getTabIndex()}
-			data-interactive={state.isInteractive()}
 			data-disabled={props.disabled}
 			data-variant={props.variant}
-			data-type={props.type}>
+			data-type={props.type}
+			data-icon={props.icon}
+			data-no-text={props.noText}
+			data-overflow={props.overflow}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
 
-			<input
-				id={state._id}
-				type={
-					state.isInteractive()
-						? props.behaviour === 'interactive-unique'
-							? 'radio'
-							: 'checkbox'
-						: 'hidden'
-				}
-				checked={props.checked}
-				name={props.name}
-				value={props.value}
-				disabled={props.disabled}
-				required={props.required}
-				aria-invalid={props.invalid}
-				onChange={(event) => state.handleChange(event)}
-			/>
-			<label
-				class={state.getClassNames('tag-label', {
-					'is-icon-text-replace':
-						state.iconVisible(props.icon) && props.noText
-				})}
-				htmlFor={state._id}
-				data-icon={props.icon}
-				data-overflow={props.overflow}>
-				{props.children}
-			</label>
+			{props.children}
+
+			<Show when={props.text}>
+				<span>{props.text}</span>
+			</Show>
 
 			<Show when={props.behaviour === 'removable'}>
 				<DBButton
+					className="db-tab-remove-button"
 					onClick={() => state.handleRemove()}
 					icon="close"
 					size="small"

@@ -5,6 +5,20 @@
 
 ## DB UI Core ➡ DB UI Components
 
+### tag vs. chip
+
+We simplified the components by reducing the amount from tag + chip to only tag.
+
+You can use different types of tags by adding another component into it:
+
+```html
+<db-tag><db-button>Tag as Button</db-button></db-tag>
+<db-tag><db-link>Tag as Link</db-link></db-tag>
+<db-tag><db-checkbox>Tag as Checkbox</db-checkbox></db-tag>
+<db-tag><db-radio>Tag as Radio</db-radio></db-tag>
+<db-tag><span>Static Tag</span></db-tag>
+```
+
 ### class
 
 | Before    | Status | After    | Description |
@@ -13,8 +27,8 @@
 
 ### sizes
 
-| Before  | Status | After | Description                                                                                                        |
-| ------- | :----: | :---: | ------------------------------------------------------------------------------------------------------------------ |
+| Before  | Status | After | Description                                                                                                                              |
+| ------- | :----: | :---: | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `small` |   ❌   |  ❌   | We removed small tags because of tonality. But you can use `type` property with value `strong` to emphasize a tag for a differentiation. |
 
 ### variants

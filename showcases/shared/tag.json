@@ -109,23 +109,33 @@
 				"props": {}
 			},
 			{
-				"name": "Interactive",
+				"name": "Interactive Button",
 				"props": {
-					"behaviour": "interactive"
+					"component": "button"
 				}
 			},
 			{
-				"name": "Interactive-unique 01",
+				"name": "Interactive Link",
 				"props": {
-					"name": "interactive-unique",
-					"behaviour": "interactive-unique"
+					"component": "link"
 				}
 			},
 			{
-				"name": "Interactive-unique 02",
+				"name": "Interactive Checkbox",
 				"props": {
-					"name": "interactive-unique",
-					"behaviour": "interactive-unique"
+					"component": "checkbox"
+				}
+			},
+			{
+				"name": "Interactive Radio 1",
+				"props": {
+					"component": "radio"
+				}
+			},
+			{
+				"name": "Interactive Radio 2",
+				"props": {
+					"component": "radio"
 				}
 			},
 			{
@@ -142,20 +152,20 @@
 			{
 				"name": "Unchecked (Default)",
 				"props": {
-					"behaviour": "interactive"
+					"component": "checkbox"
 				}
 			},
 			{
 				"name": "Checked",
 				"props": {
-					"behaviour": "interactive",
+					"component": "checkbox",
 					"checked": true
 				}
 			},
 			{
 				"name": "Disabled",
 				"props": {
-					"behaviour": "interactive",
+					"component": "checkbox",
 					"checked": true,
 					"disabled": true
 				}

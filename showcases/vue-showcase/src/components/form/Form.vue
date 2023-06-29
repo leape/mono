@@ -74,10 +74,10 @@ const logAll = () => {
 								:variant="
 									index === 0 ? undefined : 'successful'
 								"
-								@Change="changeTags(tag)"
 								:strong="index === 2"
-								behaviour="interactive"
-								>Tag {{ tag }}</DBTag
+								><DBCheckbox @Change="changeTags(tag)"
+									>Tag {{ tag }}</DBCheckbox
+								></DBTag
 							>
 						</li>
 					</ul>

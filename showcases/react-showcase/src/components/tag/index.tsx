@@ -1,4 +1,10 @@
-import { DBTag } from '../../../../../output/react/src';
+import {
+	DBButton,
+	DBCheckbox,
+	DBLink,
+	DBRadio,
+	DBTag
+} from '../../../../../output/react/src';
 import DefaultComponent from '../index';
 import defaultComponentVariants from '../../../../shared/tag.json';
 import { type DBTagProps } from '../../../../../output/react/src/components/tag/model';
@@ -10,14 +16,16 @@ const getTag = ({
 	children,
 	icon,
 	overflow,
-	checked,
 	noText,
 	behaviour,
 	type,
-	label,
 	removeButton,
-	name
-}: DBTagProps) => (
+	checked,
+	component
+}: DBTagProps & {
+	checked?: boolean;
+	component?: 'button' | 'link' | 'radio' | 'checkbox';
+}) => (
 	<DBTag
 		variant={variant}
 		disabled={disabled}
@@ -25,16 +33,23 @@ const getTag = ({
 		noText={noText}
 		behaviour={behaviour}
 		type={type}
-		checked={checked}
-		label={label}
 		overflow={overflow}
 		removeButton={removeButton}
-		name={name}
 		onRemove={() => {
 			// eslint-disable-next-line no-alert
 			alert(children.toString());
 		}}>
-		{children}
+		{component === 'button' && <DBButton>{children}</DBButton>}
+		{component === 'link' && <DBLink href="#">{children}</DBLink>}
+		{component === 'checkbox' && (
+			<DBCheckbox checked={checked}>{children}</DBCheckbox>
+		)}
+		{component === 'radio' && (
+			<DBRadio checked={checked} name="radio">
+				{children}
+			</DBRadio>
+		)}
+		{!component && <span>{children}</span>}
 	</DBTag>
 );
 
