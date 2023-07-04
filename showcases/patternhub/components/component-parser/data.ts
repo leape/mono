@@ -5,7 +5,9 @@ export type ComponentParserType = {
 export type ComponentType = {
 	index?: string | number;
 	type?: /* hygen type */
-	| 'h1'
+	| 'tag'
+		| 'select'
+		| 'h1'
 		| 'h2'
 		| 'h3'
 		| 'h4'
@@ -15,6 +17,7 @@ export type ComponentType = {
 		| 'alert'
 		| 'brand'
 		| 'button'
+		| 'checkbox'
 		| 'card'
 		| 'divider'
 		| 'header'

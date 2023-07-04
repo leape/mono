@@ -5,13 +5,15 @@ import classNames from 'classnames';
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
+		// MS Power Apps
 		includeIcon: true,
 		properties: [
 			{
 				name: 'icon',
 				type: 'Icon'
 			},
-			{ name: 'withText', type: 'TwoOptions' }
+			{ name: 'withText', type: 'TwoOptions' },
+			{ name: 'title', type: 'SingleLine.Text' }
 		]
 	}
 });
@@ -40,7 +42,8 @@ export default function DBIcon(props: DBIconProps) {
 				'is-icon-text-replace': props.withText
 			})}
 			data-icon={props.icon}
-			aria-hidden="true">
+			aria-hidden="true"
+			title={props.title}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>

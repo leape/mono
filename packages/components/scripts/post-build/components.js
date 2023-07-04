@@ -17,7 +17,53 @@
  */
 const getComponents = () => [
 	{
+		name: 'select'
+	},
+
+	{
+		name: 'drawer',
+		overwrites: {
+			react: [
+				{
+					from: 'const dialogRef = useRef<HTMLDialogElement>(null);',
+					to: 'const dialogRef = useRef<HTMLDialogElement>(component);'
+				}
+			],
+			vue: [
+				{
+					from: 'immediate: true,',
+					to: 'immediate: true,\nflush: "post"'
+				}
+			],
+			webComponents: [{ from: '__prev.find', to: '!!__prev.find' }]
+		}
+	},
+
+	{
+		name: 'tag'
+	},
+	{
 		name: 'code-docs'
+	},
+
+	{
+		name: 'checkbox',
+		overwrites: {
+			vue: [
+				{
+					from: 'immediate: true,',
+					to: 'immediate: true,\nflush: "post"'
+				}
+			]
+		},
+		config: {
+			vue: {
+				vModel: [{ modelValue: 'checked', binding: ':checked' }]
+			},
+			angular: {
+				controlValueAccessor: 'checked'
+			}
+		}
 	},
 
 	{
@@ -33,6 +79,9 @@ const getComponents = () => [
 		config: {
 			vue: {
 				vModel: [{ modelValue: 'checked', binding: ':checked' }]
+			},
+			angular: {
+				controlValueAccessor: false
 			}
 		}
 	},
@@ -64,9 +113,16 @@ const getComponents = () => [
 	},
 	{
 		name: 'input',
+		overwrites: {
+			global: [{ from: ', KeyValueType', to: '' }],
+			vue: [{ from: ', index', to: '' }]
+		},
 		config: {
 			vue: {
 				vModel: [{ modelValue: 'value', binding: ':value' }]
+			},
+			angular: {
+				controlValueAccessor: 'value'
 			}
 		}
 	},

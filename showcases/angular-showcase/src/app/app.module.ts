@@ -1,5 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {
 	DBButtonModule,
@@ -11,11 +11,15 @@ import {
 	DBHeaderModule,
 	DBBrandModule,
 	DBLinkModule,
+	DBCheckboxModule,
 	DBRadioModule,
 	DBCodeDocsModule,
 	DBAlertModule,
 	DBSectionModule,
-	DBInfotextModule
+	DBInfotextModule,
+	DBSelectModule,
+	DBDrawerModule,
+	DBTagModule
 } from '../../../../output/angular/src';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -25,14 +29,20 @@ import { LinkComponent } from './components/link/link.component';
 import { InputComponent } from './components/input/input.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { RadioComponent } from './components/radio/radio.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InfotextComponent } from './components/infotext/infotext.component';
 import { SectionComponent } from './components/section/section.component';
 import { CardComponent } from './components/card/card.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { DefaultComponent } from './components/default.component';
+import { TagComponent } from './components/tag/tag.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
 	declarations: [
+		SelectComponent,
+		TagComponent,
 		AppComponent,
 		DefaultComponent,
 		FormComponent,
@@ -41,12 +51,16 @@ import { DefaultComponent } from './components/default.component';
 		LinkComponent,
 		AlertComponent,
 		RadioComponent,
+		CheckboxComponent,
 		InfotextComponent,
 		SectionComponent,
 		CardComponent,
-		DividerComponent
+		DividerComponent,
+		DrawerComponent
 	],
 	imports: [
+		DBTagModule,
+		DBSelectModule,
 		AppRoutingModule,
 		BrowserModule,
 		DBButtonModule,
@@ -63,7 +77,10 @@ import { DefaultComponent } from './components/default.component';
 		DBSectionModule,
 		DBInfotextModule,
 		FormsModule,
-		DBRadioModule
+		ReactiveFormsModule,
+		DBCheckboxModule,
+		DBRadioModule,
+		DBDrawerModule
 	],
 	providers: [],
 	schemas: [NO_ERRORS_SCHEMA],

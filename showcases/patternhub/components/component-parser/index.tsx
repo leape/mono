@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import {
 	DBInfotext,
 	DBButton,
@@ -6,6 +7,9 @@ import {
 	DBLink,
 	DBAlert,
 	DBInput,
+	DBSelect,
+	DBCheckbox,
+	DBTag,
 	DBRadio,
 	DBDivider,
 	DBCard,
@@ -148,6 +152,13 @@ const ComponentSwitch = ({
 			</DBInput>
 		);
 	}
+	if (type === 'checkbox') {
+		return (
+			<DBCheckbox className={className} {...props}>
+				{resolvedContent}
+			</DBCheckbox>
+		);
+	}
 	if (type === 'radio') {
 		return (
 			<DBRadio className={className} {...props}>
@@ -167,6 +178,22 @@ const ComponentSwitch = ({
 			<DBSection className={className} {...props}>
 				{resolvedContent}
 			</DBSection>
+		);
+	}
+
+	if (type === 'select') {
+		return (
+			<DBSelect className={className} {...props}>
+				{resolvedContent}
+			</DBSelect>
+		);
+	}
+
+	if (type === 'tag') {
+		return (
+			<DBTag className={className} {...props}>
+				{resolvedContent}
+			</DBTag>
 		);
 	}
 

@@ -14,6 +14,10 @@ const componentChildren = [
 				name: 'divider'
 			},
 			{
+				label: 'DBDrawer',
+				name: 'drawer'
+			},
+			{
 				label: 'DBHeader',
 				name: 'header'
 			},
@@ -52,6 +56,14 @@ const componentChildren = [
 			{
 				label: 'DBRadio',
 				name: 'radio'
+			},
+			{
+				label: 'DBCheckbox',
+				name: 'checkbox'
+			},
+			{
+				label: 'DBSelect',
+				name: 'select'
 			}
 		]
 	},
@@ -70,6 +82,10 @@ const componentChildren = [
 			{
 				label: 'DBInfotext',
 				name: 'infotext'
+			},
+			{
+				label: 'DBTag',
+				name: 'tag'
 			}
 		]
 	},

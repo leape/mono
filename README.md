@@ -5,7 +5,7 @@
 
 # DB UI Mono (Alpha) 🚂💖
 
-![Based on DB UX Design System guidelines](https://img.shields.io/badge/Based%20on-DB%20Design%20System%20UX%20Guides%20%2B%20Standards-d7dce1.svg)
+![Part of DB UX Design System Core](https://img.shields.io/badge/Part%20of-DB%20UX%20Design%20System%20Core-d7dce1.svg)
 ![Main pipeline](https://github.com/db-ui/mono/actions/workflows/default.yml/badge.svg)
 ![Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -45,65 +45,65 @@ Here is an overview of all components you can use:
 <details>
   <summary><strong>Table of Components</strong></summary>
 
-| Name                                                  | Category          | Inside Repo | Styling | Complete | Planned for beta |
-| ----------------------------------------------------- | ----------------- | :---------: | :-----: | :------: | :--------------: |
-| Accordion                                             | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
-| Alert                                                 | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ✅        |
-| Avatar                                                | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
-| Backdrop                                              | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
-| Badge                                                 | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ✅        |
-| Bottom-Navigation                                     | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Breadcrumbs                                           | 02 - Action       |     ❌      |   ❌    |    ❌    |        ✅        |
-| [Button](packages/components/src/components/button)   | 02 - Action       |     ✅      |   v3    |    ❌    |        ✅        |
-| Button-Group                                          | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| [Card](packages/components/src/components/card)       | 01 - Layout       |     ✅      |   v3    |    ❌    |        ✅        |
-| Carousel                                              | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ❌        |
-| Checkbox                                              | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ✅        |
-| Combobox                                              | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
-| Container                                             | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Date-Picker                                           | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
-| [Divider](packages/components/src/components/divider) | 01 - Layout       |     ✅      |   v3    |    ❌    |        ✅        |
-| Drawer                                                | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
-| Dropdown                                              | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
-| Floating-Button                                       | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Footer                                                | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
-| Grid                                                  | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
-| Header                                                | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
-| [Icons](packages/components/src/components/icon)      | 04 - Data-Display |     ✅      |   v3    |    ✅    |        ✅        |
-| Image                                                 | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
-| Indicator                                             | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
-| Infotext                                              | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
-| [Input](packages/components/src/components/input)     | 03 - Data-Input   |     ✅      |   v3    |    ❌    |        ✅        |
-| Link                                                  | 02 - Action       |     ❌      |   ❌    |    ❌    |        ✅        |
-| List-Item                                             | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
-| Menu                                                  | 02 - Action       |     ❌      |   ❌    |    ❌    |        ✅        |
-| Modal                                                 | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
-| Notification                                          | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ✅        |
-| Numbers-Field                                         | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
-| Pagination                                            | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Popover                                               | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ❌        |
-| Progress                                              | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ❌        |
-| [Radio](packages/components/src/components/radio)     | 03 - Data-Input   |     ✅      |   v3    |    ❌    |        ✅        |
-| Rating                                                | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
-| Section                                               | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
-| Select                                                | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ✅        |
-| Skeleton                                              | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ❌        |
-| Slider                                                | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
-| Spinner                                               | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ❌        |
-| Stack/List                                            | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
-| Stepper                                               | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Switch                                                | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Table                                                 | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
-| [Tabs](packages/components/src/components/tabs)       | 04 - Data-Display |     ✅      |   v2    |    ❌    |        ❌        |
-| Tag                                                   | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
-| Text                                                  | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
-| Textarea                                              | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ✅        |
-| Timeline                                              | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
-| Time-Picker                                           | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
-| Toggle-Button                                         | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
-| Tooltip                                               | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
-| Tree                                                  | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
-| Upload                                                | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| Name                                                    | Category          | Inside Repo | Styling | Complete | Planned for beta |
+| ------------------------------------------------------- | ----------------- | :---------: | :-----: | :------: | :--------------: |
+| Accordion                                               | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
+| Alert                                                   | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ✅        |
+| Avatar                                                  | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
+| Backdrop                                                | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
+| Badge                                                   | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ✅        |
+| Bottom-Navigation                                       | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Breadcrumbs                                             | 02 - Action       |     ❌      |   ❌    |    ❌    |        ✅        |
+| [Button](packages/components/src/components/button)     | 02 - Action       |     ✅      |   v3    |    ❌    |        ✅        |
+| Button-Group                                            | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| [Card](packages/components/src/components/card)         | 01 - Layout       |     ✅      |   v3    |    ❌    |        ✅        |
+| Carousel                                                | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ❌        |
+| [Checkbox](packages/components/src/components/checkbox) | 03 - Data-Input   |     ✅      |   v3    |    ❌    |        ✅        |
+| Combobox                                                | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| Container                                               | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Date-Picker                                             | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| [Divider](packages/components/src/components/divider)   | 01 - Layout       |     ✅      |   v3    |    ❌    |        ✅        |
+| Drawer                                                  | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
+| Dropdown                                                | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
+| Floating-Button                                         | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Footer                                                  | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
+| Grid                                                    | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
+| Header                                                  | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
+| [Icons](packages/components/src/components/icon)        | 04 - Data-Display |     ✅      |   v3    |    ✅    |        ✅        |
+| Image                                                   | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
+| Indicator                                               | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
+| Infotext                                                | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
+| [Input](packages/components/src/components/input)       | 03 - Data-Input   |     ✅      |   v3    |    ❌    |        ✅        |
+| Link                                                    | 02 - Action       |     ❌      |   ❌    |    ❌    |        ✅        |
+| List-Item                                               | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
+| Menu                                                    | 02 - Action       |     ❌      |   ❌    |    ❌    |        ✅        |
+| Modal                                                   | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
+| Notification                                            | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ✅        |
+| Numbers-Field                                           | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| Pagination                                              | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Popover                                                 | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ❌        |
+| Progress                                                | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ❌        |
+| [Radio](packages/components/src/components/radio)       | 03 - Data-Input   |     ✅      |   v3    |    ❌    |        ✅        |
+| Rating                                                  | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| Section                                                 | 01 - Layout       |     ❌      |   ❌    |    ❌    |        ✅        |
+| [Select](packages/components/src/components/select)     | 03 - Data-Input   |     ✅      |   ✅    |    ✅    |        ✅        |
+| Skeleton                                                | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ❌        |
+| Slider                                                  | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| Spinner                                                 | 05 - Feedback     |     ❌      |   ❌    |    ❌    |        ❌        |
+| Stack/List                                              | 06 - Utility      |     ❌      |   ❌    |    ❌    |        ✅        |
+| Stepper                                                 | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Switch                                                  | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Table                                                   | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
+| [Tabs](packages/components/src/components/tabs)         | 04 - Data-Display |     ✅      |   v2    |    ❌    |        ❌        |
+| [Tag](packages/components/src/components/tag)           | 04 - Data-Display |     ✅      |   v3    |    ❌    |        ✅        |
+| Text                                                    | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ✅        |
+| Textarea                                                | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ✅        |
+| Timeline                                                | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
+| Time-Picker                                             | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
+| Toggle-Button                                           | 02 - Action       |     ❌      |   ❌    |    ❌    |        ❌        |
+| Tooltip                                                 | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
+| Tree                                                    | 04 - Data-Display |     ❌      |   ❌    |    ❌    |        ❌        |
+| Upload                                                  | 03 - Data-Input   |     ❌      |   ❌    |    ❌    |        ❌        |
 
 </details>
 
@@ -130,7 +130,7 @@ Add the plugin and rule to your configuration:
 	Consistent & Compliant
 	</strong></summary>
 
-DB UI Mono is based on the [DB UX Design System](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/DB-UX-Design-System/Design-fuer-Apps-Web/UI-Komponenten),
+DB UI Mono is part of [DB UX Design System Core](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/DB-UX-Design-System/Design-fuer-Apps-Web/UI-Komponenten),
 that are the guidelines for any Personenverkehr Customer and Deutsche Bahn Enterprise website and web applications.
 
 </details>
