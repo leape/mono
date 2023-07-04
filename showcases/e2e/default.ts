@@ -22,7 +22,7 @@ export const getDefaultScreenshotTest = (component: string) => {
 				};
 
 				if (isAngular) {
-					config.maxDiffPixels = 1500;
+					config.maxDiffPixels = 1000;
 				} else if (isWebkit) {
 					config.maxDiffPixels = 6;
 				} else {

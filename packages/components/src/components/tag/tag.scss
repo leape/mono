@@ -60,14 +60,14 @@
 
 @mixin interactive {
 	&:has(input:checked),
-	.db-button:not(.db-tab-remove-button),
+	.db-button:not(.db-tab-remove-button):not(.is-icon-text-replace),
 	.db-link {
 		@content;
 	}
 }
 
 @mixin tag-types {
-	.db-button:not(.db-tab-remove-button),
+	.db-button:not(.db-tab-remove-button):not(.is-icon-text-replace),
 	.db-link,
 	&:has(input),
 	&:has(span) {
@@ -186,7 +186,9 @@
 		@each $icon-name, $icon-glyph in $icon-glyphs {
 			&[data-icon="#{$icon-name}"] {
 				label,
-				.db-button:not(.db-tab-remove-button),
+				.db-button:not(.db-tab-remove-button):not(
+						.is-icon-text-replace
+					),
 				.db-link {
 					&::before {
 						@extend %icon;
@@ -265,7 +267,9 @@
 	}
 
 	.db-tab-remove-button {
-		border-radius: to-rem(3);
-		height: 100%;
+		&:is(button),
+		button {
+			height: 100%;
+		}
 	}
 }
