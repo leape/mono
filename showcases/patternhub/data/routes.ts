@@ -152,7 +152,7 @@ export const ROUTES: DbMainnavigationDataType[] = [
 
 export const getRouteWithBasePath = (
 	route: DbMainnavigationDataType
-): DbMainnavigationDataType[] => ({
+): DbMainnavigationDataType => ({
 	...route,
 	link: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${route.link}`
 });
