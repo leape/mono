@@ -34,19 +34,17 @@ const getExamplesAsMDX = (componentName, variant) => {
 
 			if (example.code && example.code[framework]) {
 				exampleCode = example.code[framework];
+			} else if (framework === 'html') {
+				exampleCode =
+					allExamples[
+						`${componentName}${variant.name}${example.name}`
+					];
 			} else {
 				exampleCode = getCodeByFramework(
 					componentName,
 					framework,
 					example
 				);
-			}
-
-			if (framework === 'html') {
-				exampleCode =
-					allExamples[
-						`${componentName}${variant.name}${example.name}`
-					];
 			}
 
 			try {
