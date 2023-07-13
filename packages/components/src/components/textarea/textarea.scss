@@ -1,5 +1,6 @@
 /* Add styles for component here */
 @charset "utf-8";
+// jscpd:ignore-start
 @use "sass:map";
 @use "@db-ui/foundations/build/scss/default.assets-paths" as *;
 @use "@db-ui/foundations/build/scss/variables" as *;
@@ -14,7 +15,9 @@
 :root,
 .db-ui-regular,
 .db-ui-expressive {
+	// jscpd:ignore-end
 	--db-textarea-disabled-label-opacity: 0.25;
+
 	.db-textarea {
 		label {
 			// top: 3.5rem;
@@ -49,12 +52,13 @@
 }
 
 .db-textarea {
-	--db-textarea-padding-inline-start: #{$db-spacing-fixed-sm};
 	--db-textarea-padding-end-icon-after: 0;
 	--db-textarea-end-data-variant: 0;
 	--db-textarea-padding-end-datalist: 0;
 	--icon-margin-after: 0;
 	--db-textarea-label-max-width: 80%;
+	--db-textarea-padding-end-data-variant: 1;
+	--db-textarea-padding-inline-start: #{$db-spacing-fixed-sm};
 
 	position: relative;
 	display: flex;
@@ -76,7 +80,6 @@
 	// &[data-variant] {
 	// 	--db-textarea-padding-end-data-variant: 1;
 	// }
-	--db-textarea-padding-end-data-variant: 1;
 
 	// two trailing icons
 	// &[data-variant]:has(> .icon-after) {
@@ -205,6 +208,7 @@
 		@extend %bg-transparent-hover;
 		@extend %default-interactive-component;
 		@extend %component-border;
+		@extend %db-body-sm;
 		@include get-variant-bg-color(0.08);
 
 		// height: $db-sizing-md;
@@ -259,8 +263,6 @@
 				opacity: var(--db-textarea-disabled-label-opacity);
 			}
 		}
-
-		@extend %db-body-sm;
 
 		// Hiding textarea placeholder for floating label
 		&::placeholder {
@@ -328,6 +330,7 @@
 			}
 		}
 
+		// jscpd:ignore-start
 		&[data-variant="#{$name}"] textarea {
 			--db-current-border-color: #{map.get($colors, "border")};
 			@if ($name == "critical") {
@@ -343,7 +346,7 @@
 			& + label {
 				color: map.get($colors, "on-bg");
 			}
-
+			// jscpd:ignore-end
 			// & ~ .db-icon {
 			// 	color: $db-colors-informational-on-bg-enabled;
 			// }

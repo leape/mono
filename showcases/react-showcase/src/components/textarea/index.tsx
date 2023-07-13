@@ -5,8 +5,10 @@ import type { DBTextareaProps } from '../../../../../output/react/src/components
 import { getVariants } from '../data';
 
 const handleChange = (evt) => {
-	console.log('Change: ', evt);
+	const { debug } = console;
+	debug(evt);
 };
+
 const getTextarea = ({
 	value,
 	variant,

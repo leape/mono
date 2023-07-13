@@ -1,29 +1,28 @@
-import { TextareaComponent } from './components/textarea/textarea.component';
-
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {
+	DBAlertModule,
+	DBBrandModule,
 	DBButtonModule,
 	DBCardModule,
-	DBDividerModule,
-	DBIconModule,
-	DBInputModule,
-	DBPageModule,
-	DBHeaderModule,
-	DBBrandModule,
-	DBLinkModule,
 	DBCheckboxModule,
-	DBRadioModule,
 	DBCodeDocsModule,
-	DBAlertModule,
-	DBSectionModule,
-	DBInfotextModule,
-	DBTextareaModule
-	DBSelectModule,
+	DBDividerModule,
 	DBDrawerModule,
-	DBTagModule
+	DBHeaderModule,
+	DBIconModule,
+	DBInfotextModule,
+	DBInputModule,
+	DBLinkModule,
+	DBPageModule,
+	DBRadioModule,
+	DBSectionModule,
+	DBSelectModule,
+	DBTagModule,
+	DBTextareaModule
 } from '../../../../output/angular/src';
+import { TextareaComponent } from './components/textarea/textarea.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { FormComponent } from './components/form/form.component';
