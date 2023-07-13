@@ -1,7 +1,7 @@
 import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBTextareaState, DBTextareaProps } from './model';
 import { uuid } from '../../utils';
-import classNames from 'classnames';
+import { cls } from '../../utils';
 import { DEFAULT_ID, DEFAULT_LABEL } from '../../shared/constants';
 import { EventHandler } from 'react';
 
@@ -37,9 +37,6 @@ export default function DBTextarea(props: DBTextareaProps) {
 		_value: '',
 		_infomsg: 'HI!',
 		_id: DEFAULT_ID,
-		getClassNames: (...args: classNames.ArgumentArray) => {
-			return classNames(args);
-		},
 		handleChange: (event) => {
 			if (props.onChange) {
 				props.onChange(event);
@@ -75,7 +72,7 @@ export default function DBTextarea(props: DBTextareaProps) {
 	return (
 		<div
 			ref={component}
-			class={state.getClassNames('db-textarea', props.className)}
+			class={cls('db-input', props.className)}
 			data-variant={props.variant}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
