@@ -22,12 +22,12 @@ useMetadata({
 	}
 });
 
-const DEFAULT_VALUES = {
-	label: DEFAULT_LABEL,
-	placeholder: ' ',
-	rows: 2,
-	cols: 33
-};
+// const DEFAULT_VALUES = {
+// 	label: DEFAULT_LABEL,
+// 	placeholder: ' ',
+// 	rows: 2,
+// 	cols: 33
+// };
 export default function DBTextarea(props: DBTextareaProps) {
 	// This is used as forwardRef
 	let component: any;
@@ -37,6 +37,12 @@ export default function DBTextarea(props: DBTextareaProps) {
 		_value: '',
 		_infomsg: 'HI!',
 		_id: DEFAULT_ID,
+		defaultValues: {
+			label: DEFAULT_LABEL,
+			placeholder: ' ',
+			rows: '2',
+			cols: '33'
+		},
 		handleChange: (event) => {
 			if (props.onChange) {
 				props.onChange(event);
@@ -82,15 +88,17 @@ export default function DBTextarea(props: DBTextareaProps) {
 				disabled={props.disabled}
 				onChange={(event) => state.handleChange(event)}
 				value={state._value}
-				rows={props.rows ?? DEFAULT_VALUES.rows}
-				cols={props.cols ?? DEFAULT_VALUES.cols}
-				placeholder={props.placeholder ?? DEFAULT_VALUES.placeholder}
+				rows={props.rows ?? state.defaultValues.rows}
+				cols={props.cols ?? state.defaultValues.cols}
+				placeholder={
+					props.placeholder ?? state.defaultValues.placeholder
+				}
 			/>
 			<label
 				htmlFor={state._id}
 				aria-hidden="true"
 				id={state._id + '-label'}>
-				<span>{props.label ?? DEFAULT_VALUES.label}</span>
+				<span>{props.label ?? state.defaultValues.label}</span>
 			</label>
 			<span class="description">{state._infomsg}</span>
 		</div>
