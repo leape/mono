@@ -10,7 +10,7 @@ import {
 import { DBDrawerState, DBDrawerProps } from './model';
 import { DBButton } from '../button';
 import { DEFAULT_CLOSE_BUTTON, DEFAULT_ID } from '../../shared/constants';
-import classNames from 'classnames';
+import { cls } from "../../utils";
 import { uuid } from '../../utils';
 
 useMetadata({
@@ -28,8 +28,13 @@ export default function DBDrawer(props: DBDrawerProps) {
 	const state = useStore<DBDrawerState>({
 		_id: DEFAULT_ID,
 		handleClose: (event: any) => {
+			if (event.key === 'Escape') {
+				event.preventDefault();
+			}
+
 			if (
 				event === 'close' ||
+				event.key === 'Escape' ||
 				(event.target.nodeName === 'DIALOG' && !props.noBackdrop)
 			) {
 				if (props.onClose) {
@@ -61,9 +66,6 @@ export default function DBDrawer(props: DBDrawerProps) {
 					}, 401);
 				}
 			}
-		},
-		getClassNames: (...args: classNames.ArgumentArray) => {
-			return classNames(args);
 		}
 	});
 
@@ -87,16 +89,14 @@ export default function DBDrawer(props: DBDrawerProps) {
 			onClick={(event) => {
 				state.handleClose(event);
 			}}
+			onKeyDown={(event) => state.handleClose(event)}
 			data-backdrop={!props.noBackdrop}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
 			<article
 				ref={dialogContainerRef}
-				class={
-					'db-drawer-container' +
-					(props.className ? ' ' + props.className : '')
-				}
+				class={cls('db-drawer-container', props.className)}
 				data-spacing={props.spacing}
 				data-width={props.width}
 				data-direction={props.direction}

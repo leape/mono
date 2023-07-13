@@ -1,4 +1,5 @@
 import Textarea from '../components/textarea/Textarea.vue';
+import NavigationItem from '../components/navigation-item/NavigationItem.vue';
 import Select from '../components/select/Select.vue';
 import Tag from '../components/tag/Tag.vue';
 import Form from '../components/form/Form.vue';
@@ -16,6 +17,11 @@ import Drawer from '../components/drawer/Drawer.vue';
 
 export const navigationItems: any[] = [
 	{ path: '/textarea', label: 'Textarea', component: Textarea },
+	{
+		path: '/navigation-item',
+		label: 'NavigationItem',
+		component: NavigationItem
+	},
 	{ path: '/tag', label: 'Tag', component: Tag },
 	{ path: '/', label: 'Home', component: Form },
 	{ path: '/divider', label: 'Divider', component: Divider },

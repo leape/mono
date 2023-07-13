@@ -20,6 +20,9 @@ const getComponents = () => [
 		name: 'textarea'
 	},
 	{
+		name: 'navigation-item'
+	},
+	{
 		name: 'select'
 	},
 
@@ -30,12 +33,6 @@ const getComponents = () => [
 				{
 					from: 'const dialogRef = useRef<HTMLDialogElement>(null);',
 					to: 'const dialogRef = useRef<HTMLDialogElement>(component);'
-				}
-			],
-			vue: [
-				{
-					from: 'immediate: true,',
-					to: 'immediate: true,\nflush: "post"'
 				}
 			],
 			webComponents: [{ from: '__prev.find', to: '!!__prev.find' }]
@@ -51,34 +48,24 @@ const getComponents = () => [
 
 	{
 		name: 'checkbox',
-		overwrites: {
-			vue: [
-				{
-					from: 'immediate: true,',
-					to: 'immediate: true,\nflush: "post"'
-				}
-			]
-		},
 		config: {
 			vue: {
 				vModel: [{ modelValue: 'checked', binding: ':checked' }]
+			},
+			angular: {
+				controlValueAccessor: 'checked'
 			}
 		}
 	},
 
 	{
 		name: 'radio',
-		overwrites: {
-			vue: [
-				{
-					from: 'immediate: true,',
-					to: 'immediate: true,\nflush: "post"'
-				}
-			]
-		},
 		config: {
 			vue: {
 				vModel: [{ modelValue: 'checked', binding: ':checked' }]
+			},
+			angular: {
+				controlValueAccessor: false
 			}
 		}
 	},
@@ -117,6 +104,9 @@ const getComponents = () => [
 		config: {
 			vue: {
 				vModel: [{ modelValue: 'value', binding: ':value' }]
+			},
+			angular: {
+				controlValueAccessor: 'value'
 			}
 		}
 	},

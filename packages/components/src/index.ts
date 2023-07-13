@@ -19,3 +19,5 @@ export * from './components/code-docs';
 export * from './components/textarea';
 export * from './components/select';
 export * from './components/tag';
+export * from './components/tag';
+export * from './components/navigation-item';

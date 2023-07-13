@@ -1,7 +1,7 @@
 {
   "name": "@db-ui/foundations",
   "version": "0.0.0",
-  "description": "Provides basic tokens and assets based on the DB UX Design System.",
+  "description": "Provides basic tokens and assets based on DB UX Design System Core.",
   "repository": {
     "type": "git",
     "url": "https://github.com/db-ui/mono.git"
@@ -34,7 +34,7 @@
     "@zeplin/sdk": "^1.18.0",
     "cpr": "3.0.1",
     "dotenv": "^16.3.1",
-    "nodemon": "2.0.22",
+    "nodemon": "3.0.1",
     "sass": "^1.63.6",
     "style-dictionary": "3.8.0"
   },
