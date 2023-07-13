@@ -43,7 +43,7 @@ export default function DBTextarea(props: DBTextareaProps) {
 			rows: '2',
 			cols: '33'
 		},
-		handleChange: (event) => {
+		handleChange: (event: any) => {
 			if (props.onChange) {
 				props.onChange(event);
 			}
