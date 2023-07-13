@@ -178,7 +178,7 @@
 		// height: $db-sizing-md;
 		cursor: text;
 		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
-		max-width: var(--db-textarea-label-max-width, 80%);
+		max-inline-size: var(--db-textarea-label-max-width, 80%);
 
 		span:first-child {
 			text-overflow: ellipsis;
@@ -212,8 +212,8 @@
 		@include get-variant-bg-color(0.08);
 
 		// height: $db-sizing-md;
-		max-width: 100%;
-		width: 100%;
+		max-inline-size: 100%;
+		inline-size: 100%;
 		padding: calc(
 				var(--db-type-body-font-size-2xs) + var(--db-spacing-fixed-2xs)
 			)
@@ -253,7 +253,7 @@
 		&:required {
 			+ label::after {
 				content: " *";
-				padding-left: 0.2rem;
+				padding-inline-start: 0.2rem;
 			}
 		}
 
@@ -292,11 +292,11 @@
 		align-items: center;
 		flex-direction: row;
 		position: absolute;
-		top: 0;
-		height: $db-sizing-md;
+		inset-block-start: 0;
+		block-size: $db-sizing-md;
 
 		pointer-events: none;
-		right: 0;
+		inset-inline-end: 0;
 
 		margin-inline-end: var(--icon-textarea-margin-inline-end);
 
