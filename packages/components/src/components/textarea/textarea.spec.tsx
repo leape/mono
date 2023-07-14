@@ -5,7 +5,7 @@ import { DBTextarea } from './index';
 // @ts-ignore - vue can only find it with .ts as file ending
 import { DEFAULT_VIEWPORT } from '../../shared/constants.ts';
 
-const comp = <DBTextarea>Test</DBTextarea>;
+const comp = <DBTextarea label="Test">Test</DBTextarea>;
 
 const testComponent = () => {
 	test('should contain text', async ({ mount }) => {
