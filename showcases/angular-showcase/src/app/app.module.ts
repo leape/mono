@@ -2,18 +2,27 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {
-	DBAlertModule,
-	DBBrandModule,
 	DBButtonModule,
 	DBCardModule,
-	DBCheckboxModule,
-	DBCodeDocsModule,
 	DBDividerModule,
+	DBIconModule,
+	DBInputModule,
+	DBPageModule,
+	DBHeaderModule,
+	DBBrandModule,
+	DBLinkModule,
+	DBCheckboxModule,
+	DBRadioModule,
+	DBCodeDocsModule,
+	DBAlertModule,
+	DBSectionModule,
+	DBInfotextModule,
+	DBSelectModule,
 	DBDrawerModule,
 	DBTagModule,
 	DBNavigationItemModule
 } from '../../../../output/angular/src';
-import { TextareaComponent } from './components/textarea/textarea.component';
+// import { TextareaComponent } from './components/textarea/textarea.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { FormComponent } from './components/form/form.component';
@@ -35,8 +44,9 @@ import { NavigationItemComponent } from './components/navigation-item/navigation
 
 @NgModule({
 	declarations: [
-		TextareaComponent,
+		// TextareaComponent,
 		NavigationItemComponent,
+
 		SelectComponent,
 		TagComponent,
 		AppComponent,
@@ -55,8 +65,8 @@ import { NavigationItemComponent } from './components/navigation-item/navigation
 		DrawerComponent
 	],
 	imports: [
-		DBTextareaModule,
 		DBNavigationItemModule,
+
 		DBTagModule,
 		DBSelectModule,
 		AppRoutingModule,

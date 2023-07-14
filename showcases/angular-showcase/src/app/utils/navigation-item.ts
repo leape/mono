@@ -1,4 +1,4 @@
-import { TextareaComponent } from '../components/textarea/textarea.component';
+// import { TextareaComponent } from '../components/textarea/textarea.component';
 import { NavigationItemComponent } from '../components/navigation-item/navigation-item.component';
 import { SelectComponent } from '../components/select/select.component';
 import { TagComponent } from '../components/tag/tag.component';
@@ -16,7 +16,7 @@ import { DividerComponent } from '../components/divider/divider.component';
 import { DrawerComponent } from '../components/drawer/drawer.component';
 
 export const NAVIGATION_ITEMS: any[] = [
-	{ path: 'textarea', label: 'Textarea', component: TextareaComponent },
+	// { path: 'textarea', label: 'Textarea', component: TextareaComponent },
 	{
 		path: 'navigation-item',
 		label: 'NavigationItem',
