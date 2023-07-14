@@ -22,12 +22,6 @@ useMetadata({
 	}
 });
 
-// const DEFAULT_VALUES = {
-// 	label: DEFAULT_LABEL,
-// 	placeholder: ' ',
-// 	rows: 2,
-// 	cols: 33
-// };
 export default function DBTextarea(props: DBTextareaProps) {
 	// This is used as forwardRef
 	let component: any;
