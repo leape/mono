@@ -22,7 +22,6 @@ import {
 	DBTagModule,
 	DBNavigationItemModule
 } from '../../../../output/angular/src';
-// import { TextareaComponent } from './components/textarea/textarea.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { FormComponent } from './components/form/form.component';
@@ -44,7 +43,6 @@ import { NavigationItemComponent } from './components/navigation-item/navigation
 
 @NgModule({
 	declarations: [
-		// TextareaComponent,
 		NavigationItemComponent,
 
 		SelectComponent,
