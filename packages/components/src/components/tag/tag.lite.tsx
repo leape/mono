@@ -1,7 +1,7 @@
-import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import { onMount, onUpdate,Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBButton } from '../button';
 import { DBTagProps, DBTagState } from './model';
-import classNames from 'classnames';
+import { cls } from '../../utils';
 
 useMetadata({
 	isAttachedToShadowDom: true,
@@ -9,7 +9,11 @@ useMetadata({
 		includeIcon: true,
 		isFormComponent: true,
 		properties: [
-			{ name: 'children', type: 'SingleLine.Text' },
+			{
+				name: 'children',
+				type: 'SingleLine.Text',
+				defaultValue: 'Tag'
+			},
 			// { name: 'disabled', type: 'TwoOptions' },
 			{
 				name: 'variant',
@@ -35,20 +39,12 @@ useMetadata({
 	}
 });
 
-const DEFAULT_VALUES = {
-	// TODO: We should think this through again, if we would really like to have default and especially english, instead of german labels in here
-	removeButtonText: 'Remove tag'
-};
-
 export default function DBTag(props: DBTagProps) {
 	// This is used as forwardRef
 	let component: any;
 	const state = useStore<DBTagState>({
 		iconVisible: (icon?: string) => {
 			return Boolean(icon && icon !== '_' && icon !== 'none');
-		},
-		getClassNames: (...args: classNames.ArgumentArray) => {
-			return classNames(args);
 		},
 		getTabIndex: () => {
 			if (props.disabled) {
@@ -67,7 +63,8 @@ export default function DBTag(props: DBTagProps) {
 				return props.removeButton;
 			}
 
-			return DEFAULT_VALUES.removeButtonText;
+			// TODO: We should think this through again, if we would really like to have default and especially english, instead of german labels in here
+			return 'Remove tag';
 		}
 	});
 
@@ -80,7 +77,7 @@ export default function DBTag(props: DBTagProps) {
 	return (
 		<div
 			ref={component}
-			class={state.getClassNames('db-tag', props.className)}
+			class={cls('db-tag', props.className)}
 			tabIndex={state.getTabIndex()}
 			data-disabled={props.disabled}
 			data-variant={props.variant}
