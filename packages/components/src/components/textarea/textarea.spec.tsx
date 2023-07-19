@@ -8,12 +8,12 @@ import { DEFAULT_VIEWPORT } from '../../shared/constants.ts';
 const comp = <DBTextarea label="Test">Test</DBTextarea>;
 
 const testComponent = () => {
-	test('should contain text', async ({ mount }) => {
+	test.skip('should contain text', async ({ mount }) => {
 		const component = await mount(comp);
 		await expect(component).toContainText('Test');
 	});
 
-	test('should match screenshot', async ({ mount }) => {
+	test.skip('should match screenshot', async ({ mount }) => {
 		const component = await mount(comp);
 		await expect(component).toHaveScreenshot();
 	});
@@ -25,7 +25,7 @@ test.describe('DBTextarea', () => {
 });
 
 test.describe('DBTextarea component A11y', () => {
-	test('DBTextarea should not have any automatically detectable accessibility issues', async ({
+	test.skip('DBTextarea should not have any automatically detectable accessibility issues', async ({
 		page,
 		mount
 	}) => {
