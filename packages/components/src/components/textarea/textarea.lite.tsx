@@ -72,7 +72,7 @@ export default function DBTextarea(props: DBTextareaProps) {
 	return (
 		<div
 			ref={component}
-			class={cls('db-input', props.className)}
+			class={cls('db-textarea', props.className)}
 			data-variant={props.variant}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
