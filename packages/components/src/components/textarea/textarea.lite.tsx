@@ -26,10 +26,9 @@ export default function DBTextarea(props: DBTextareaProps) {
 	// This is used as forwardRef
 	let component: any;
 	// jscpd:ignore-start
-	console.log('props: ', props);
 	const state = useStore<DBTextareaState>({
 		_value: '',
-		_infomsg: 'HI!',
+		_infomsg: '',
 		_id: DEFAULT_ID,
 		defaultValues: {
 			label: DEFAULT_LABEL,
@@ -77,6 +76,12 @@ export default function DBTextarea(props: DBTextareaProps) {
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
+			<label
+				htmlFor={state._id}
+				aria-hidden="true"
+				id={state._id + '-label'}>
+				<span>{props.label ?? state.defaultValues.label}</span>
+			</label>
 			<textarea
 				id={state._id}
 				disabled={props.disabled}
@@ -88,12 +93,6 @@ export default function DBTextarea(props: DBTextareaProps) {
 					props.placeholder ?? state.defaultValues.placeholder
 				}
 			/>
-			<label
-				htmlFor={state._id}
-				aria-hidden="true"
-				id={state._id + '-label'}>
-				<span>{props.label ?? state.defaultValues.label}</span>
-			</label>
 			<span class="description">{state._infomsg}</span>
 		</div>
 	);

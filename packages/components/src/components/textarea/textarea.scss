@@ -29,28 +29,6 @@
 	--db-textarea-disabled-label-opacity: 0;
 }
 
-@mixin label-focus-animation(
-	$translationX: var(--db-textarea-padding-inline-start)
-) {
-	$transformScale: -1.25;
-
-	transition: opacity 0.08s, transform 0.15s;
-	opacity: var(--db-textarea-focus-opacity);
-
-	// add 0.1em to adjust label with textarea padding-inline-start
-	// transform: translate(
-	// 		calc($translationX + 0.1em),
-	// 		calc($db-sizing-md * $transformScale)
-	// 	)
-	// 	scale(var(--db-textarea-label-scale));
-
-	transform: translate(
-			var(--db-textarea-padding-inline-start),
-			calc(-0.5 * var(--db-spacing-fixed-2xs))
-		)
-		scale(var(--db-textarea-label-scale));
-}
-
 .db-textarea {
 	--db-textarea-padding-end-icon-after: 0;
 	--db-textarea-end-data-variant: 0;
@@ -158,23 +136,12 @@
 
 	label {
 		@extend %default-color;
-		position: absolute;
 		// top: $db-spacing-fixed-xs;
 		display: flex;
 		align-items: center;
-		font-size: var(--db-type-body-font-size-md);
+		font-size: var(--db-type-body-font-size-xs);
+		padding-bottom: var(--db-spacing-fixed-xs);
 
-		transform-origin: left;
-		// transform: translate(
-		// 	var(--db-textarea-padding-inline-start),
-		// 	calc(-1 * var(--db-sizing-md))
-		// );
-		transform: translate(
-			var(--db-textarea-padding-inline-start),
-			var(--db-spacing-fixed-xs)
-		);
-		transition: transform 0.2s $db-transition-functional-timing;
-		will-change: transform;
 		// height: $db-sizing-md;
 		cursor: text;
 		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
@@ -197,28 +164,24 @@
 	}
 
 	textarea {
-		--db-textarea-padding-inline-end: calc(
-			(
-					var(--db-textarea-padding-end-icon-after) +
-						var(--db-textarea-padding-end-data-variant) +
-						var(--db-textarea-padding-end-datalist)
-				) * #{$db-sizing-xs}
-		);
+		// --db-textarea-padding-inline-end: calc(
+		// 	(
+		// 			var(--db-textarea-padding-end-icon-after) +
+		// 				var(--db-textarea-padding-end-data-variant) +
+		// 				var(--db-textarea-padding-end-datalist)
+		// 		) * #{$db-sizing-xs}
+		// );
 
 		@extend %bg-transparent-hover;
 		@extend %default-interactive-component;
 		@extend %component-border;
-		@extend %db-body-sm;
+		@extend %db-body-md;
 		@include get-variant-bg-color(0.08);
 
 		// height: $db-sizing-md;
 		max-inline-size: 100%;
 		inline-size: 100%;
-		padding: calc(
-				var(--db-type-body-font-size-2xs) + var(--db-spacing-fixed-2xs)
-			)
-			var(--db-textarea-padding-inline-end) $db-spacing-fixed-xs
-			var(--db-textarea-padding-inline-start);
+		padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-sm);
 
 		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
 		&:focus,
@@ -233,17 +196,13 @@
 			// 	var(--db-spacing-fixed-xs) + 0.25em *
 			// 		var(--db-textarea-focus-opacity)
 			// );
-
-			+ label {
-				@include label-focus-animation();
-			}
 		}
 
 		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
 		&:disabled,
 		fieldset:disabled & {
 			&,
-			& + label {
+			& label {
 				// Decided against cursor: not-allowed, compare to e.g. https://phabricator.wikimedia.org/T121960
 				opacity: 0.25;
 				pointer-events: none;
@@ -251,7 +210,7 @@
 		}
 
 		&:required {
-			+ label::after {
+			label::after {
 				content: " *";
 				padding-inline-start: 0.2rem;
 			}
@@ -259,7 +218,7 @@
 
 		// disabled and prefilled value – different in tonalities
 		&:disabled:not(:placeholder-shown) {
-			+ label {
+			label {
 				opacity: var(--db-textarea-disabled-label-opacity);
 			}
 		}
@@ -331,6 +290,9 @@
 		}
 
 		// jscpd:ignore-start
+		& label {
+			color: map.get($colors, "on-bg");
+		}
 		&[data-variant="#{$name}"] textarea {
 			--db-current-border-color: #{map.get($colors, "border")};
 			@if ($name == "critical") {
@@ -343,9 +305,6 @@
 				@extend %adaptive-successful-component;
 			}
 
-			& + label {
-				color: map.get($colors, "on-bg");
-			}
 			// jscpd:ignore-end
 			// & ~ .db-icon {
 			// 	color: $db-colors-informational-on-bg-enabled;
