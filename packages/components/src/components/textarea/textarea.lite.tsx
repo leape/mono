@@ -1,9 +1,10 @@
 import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBTextareaState, DBTextareaProps } from './model';
+import { DBInfotext } from '../infotext';
 import { uuid } from '../../utils';
 import { cls } from '../../utils';
 import { DEFAULT_ID, DEFAULT_LABEL } from '../../shared/constants';
-import { EventHandler } from 'react';
+import { DefaultVariantType, DefaultVariantsIcon } from '../../shared/model';
 
 useMetadata({
 	isAttachedToShadowDom: true,
@@ -35,6 +36,16 @@ export default function DBTextarea(props: DBTextareaProps) {
 			placeholder: ' ',
 			rows: '2',
 			cols: '33'
+		},
+		iconVisible: (icon?: string) => {
+			return Boolean(icon && icon !== '_' && icon !== 'none');
+		},
+		getIcon: (variant?: DefaultVariantType) => {
+			if (variant) {
+				return DefaultVariantsIcon[variant];
+			}
+
+			return '';
 		},
 		handleChange: (event: any) => {
 			if (props.onChange) {
@@ -80,7 +91,7 @@ export default function DBTextarea(props: DBTextareaProps) {
 				htmlFor={state._id}
 				aria-hidden="true"
 				id={state._id + '-label'}>
-				<span>{props.label ?? state.defaultValues.label}</span>
+				{props.label ?? state.defaultValues.label}
 			</label>
 			<textarea
 				id={state._id}
@@ -93,7 +104,14 @@ export default function DBTextarea(props: DBTextareaProps) {
 					props.placeholder ?? state.defaultValues.placeholder
 				}
 			/>
-			<span class="description">{state._infomsg}</span>
+			<DBInfotext
+				size="medium"
+				cols={1}
+				rows={1}
+				variant={props.variant}
+				icon={props.icon || state.getIcon(props.variant)}>
+				{props.infomsg}
+			</DBInfotext>
 		</div>
 	);
 }

@@ -1,37 +1,43 @@
 import {
+	ChangeEventProps,
+	ChangeEventState,
+	DefaultVariantProps,
+	DefaultVariantType,
+	FocusEventProps,
+	FocusEventState,
+	FormProps,
+	FormState,
 	GlobalProps,
 	GlobalState,
-	ChangeEventProps,
-	FocusEventProps,
-	FormProps,
-	ChangeEventState,
-	FocusEventState,
-	FormState,
-	DefaultVariantProps,
-	GlobalTextProps
+	GlobalTextProps,
+	IconProps,
+	IconState
 } from '../../shared/model';
 
 export interface DBTextareaDefaultProps {
-	variant?: DefaultVariantProps;
+	cols?: number;
 	infomsg?: string;
 	rows?: number;
-	cols?: number;
+	variant?: DefaultVariantProps;
 }
 
 export type DBTextareaProps = DBTextareaDefaultProps &
-	GlobalProps &
-	GlobalTextProps &
 	ChangeEventProps &
+	DefaultVariantProps &
 	FocusEventProps &
 	FormProps &
-	DefaultVariantProps;
+	GlobalProps &
+	GlobalTextProps &
+	IconProps;
 
 export interface DBTextareaDefaultState {
 	_infomsg: string;
+	getIcon: (variant?: DefaultVariantType) => string;
 }
 
 export type DBTextareaState = DBTextareaDefaultState &
-	GlobalState &
 	ChangeEventState &
 	FocusEventState &
-	FormState;
+	FormState &
+	GlobalState &
+	IconState;

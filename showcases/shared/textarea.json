@@ -1,5 +1,34 @@
 [
 	{
+		"name": "Tonality",
+		"examples": [
+			{
+				"name": "functional",
+				"className": "db-ui-functional",
+				"props": {
+					"label": "Label",
+					"infomsg": "functional"
+				}
+			},
+			{
+				"name": "regular (Default)",
+				"className": "db-ui-regular",
+				"props": {
+					"label": "Label",
+					"infomsg": "regular (Default)"
+				}
+			},
+			{
+				"name": "expressive",
+				"className": "db-ui-expressive",
+				"props": {
+					"label": "Label",
+					"infomsg": "expressive"
+				}
+			}
+		]
+	},
+	{
 		"name": "Variant",
 		"examples": [
 			{
@@ -9,7 +38,8 @@
 					"description": "(Default) Basic",
 					"value": "A default value",
 					"placeholder": "I am a placeholder",
-					"infomsg": "I am a default info message"
+					"infomsg": "I am a default info message",
+					"icon": "none"
 				}
 			},
 			{
@@ -19,6 +49,7 @@
 					"description": "Informational",
 					"variant": "informational",
 					"value": "An informational value",
+					"icon": "account",
 					"infomsg": "I am an informational info message"
 				}
 			},
@@ -29,6 +60,7 @@
 					"description": "Warning",
 					"variant": "warning",
 					"value": "A warning value",
+					"icon": "account",
 					"infomsg": "I am a warning info message"
 				}
 			},

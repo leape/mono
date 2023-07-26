@@ -17,12 +17,6 @@
 .db-ui-expressive {
 	// jscpd:ignore-end
 	--db-textarea-disabled-label-opacity: 0.25;
-
-	.db-textarea {
-		label {
-			// top: 3.5rem;
-		}
-	}
 }
 
 .db-ui-functional {
@@ -38,101 +32,14 @@
 	--db-textarea-padding-end-data-variant: 1;
 	--db-textarea-padding-inline-start: #{$db-spacing-fixed-sm};
 
+	.db-infotext {
+		padding-top: var(--db-spacing-fixed-2xs);
+		padding-left: var(--db-spacing-fixed-sm);
+	}
+
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	// padding-inline-end according to current amount of icons
-	// &:has(> .icon-before) {
-	// 	--db-textarea-padding-inline-start: #{calc(#{$db-sizing-md})};
-	// 	--db-textarea-label-max-width: 70%;
-
-	// 	textarea {
-	// 		padding-inline-start: var(--db-textarea-padding-inline-start);
-	// 	}
-	// }
-
-	// &:has(> .icon-after) {
-	// 	--db-textarea-padding-end-icon-after: 1;
-	// }
-
-	// &[data-variant] {
-	// 	--db-textarea-padding-end-data-variant: 1;
-	// }
-
-	// two trailing icons
-	// &[data-variant]:has(> .icon-after) {
-	// 	--db-textarea-label-max-width: 61%;
-	// }
-
-	// &:has(> datalist):has(> .icon-after) {
-	// 	.icon-after {
-	// 		padding-inline-start: $db-spacing-fixed-xs;
-	// 	}
-	// }
-
-	// &:has(> datalist) {
-	// 	--db-textarea-padding-end-datalist: 1;
-
-	// 	// Datalist icon
-	// 	@include icon(glyph(expand-more), 24, "outline", "after");
-
-	// 	&::after {
-	// 		transition: transform $db-transition-emotional-straight;
-	// 	}
-
-	// 	&:has(textarea:is(:focus, :not(:placeholder-shown))) {
-	// 		&::after {
-	// 			transform: rotate(180deg);
-	// 		}
-	// 	}
-
-	// 	textarea {
-	// 		&::-webkit-calendar-picker-indicator {
-	// 			display: none !important;
-	// 		}
-	// 	}
-	// }
-
-	// .db-icon,
-	// db-icon,
-	// &:has(> datalist)::after {
-	// 	--icon-font-family: var(--db-base-icon-font-family);
-	// 	--icon-font-size: var(--db-base-icon-font-size);
-
-	// 	@extend %db-body-sm;
-
-	// 	font-size: var(--icon-font-size);
-
-	// 	height: $db-sizing-md;
-	// 	display: flex;
-	// 	align-items: center;
-	// 	position: absolute;
-	// 	top: 0;
-	// 	margin-inline: $db-spacing-fixed-sm;
-	// }
-
-	// .icon-after,
-	// // angular specific nesting
-	// dbicon.icon-after > .db-icon,
-	// &:has(> datalist)::after {
-	// 	right: 0;
-	// }
-
-	// .icon-after {
-	// 	margin-inline-end: calc(
-	// 		#{$db-spacing-fixed-sm} + var(--db-textarea-padding-end-datalist) * #{$db-sizing-md} -
-	// 			var(--db-textarea-padding-end-datalist) * #{$db-spacing-fixed-sm}
-	// 	);
-	// }
-
-	// currently not supported by firefox
-	// &:has(> textarea:disabled) {
-	// 	.db-icon,
-	// 	.icon-state,
-	// 	&:has(> datalist)::after {
-	// 		opacity: 0.5;
-	// 	}
-	// }
 
 	label {
 		@extend %default-color;
@@ -141,10 +48,9 @@
 		align-items: center;
 		font-size: var(--db-type-body-font-size-xs);
 		padding-bottom: var(--db-spacing-fixed-xs);
+		padding-left: var(--db-spacing-fixed-sm);
 
-		// height: $db-sizing-md;
 		cursor: text;
-		// setting max-width to prevent users from too long labels by displaying text-overflow: ellipsis
 		max-inline-size: var(--db-textarea-label-max-width, 80%);
 
 		span:first-child {
@@ -164,14 +70,6 @@
 	}
 
 	textarea {
-		// --db-textarea-padding-inline-end: calc(
-		// 	(
-		// 			var(--db-textarea-padding-end-icon-after) +
-		// 				var(--db-textarea-padding-end-data-variant) +
-		// 				var(--db-textarea-padding-end-datalist)
-		// 		) * #{$db-sizing-xs}
-		// );
-
 		@extend %bg-transparent-hover;
 		@extend %default-interactive-component;
 		@extend %component-border;
@@ -182,21 +80,6 @@
 		max-inline-size: 100%;
 		inline-size: 100%;
 		padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-sm);
-
-		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
-		&:focus,
-		&:not(:placeholder-shown) {
-			// top: $db-spacing-fixed-xs;
-			// padding-bottom: calc(
-			// 	$db-spacing-fixed-xs - var(--db-textarea-focus-opacity) *
-			// 		$db-spacing-fixed-xs
-			// );
-			// move filled text for expressive and regular to center with focused label
-			// padding-top: calc(
-			// 	var(--db-spacing-fixed-xs) + 0.25em *
-			// 		var(--db-textarea-focus-opacity)
-			// );
-		}
 
 		// TODO: Evaluate whether those could get moved to ../_form-elements.scss
 		&:disabled,

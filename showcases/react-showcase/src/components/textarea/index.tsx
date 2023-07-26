@@ -10,24 +10,26 @@ const handleChange = (evt) => {
 };
 
 const getTextarea = ({
-	value,
-	variant,
+	cols,
+	disabled,
+	icon,
 	infomsg,
 	label,
 	placeholder,
-	cols,
 	rows,
-	disabled
+	value,
+	variant
 }: DBTextareaProps) => (
 	<DBTextarea
 		cols={cols}
+		disabled={disabled}
+		icon={icon}
 		infomsg={infomsg}
 		label={label}
 		onChange={handleChange}
 		placeholder={placeholder}
 		rows={rows}
 		value={value}
-		disabled={disabled}
 		variant={variant}></DBTextarea>
 );
 
