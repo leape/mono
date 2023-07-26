@@ -8,7 +8,6 @@ export type ComponentType = {
 	| 'textarea'
 		| 'tag'
 		| 'navigation-item'
-		| 'tag'
 		| 'select'
 		| 'h1'
 		| 'h2'

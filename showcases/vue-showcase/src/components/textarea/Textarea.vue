@@ -5,7 +5,7 @@ import { DBTextarea } from "../../../../../output/vue/vue3/src";
 </script>
 
 <template>
-	<DefaultComponent title="Textarea" :variants="defaultComponentVariants">
+	<DefaultComponent title="DBTextarea" :variants="defaultComponentVariants">
 		<template
 			#example="{ exampleIndex, variantIndex, exampleName, exampleProps }"
 		>

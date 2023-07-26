@@ -5,15 +5,15 @@ import { DBTextarea } from './index';
 // @ts-ignore - vue can only find it with .ts as file ending
 import { DEFAULT_VIEWPORT } from '../../shared/constants.ts';
 
-const comp = <DBTextarea label="Test">Test</DBTextarea>;
+const comp = <DBTextarea>Test</DBTextarea>;
 
 const testComponent = () => {
-	test.skip('should contain text', async ({ mount }) => {
+	test('should contain text', async ({ mount }) => {
 		const component = await mount(comp);
 		await expect(component).toContainText('Test');
 	});
 
-	test.skip('should match screenshot', async ({ mount }) => {
+	test('should match screenshot', async ({ mount }) => {
 		const component = await mount(comp);
 		await expect(component).toHaveScreenshot();
 	});
@@ -24,11 +24,8 @@ test.describe('DBTextarea', () => {
 	testComponent();
 });
 
-test.describe('DBTextarea component A11y', () => {
-	test.skip('DBTextarea should not have any automatically detectable accessibility issues', async ({
-		page,
-		mount
-	}) => {
+test.describe('DBTextarea', () => {
+	test.skip('should not have any A11y issues', async ({ page, mount }) => {
 		await mount(comp);
 		const accessibilityScanResults = await new AxeBuilder({ page })
 			.include('.db-textarea')

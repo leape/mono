@@ -1,5 +1,4 @@
 @use "@db-ui/foundations/build/scss/db-ui-foundations" as *;
-
 @use "../components/button/button" as *;
 @use "../components/icon/icon" as *;
 @use "../components/tab/tab" as *;
@@ -21,7 +20,6 @@
 @use "../components/drawer/drawer" as *;
 @use "../components/select/select" as *;
 @use "../components/navigation-item/navigation-item" as *;
-
 @use "../components/textarea/textarea" as *;
 
 // angular-workaround

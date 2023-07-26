@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import DBTextarea from '../src/components/textarea/textarea';
-
 import {
 	DBInfotext,
 	DBButton,
@@ -190,8 +189,8 @@ const ComponentSwitch = ({
 			</DBTextarea>
 		);
 	}
-      
-  if (type === 'select') {
+
+	if (type === 'select') {
 		return (
 			<DBSelect className={className} {...props}>
 				{resolvedContent}
@@ -212,6 +211,14 @@ const ComponentSwitch = ({
 			<DBNavigationItem className={className} {...props}>
 				{resolvedContent}
 			</DBNavigationItem>
+		);
+	}
+
+	if (type === 'textarea') {
+		return (
+			<DBTextarea className={className} {...props}>
+				{resolvedContent}
+			</DBTextarea>
 		);
 	}
 

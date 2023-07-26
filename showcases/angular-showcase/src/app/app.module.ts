@@ -1,3 +1,5 @@
+import { TextareaComponent } from "./components/textarea/textarea.component";
+
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +23,8 @@ import {
 	DBDrawerModule,
 	DBTagModule,
 	DBNavigationItemModule
+,DBTextareaModule
+
 } from '../../../../output/angular/src';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -43,6 +47,8 @@ import { NavigationItemComponent } from './components/navigation-item/navigation
 
 @NgModule({
 	declarations: [
+TextareaComponent,
+
 		NavigationItemComponent,
 
 		SelectComponent,
@@ -63,6 +69,8 @@ import { NavigationItemComponent } from './components/navigation-item/navigation
 		DrawerComponent
 	],
 	imports: [
+DBTextareaModule,
+
 		DBNavigationItemModule,
 
 		DBTagModule,
