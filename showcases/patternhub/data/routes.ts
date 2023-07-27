@@ -2,11 +2,6 @@ import type { DbMainnavigationDataType } from '@db-ui/elements/dist/types/compon
 
 const componentChildren = [
 	{
-		label: 'TODO: Add to specific category; DBTextarea',
-		name: 'textarea'
-	},
-
-	{
 		label: '01 Layout',
 		link: '/components/01-layout',
 		children: [
@@ -69,6 +64,10 @@ const componentChildren = [
 			{
 				label: 'DBSelect',
 				name: 'select'
+			},
+			{
+				label: 'DBTextarea',
+				name: 'textarea'
 			}
 		]
 	},
