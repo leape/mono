@@ -106,8 +106,6 @@ export default function DBTextarea(props: DBTextareaProps) {
 			/>
 			<DBInfotext
 				size="medium"
-				cols={1}
-				rows={1}
 				variant={props.variant}
 				icon={props.icon || state.getIcon(props.variant)}>
 				{props.infomsg}

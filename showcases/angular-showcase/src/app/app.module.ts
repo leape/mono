@@ -1,5 +1,3 @@
-import { TextareaComponent } from "./components/textarea/textarea.component";
-
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,9 +20,8 @@ import {
 	DBSelectModule,
 	DBDrawerModule,
 	DBTagModule,
-	DBNavigationItemModule
-,DBTextareaModule
-
+	DBNavigationItemModule,
+	DBTextareaModule
 } from '../../../../output/angular/src';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -44,57 +41,54 @@ import { TagComponent } from './components/tag/tag.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { SelectComponent } from './components/select/select.component';
 import { NavigationItemComponent } from './components/navigation-item/navigation-item.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
 
 @NgModule({
 	declarations: [
-TextareaComponent,
-
-		NavigationItemComponent,
-
-		SelectComponent,
-		TagComponent,
+		AlertComponent,
 		AppComponent,
-		DefaultComponent,
-		FormComponent,
 		ButtonComponent,
+		CardComponent,
+		CheckboxComponent,
+		DefaultComponent,
+		DividerComponent,
+		DrawerComponent,
+		FormComponent,
+		InfotextComponent,
 		InputComponent,
 		LinkComponent,
-		AlertComponent,
+		NavigationItemComponent,
 		RadioComponent,
-		CheckboxComponent,
-		InfotextComponent,
 		SectionComponent,
-		CardComponent,
-		DividerComponent,
-		DrawerComponent
+		SelectComponent,
+		TagComponent,
+		TextareaComponent
 	],
 	imports: [
-DBTextareaModule,
-
-		DBNavigationItemModule,
-
-		DBTagModule,
-		DBSelectModule,
 		AppRoutingModule,
 		BrowserModule,
-		DBButtonModule,
-		DBIconModule,
-		DBDividerModule,
-		DBCardModule,
-		DBInputModule,
-		DBPageModule,
-		DBHeaderModule,
-		DBBrandModule,
-		DBLinkModule,
-		DBCodeDocsModule,
 		DBAlertModule,
-		DBSectionModule,
-		DBInfotextModule,
-		FormsModule,
-		ReactiveFormsModule,
+		DBBrandModule,
+		DBButtonModule,
+		DBCardModule,
 		DBCheckboxModule,
+		DBCodeDocsModule,
+		DBDividerModule,
+		DBDrawerModule,
+		DBHeaderModule,
+		DBIconModule,
+		DBInfotextModule,
+		DBInputModule,
+		DBLinkModule,
+		DBNavigationItemModule,
+		DBPageModule,
 		DBRadioModule,
-		DBDrawerModule
+		DBSectionModule,
+		DBSelectModule,
+		DBTagModule,
+		DBTextareaModule,
+		FormsModule,
+		ReactiveFormsModule
 	],
 	providers: [],
 	schemas: [NO_ERRORS_SCHEMA],

@@ -5,4 +5,3 @@ import { getDefaultScreenshotTest } from '../default.ts';
 test.describe('DBTextarea', () => {
 	getDefaultScreenshotTest('textarea');
 });
-

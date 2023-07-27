@@ -32,14 +32,14 @@
 	--db-textarea-padding-end-data-variant: 1;
 	--db-textarea-padding-inline-start: #{$db-spacing-fixed-sm};
 
-	.db-infotext {
-		padding-top: var(--db-spacing-fixed-2xs);
-		padding-left: var(--db-spacing-fixed-sm);
-	}
-
 	position: relative;
 	display: flex;
 	flex-direction: column;
+
+	.db-infotext {
+		padding-block-start: var(--db-spacing-fixed-2xs);
+		padding-inline-start: var(--db-spacing-fixed-sm);
+	}
 
 	label {
 		@extend %default-color;
@@ -47,8 +47,8 @@
 		display: flex;
 		align-items: center;
 		font-size: var(--db-type-body-font-size-xs);
-		padding-bottom: var(--db-spacing-fixed-xs);
-		padding-left: var(--db-spacing-fixed-sm);
+		padding-block-end: var(--db-spacing-fixed-xs);
+		padding-inline-start: var(--db-spacing-fixed-sm);
 
 		cursor: text;
 		max-inline-size: var(--db-textarea-label-max-width, 80%);
