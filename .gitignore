@@ -12,6 +12,7 @@ source/_meta/_head.mustache
 source/_meta/_foot.mustache
 
 tailwind.config.js
+!e2e/.env
 .env
 **/*/.env
 
@@ -29,6 +30,8 @@ output/power-apps
 /output/**/src
 /output/**/dist
 /output/**/.angular
+/output/**/playwright*
+/output/**/test-results
 
 /build-showcases/
 /build-outputs/
@@ -38,3 +41,13 @@ output/power-apps
 !/build-power-apps/package.json
 !/build-power-apps/package-lock.json
 !/build-power-apps/DBUI/**
+!/build-power-apps/**/strings/*.*.resx
+.cache
+**/playwright-report
+/.parcel-cache/
+/output/docs.json
+showcases/patternhub/public/iframe-resizer/*
+
+/showcases/**/test-results/
+
+/__snapshots__/**/*-win32.png

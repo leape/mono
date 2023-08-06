@@ -1,30 +1,34 @@
-/** @type {import("next").NextConfig} */
+import { remarkCodeHike } from '@code-hike/mdx';
+import remarkGfm from 'remark-gfm';
+import generated from '@next/mdx';
+import { getTheme } from './code-theme.js';
 
-const withMDX = require('@next/mdx')({
+const withMDX = generated({
 	extension: /\.mdx?$/,
 	options: {
-		// If you use remark-gfm, you'll need to use next.config.mjs
-		// as the package is ESM only
-		// https://github.com/remarkjs/remark-gfm#install
-		remarkPlugins: [],
-		rehypePlugins: []
-		// If you use `MDXProvider`, uncomment the following line.
-		// providerImportSource: "@mdx-js/react",
+		remarkPlugins: [
+			remarkGfm,
+			[
+				remarkCodeHike,
+				{
+					theme: getTheme(),
+					showCopyButton: true,
+					showExpandButton: true
+				}
+			]
+		],
+		rehypePlugins: [],
+		providerImportSource: '@mdx-js/react'
 	}
 });
 
-const withTM = require('next-transpile-modules');
-const packageJSON = require('./package.json');
-
-const transpiledPackages = Object.keys(packageJSON.dependencies).filter((it) =>
-	it.includes('@db-ui')
-);
-
-module.exports = {
+const config = {
 	basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-	...withTM(transpiledPackages)(
-		withMDX({
-			pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx']
-		})
-	)
+	transpilePackages: ['@db-ui'],
+	...withMDX({
+		pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+		eslint: { ignoreDuringBuilds: true }
+	})
 };
+
+export default config;

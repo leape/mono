@@ -1,31 +1,69 @@
-import {
-	onMount,
-	Show,
-	useMetadata,
-	useRef,
-	useStore
-} from '@builder.io/mitosis';
+import { For, onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBIcon } from '../icon';
-import { DEFAULT_ID, uuid } from '../../utils';
-import { DBInputState, DBInputProps, iconVariants } from './model';
+import { uuid } from '../../utils';
+import { DBInputProps, DBInputState } from './model';
+import { cls } from '../../utils';
+import { DEFAULT_ID, DEFAULT_LABEL } from '../../shared/constants';
+import {
+	DefaultVariantType,
+	DefaultVariantsIcon,
+	KeyValueType
+} from '../../shared/model';
 
 useMetadata({
-	isAttachedToShadowDom: false,
+	isAttachedToShadowDom: true,
 	component: {
-		includeIcon: false,
-		properties: []
+		// MS Power Apps
+		includeIcon: true,
+		hasDisabledProp: true,
+		properties: [
+			{
+				name: 'label',
+				type: 'SingleLine.Text',
+				required: true,
+				defaultValue: 'Input'
+			},
+			{ name: 'placeholder', type: 'SingleLine.Text' },
+			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' }, // $event.target["value"|"checked"|...]
+			{
+				name: 'icon',
+				type: 'Icon' // this is a custom type not provided by ms
+			},
+			{
+				name: 'iconAfter',
+				type: 'Icon'
+			},
+			{
+				name: 'variant',
+				type: 'DefaultVariant' // this is a custom type not provided by ms
+			}
+		]
 	}
 });
 
 export default function DBInput(props: DBInputProps) {
-	const textInputRef = useRef<HTMLInputElement>(null);
+	// This is used as forwardRef
+	let component: any;
+	// jscpd:ignore-start
 	const state = useStore<DBInputState>({
-		mId: DEFAULT_ID,
+		_id: DEFAULT_ID,
 		_isValid: undefined,
-		_value: '',
-		_placeholder: ' ', // placeholder can't be empty
-		_label: 'LABEL SHOULD BE SET',
-		handleChange: (event) => {
+		_dataListId: DEFAULT_ID,
+		defaultValues: {
+			label: DEFAULT_LABEL,
+			placeholder: ' '
+		},
+		iconVisible: (icon?: string) => {
+			return Boolean(icon && icon !== '_' && icon !== 'none');
+		},
+		getIcon: (variant?: DefaultVariantType) => {
+			if (variant) {
+				return DefaultVariantsIcon[variant];
+			}
+
+			return '';
+		},
+		handleChange: (event: any) => {
 			if (props.onChange) {
 				props.onChange(event);
 			}
@@ -34,17 +72,20 @@ export default function DBInput(props: DBInputProps) {
 				props.change(event);
 			}
 
-			// using controlled components for react forces us to using state for value
-			state._value = event.target.value;
-
-			if (textInputRef?.validity?.valid != state._isValid) {
-				state._isValid = textInputRef?.validity?.valid;
+			if (event.target?.validity?.valid != state._isValid) {
+				state._isValid = event.target?.validity?.valid;
 				if (props.validityChange) {
-					props.validityChange(!!textInputRef?.validity?.valid);
+					props.validityChange(!!event.target?.validity?.valid);
 				}
 			}
+
+			// TODO: Replace this with the solution out of https://github.com/BuilderIO/mitosis/issues/833 after this has been "solved"
+			// VUE:this.$emit("update:value", event.target.value);
+
+			// Angular: propagate change event to work with reactive and template driven forms
+			this.propagateChange(event.target.value);
 		},
-		handleBlur: (event) => {
+		handleBlur: (event: any) => {
 			if (props.onBlur) {
 				props.onBlur(event);
 			}
@@ -53,7 +94,7 @@ export default function DBInput(props: DBInputProps) {
 				props.blur(event);
 			}
 		},
-		handleFocus: (event) => {
+		handleFocus: (event: any) => {
 			if (props.onFocus) {
 				props.onFocus(event);
 			}
@@ -61,74 +102,90 @@ export default function DBInput(props: DBInputProps) {
 			if (props.focus) {
 				props.focus(event);
 			}
-		}
+		},
+		// callback for controlValueAccessor's onChange handler
+		propagateChange: (_: any) => {}
 	});
 
 	onMount(() => {
-		state.mId = props.id ? props.id : 'input-' + uuid();
-
-		if (props.value) {
-			state._value = props.value;
-		}
+		state._id = props.id || 'input-' + uuid();
+		state._dataListId = props.dataListId || `datalist-${uuid()}`;
 
 		if (props.stylePath) {
 			state.stylePath = props.stylePath;
 		}
-
-		if (props.placeholder) {
-			state._placeholder = props.placeholder;
-		}
-
-		if (props.label) {
-			state._label = props.label;
-		}
 	});
+	// jscpd:ignore-end
 
 	return (
 		<div
-			class={'db-input ' + (props.className || '')}
+			class={cls('db-input', props.className)}
 			data-variant={props.variant}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
-			<Show when={props.iconBefore}>
-				<DBIcon icon={props.iconBefore} className="icon-before" />
+			<Show when={state.iconVisible(props.icon)}>
+				<DBIcon icon={props.icon} class="icon-before" />
 			</Show>
 			<input
-				ref={textInputRef}
-				id={state.mId}
+				ref={component}
+				id={state._id}
 				name={props.name}
 				type={props.type || 'text'}
-				placeholder={state._placeholder}
-				aria-labelledby={state.mId + '-label'}
+				placeholder={
+					props.placeholder ?? state.defaultValues.placeholder
+				}
+				aria-labelledby={state._id + '-label'}
 				disabled={props.disabled}
 				required={props.required}
-				value={state._value}
+				defaultValue={props.defaultValue}
+				value={props.value}
+				aria-invalid={props.invalid}
 				maxLength={props.maxLength}
 				minLength={props.minLength}
+				max={props.max}
+				min={props.min}
 				pattern={props.pattern}
 				onChange={(event) => state.handleChange(event)}
 				onBlur={(event) => state.handleBlur(event)}
 				onFocus={(event) => state.handleFocus(event)}
+				list={props.dataList && state._dataListId}
 			/>
 			<label
-				htmlFor={state.mId}
+				htmlFor={state._id}
 				aria-hidden="true"
-				id={state.mId + '-label'}>
-				<span>{state._label}</span>
+				id={state._id + '-label'}>
+				<span>{props.label ?? state.defaultValues.label}</span>
 			</label>
 			<Show when={props.description}>
-				<p className="description">{props.description}</p>
+				<p class="description">{props.description}</p>
 			</Show>
 			<Show when={props.variant || props.required || props.pattern}>
 				<DBIcon
-					icon={props.variant && iconVariants[props.variant]}
-					className="icon-input-state"
+					icon={state.getIcon(props.variant)}
+					class="icon-state"
 				/>
 			</Show>
-			<Show when={props.iconAfter}>
-				<DBIcon icon={props.iconAfter} className="icon-after" />
+			<Show when={state.iconVisible(props.iconAfter)}>
+				<DBIcon icon={props.iconAfter} class="icon-after" />
 			</Show>
+			<Show when={props.dataList}>
+				<datalist id={state._dataListId}>
+					<For each={props.dataList}>
+						{(option: KeyValueType) => (
+							<option
+								key={
+									state._dataListId + '-option-' + option.key
+								}
+								value={option.key}>
+								{option.value}
+							</option>
+						)}
+					</For>
+				</datalist>
+			</Show>
+
+			{props.children}
 		</div>
 	);
 }

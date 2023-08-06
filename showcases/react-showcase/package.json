@@ -1,26 +1,30 @@
 {
   "name": "react-showcase",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
+  "private": true,
   "scripts": {
+    "build": "npm-run-all build:*",
+    "build:01_tsc": "tsc",
+    "build:02_vite": "vite build",
     "dev": "vite --open",
+    "preview": "npx http-server ../../build-showcases",
+    "regenerate:screenshots": "cross-env showcase=react-showcase npx playwright test -c ../playwright.config.ts --update-snapshots",
     "start": "vite",
-    "build:tsc": "tsc",
-    "build:vite": "vite build",
-    "build:copy": "cpr dist ../../build-showcases/react-showcase -o",
-    "build": "npm-run-all build:*"
+    "test:e2e": "cross-env showcase=react-showcase npx playwright test --config=../playwright.config.ts"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6.14.2"
   },
   "devDependencies": {
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.0.1",
-    "sass": "^1.57.1",
-    "typescript": "^4.6.4",
-    "vite": "^4.0.4"
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.4",
+    "cross-env": "^7.0.3",
+    "sass": "^1.64.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.4.8"
   }
 }

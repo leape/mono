@@ -1,6 +1,31 @@
 export const uuid = () => {
-	return window?.crypto?.randomUUID() || Math.random().toString();
+	if (typeof window !== 'undefined') {
+		return window.crypto?.randomUUID();
+	}
+
+	return Math.random().toString();
 };
 
-export const DEFAULT_ID =
-	'ID_WILL_BE_OVERWRITTEN_ON_MOUNT_AND_THIS_CONSTANT_WONT_SHOW_UP_ONLY_IF_YOU_ARE_ARENT_INITIALIZING_IT_IN_THE_FRONTEND';
+export type ClassNameArg =
+	| string
+	| { [key: string]: boolean | undefined }
+	| undefined;
+export const cls = (...args: ClassNameArg[]) => {
+	let result = '';
+
+	args.forEach((arg, index) => {
+		if (arg) {
+			if (typeof arg === 'string') {
+				result += `${arg} `;
+			} else {
+				for (let key in arg) {
+					if (arg[key]) {
+						result += `${key} `;
+					}
+				}
+			}
+		}
+	});
+
+	return result.trim();
+};

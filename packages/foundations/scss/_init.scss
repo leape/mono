@@ -1,12 +1,15 @@
 @use "variables" as *;
+@use "variables.global" as *;
+@use "color-placeholder" as *;
+@use "helpers/functions" as *;
+@use "color/code-colors" as *;
 
 :root {
-	// Todo: probably move these to the tokens as well
+	// TODO: probably move these to the tokens as well
 	--db-focus-outline-offset: 1px;
-	--db-focus-outline-color: #{$db-colors-information-enabled};
+	--db-focus-outline-color: #{$db-colors-informational-enabled};
 	--db-focus-outline-transition-duration: #{$db-transition-duration-ultra-fast};
 	--db-focus-outline-size: max(2px, 0.08em);
-
 	--db-disabled-text-opacity: 0.5;
 }
 
@@ -19,7 +22,7 @@ body {
 
 // Box sizing
 html {
-	box-sizing: border-box;
+	box-sizing: var(--db-box-sizing, border-box);
 }
 
 *,
@@ -31,7 +34,6 @@ html {
 // Make sure every elements has the current color from container above
 body {
 	color: var(--db-current-color, $db-colors-neutral-on-bg-enabled);
-	min-height: 100vh;
 }
 
 a {
@@ -42,14 +44,23 @@ a {
 	}
 }
 
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
 // Media
 img,
 embed,
 iframe,
 object,
 video {
-	height: auto;
-	max-width: 100%;
+	block-size: auto;
+	max-inline-size: 100%;
 }
 
 // Iframe
@@ -59,7 +70,7 @@ iframe {
 
 // Focus styles
 %focus-placeholder,
-:is(a, button, input, textarea, summary) {
+:is(a, button, input, textarea, summary, select) {
 	transition: outline var(--db-focus-outline-transition-duration);
 
 	&:focus-visible {
@@ -73,7 +84,7 @@ iframe {
 	}
 }
 
-// List style / https://marketingportal.extranet.deutschebahn.com/de/brandguide/typografie-1#8e0be060-c2f5-42a1-abbc-6b050845d73c~paragraph--image_link
+// List style / https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Typografie#Aufzaehlungszeichen-9693110
 :where(ul) {
 	list-style-type: "\2022"+ "   ";
 
@@ -98,4 +109,26 @@ nav,
 // Block
 fieldset {
 	border: none;
+}
+
+// Code
+
+pre:has(code) {
+	@extend %code-style;
+	padding: $db-spacing-fixed-xs;
+}
+
+code {
+	@extend %code-style;
+	padding-block: $db-spacing-fixed-2xs;
+	padding-inline: $db-spacing-fixed-xs;
+}
+
+// details/summary box-sizing / https://kittygiraudel.com/2021/08/23/shadow-roots-and-inheritance/
+details {
+	& > *,
+	& > ::before,
+	& > ::after {
+		box-sizing: var(--db-box-sizing, border-box);
+	}
 }

@@ -1,24 +1,27 @@
 import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import type { DBIconState, DBIconProps } from './model';
+import { cls } from '../../utils';
 
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
+		// MS Power Apps
 		includeIcon: true,
 		properties: [
 			{
 				name: 'icon',
-				type: 'Enum',
-				values: [
-					{ key: 'None', name: 'None', value: '_' },
-					{ key: 'Account', name: 'Account', value: 'account' }
-				]
-			}
+				type: 'Icon',
+				defaultValue: 'None'
+			},
+			{ name: 'title', type: 'SingleLine.Text' }
 		]
 	}
 });
 
 export default function DBIcon(props: DBIconProps) {
+	// This is used as forwardRef
+	let component: any;
+	// jscpd:ignore-start
 	const state = useStore<DBIconState>({});
 
 	onMount(() => {
@@ -26,16 +29,15 @@ export default function DBIcon(props: DBIconProps) {
 			state.stylePath = props.stylePath;
 		}
 	});
+	// jscpd:ignore-end
 
 	return (
 		<span
-			className={
-				'db-icon' +
-				(props.className ? ' ' + props.className : '') +
-				(props.withText ? '' : ' is-icon-text-replace')
-			}
+			ref={component}
+			class={cls('db-icon', props.className)}
 			data-icon={props.icon}
-			aria-hidden="true">
+			aria-hidden="true"
+			title={props.title}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>

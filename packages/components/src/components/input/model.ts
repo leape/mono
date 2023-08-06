@@ -6,12 +6,21 @@ import {
 	ChangeEventState,
 	ChangeEventProps,
 	GlobalProps,
-	GlobalState
+	GlobalState,
+	DefaultVariantType,
+	FormProps,
+	FormState,
+	IconProps,
+	IconState,
+	DefaultVariantProps,
+	KeyValueType,
+	IconAfterProps
 } from '../../shared/model';
 
 export type DBInputDefaultProps = {
-	id?: string;
-	label?: string;
+	dataList?: KeyValueType[];
+	dataListId?: string;
+	description?: string;
 	type?:
 		| 'text'
 		| 'search'
@@ -24,22 +33,8 @@ export type DBInputDefaultProps = {
 		| 'date'
 		| 'datetime-local'
 		| 'week';
-	variant?: 'error' | 'success' | 'warning' | 'information';
-	iconBefore?: string;
-	iconAfter?: string;
-	disabled?: boolean;
-	required?: boolean;
 	value?: any;
-	description?: string;
-	name?: string;
-};
-
-export const iconVariants: any = {
-	error: 'error',
-	// TODO: 'error-triangle' will change to 'warning' soon
-	warning: 'error-triangle',
-	success: 'check-circle',
-	information: 'info'
+	variant?: DefaultVariantProps;
 };
 
 export type DBInputProps = DBInputDefaultProps &
@@ -47,17 +42,21 @@ export type DBInputProps = DBInputDefaultProps &
 	GlobalTextProps &
 	ChangeEventProps &
 	FocusEventProps &
-	ValidEventProps;
+	ValidEventProps &
+	FormProps &
+	IconProps &
+	IconAfterProps &
+	DefaultVariantProps;
 
 export type DBInputDefaultState = {
-	mId?: string;
-	_isValid: boolean | undefined;
-	_value: any;
-	_placeholder: string;
-	_label: string;
+	_dataListId?: string;
+	_value?: any;
+	getIcon: (variant?: DefaultVariantType) => string;
 };
 
 export type DBInputState = DBInputDefaultState &
 	GlobalState &
 	ChangeEventState &
-	FocusEventState;
+	FocusEventState &
+	FormState &
+	IconState;

@@ -1,14 +1,12 @@
 const StyleDictionary = require('style-dictionary').extend(
 	'style-dictionary.config.json'
 );
-
 const minifyDictionary = require('style-dictionary/lib/common/formatHelpers/minifyDictionary');
 const transforms = require('style-dictionary/lib/common/transforms');
-const SCSSPlaceholders = require('./scripts/color-placeholders-generator');
-const SCSSClasses = require('./scripts/color-classes-generator');
-
-const generateTypography = require('./scripts/scss-typography-generator');
-const generateScaling = require('./scripts/scss-scaling-generator');
+const SCSSPlaceholders = require('./scripts/color-placeholders-generator.js');
+const SCSSClasses = require('./scripts/color-classes-generator.js');
+const generateTypography = require('./scripts/scss-typography-generator.js');
+const generateScaling = require('./scripts/scss-scaling-generator.js');
 
 const modifyTailwind = (dictionary) => {
 	for (const token of [
@@ -106,6 +104,10 @@ StyleDictionary.registerTransform({
 	name: `size/real/rem`,
 	matcher: (token) => token.attributes.category === 'size',
 	transformer(token) {
+		if (token.attributes.screen) {
+			return token.value;
+		}
+
 		return `${Number(token.value) / 16}rem`;
 	}
 });
@@ -115,7 +117,7 @@ StyleDictionary.registerTransform({
 	name: `size/upscale/screen`,
 	matcher: (token) => token.attributes.screen === true,
 	transformer(token) {
-		return `${Number(token.value) * 16}`;
+		return `${Number(token.value) * 16}px`;
 	}
 });
 

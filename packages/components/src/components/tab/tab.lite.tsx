@@ -5,12 +5,15 @@ import {
 	useStore,
 	useRef
 } from '@builder.io/mitosis';
-import { DEFAULT_ID, uuid } from '../../utils';
+import { DEFAULT_ID } from '../../shared/constants';
 import type { DBTabState, DBTabProps } from './model';
+import { uuid } from '../../utils';
+import { cls } from '../../utils';
 
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
+		// MS Power Apps
 		includeIcon: false,
 		properties: [
 			{ name: 'name', type: 'SingleLine.Text' },
@@ -28,7 +31,10 @@ useMetadata({
 });
 
 export default function DBTab(props: DBTabProps) {
-	const inputRef = useRef<HTMLInputElement>(null);
+	// This is used as forwardRef
+	let component: any;
+	const formRef = useRef<HTMLInputElement>(null);
+	// jscpd:ignore-start
 	const state = useStore<DBTabState>({
 		mId: DEFAULT_ID
 	});
@@ -40,20 +46,18 @@ export default function DBTab(props: DBTabProps) {
 		}
 
 		if (props.active) {
-			inputRef?.click();
+			formRef?.click();
 		}
 	});
+	// jscpd:ignore-end
 
 	return (
-		<div
-			className={
-				'db-tab' + (props.className ? ' ' + props.className : '')
-			}>
+		<div ref={component} class={cls('db-tab', props.className)}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
 			<input
-				ref={inputRef}
+				ref={formRef}
 				type="radio"
 				name={props.name}
 				id={state.mId}

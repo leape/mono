@@ -1,9 +1,8 @@
 @use "../color-placeholder" as *;
+@use "../variables" as *;
 
-$color-variants: "neutral-0", "neutral-1", "neutral-3", "neutral-4", "neutral-5",
-	"neutral-6", "primary", "primary-light", "secondary", "secondary-light",
-	"critical", "critical-light", "success", "success-light", "warning",
-	"warning-light", "information", "information-light";
+$color-variants: "neutral-0", "neutral-1", "neutral-3", "neutral-4", "primary",
+	"secondary", "critical", "successful", "warning", "informational";
 
 @mixin color-variants($ia) {
 	@each $variant in $color-variants {
@@ -24,3 +23,136 @@ $color-variants: "neutral-0", "neutral-1", "neutral-3", "neutral-4", "neutral-5"
 %color-variants-ia {
 	@include color-variants(true);
 }
+
+@mixin get-variant-bg-color($alpha) {
+	background-color: rgba(
+		var(--db-current-background-color-red),
+		var(--db-current-background-color-green),
+		var(--db-current-background-color-blue),
+		var(--db-current-background-color-alpha, $alpha)
+	);
+}
+
+%bg-transparent {
+	@include get-variant-bg-color(0);
+}
+
+%bg-transparent-hover {
+	@extend %bg-transparent;
+
+	&:enabled {
+		&:hover {
+			@include get-variant-bg-color(0.16);
+		}
+	}
+}
+
+%bg-transparent-interactive {
+	@extend %bg-transparent-hover;
+
+	&:enabled {
+		&:active {
+			@include get-variant-bg-color(0.24);
+		}
+	}
+}
+
+// Variants for adaptive components like input, select, alert, ...
+
+$db-colors-critical-border: var(
+	--db-colors-critical-border-weak-enabled,
+	$db-colors-critical-border-weak-enabled
+);
+
+$db-colors-critical-element: var(
+	--db-colors-critical-element-enabled,
+	$db-colors-critical-element-enabled
+);
+
+$db-colors-critical-on-bg: var(
+	--db-colors-critical-on-bg-enabled,
+	$db-colors-critical-on-bg-enabled
+);
+$db-colors-critical: var(
+	--db-colors-critical-enabled,
+	$db-colors-critical-enabled
+);
+
+$db-colors-informational-border: var(
+	--db-colors-informational-border-weak-enabled,
+	$db-colors-informational-border-weak-enabled
+);
+$db-colors-informational-element: var(
+	--db-colors-informational-element-enabled,
+	$db-colors-informational-element-enabled
+);
+
+$db-colors-informational-on-bg: var(
+	--db-colors-informational-on-bg-enabled,
+	$db-colors-informational-on-bg-enabled
+);
+$db-colors-informational: var(
+	--db-colors-informational-enabled,
+	$db-colors-informational-enabled
+);
+
+$db-colors-warning-border: var(
+	--db-colors-warning-border-weak-enabled,
+	$db-colors-warning-border-weak-enabled
+);
+$db-colors-warning-element: var(
+	--db-colors-warning-element-enabled,
+	$db-colors-warning-element-enabled
+);
+$db-colors-warning-on-bg: var(
+	--db-colors-warning-on-bg-enabled,
+	$db-colors-warning-on-bg-enabled
+);
+$db-colors-warning: var(
+	--db-colors-warning-enabled,
+	$db-colors-warning-enabled
+);
+
+$db-colors-successful-border: var(
+	--db-colors-successful-border-weak-enabled,
+	$db-colors-successful-border-weak-enabled
+);
+$db-colors-successful-element: var(
+	--db-colors-successful-element-enabled,
+	$db-colors-successful-element-enabled
+);
+$db-colors-successful-on-bg: var(
+	--db-colors-successful-on-bg-enabled,
+	$db-colors-successful-on-bg-enabled
+);
+$db-colors-successful: var(
+	--db-colors-successful-enabled,
+	$db-colors-successful-enabled
+);
+
+$component-variants: (
+	"critical": (
+		"border": $db-colors-critical-border,
+		"element": $db-colors-critical-element,
+		"on-bg": $db-colors-critical-on-bg,
+		"primary": $db-colors-critical
+	),
+	"informational": (
+		"border": $db-colors-informational-border,
+		"element": $db-colors-informational-element,
+		"on-bg": $db-colors-informational-on-bg,
+		"primary": $db-colors-informational
+	),
+	"warning": (
+		"border": $db-colors-warning-border,
+		"element": $db-colors-warning-element,
+		"on-bg": $db-colors-warning-on-bg,
+		"primary": $db-colors-warning
+	),
+	"successful": (
+		"border": $db-colors-successful-border,
+		"element": $db-colors-successful-element,
+		"on-bg": $db-colors-successful-on-bg,
+		"primary": $db-colors-successful
+	)
+);

@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+@use "@db-ui/foundations/build/scss/helpers/font" as *;
+@use "@db-ui/foundations/build/scss/variables" as *;
+@use "@db-ui/foundations/build/scss/variables.global" as *;
+@use "@db-ui/foundations/build/scss/scaling-placeholder" as *;
+@use "@db-ui/foundations/build/scss/color-placeholder" as *;
+@use "@db-ui/foundations/build/scss/helpers/functions" as *;
+@use "@db-ui/foundations/build/scss/icon/icons.helpers" as *;
+@use "@db-ui/foundations/build/scss/helpers/component" as *;
+
+%db-link-height {
+	display: inline-block;
+	block-size: $db-sizing-sm;
+}
+
+.db-link {
+	@extend %default-color;
+	@extend %db-link-height;
+	inline-size: fit-content;
+	align-items: center;
+
+	// Link underline
+	// TODO: We should evaluate whether we could move this declaration to the @font-face declarations even already
+	text-underline-position: from-font;
+	text-decoration-thickness: to-rem($pxValue: 1);
+
+	// Changing color on hover should be animated by a transition
+	transition:
+		outline 0.06s,
+		color $db-transition-color;
+
+	a {
+		// Workaround for angular
+		@extend %db-link-height;
+	}
+
+	&:hover {
+		color: inherit;
+	}
+
+	// "disabled" links
+	&[aria-disabled="true"] {
+		// TODO: probably move these to the tokens as well
+		opacity: var(--db-disabled-text-opacity, 0.5);
+		pointer-events: none;
+	}
+
+	&:not([data-variant="inline"]) {
+		&[data-content="internal"] {
+			@include icon(glyph(arrow-forward), 24, "outline", "after");
+		}
+
+		&[data-content="external"] {
+			@include icon(glyph(link-external), 24, "outline", "after");
+		}
+	}
+
+	&:focus-visible {
+		border-radius: $default-border-radius;
+	}
+
+	&[data-content="internal"],
+	&[data-content="external"] {
+		--icon-margin-before: var(--db-spacing-fixed-2xs);
+
+		&:focus-visible {
+			outline-offset: var(--db-focus-outline-offset, 1px);
+		}
+
+		&::after {
+			margin-inline-start: var(--icon-margin-before);
+		}
+	}
+
+	&[data-variant="primary"] {
+		@extend %db-primary-text-ia;
+	}
+
+	&[data-size="small"] {
+		--icon-font-size: var(--db-base-icon-font-size);
+		--icon-margin-before: var(--db-spacing-fixed-3xs);
+		@extend %db-overwrite-font-size-sm;
+	}
+}

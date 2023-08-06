@@ -27,24 +27,39 @@ jobs:
 
   build-showcases:
     uses: ./.github/workflows/01-build-showcases.yml
-    needs: [build-packages]
+    needs: [build-packages, get-publish-version]
     with:
       release: ${{ needs.get-publish-version.outputs.release }}
       preRelease: ${{ needs.get-publish-version.outputs.preRelease }}
 
-  #  cypress:
-  #    uses: ./.github/workflows/02-cypress.yml
-  #    needs: [install-cypress,build-showcases]
+  test-components:
+    uses: ./.github/workflows/02-e2e.yml
+    needs: [build-packages]
+
+  build-power-apps:
+    uses: ./.github/workflows/01-build-power-apps.yml
+    needs: [get-publish-version, build-packages]
+    secrets: inherit
+    with:
+      version: ${{ needs.get-publish-version.outputs.version }}
+
+  test-showcases:
+    uses: ./.github/workflows/02-e2e-showcases.yml
+    needs: [build-showcases]
 
   checks-done:
     runs-on: ubuntu-latest
     steps:
       - name: 🎉 Checks done
         run: echo "🎉 All builds were successful."
-        # TODO: integrate the cypress builds and use the following two lines afterwards
-        # run: echo "🎉 All tests were successful."
-    #    needs: [cypress]
-    needs: [build-outputs, build-showcases]
+    needs:
+      [
+        test-components,
+        build-outputs,
+        build-showcases,
+        test-showcases,
+        build-power-apps
+      ]
 
   deploy:
     uses: ./.github/workflows/03-deploy-gh-pages.yml
@@ -52,13 +67,6 @@ jobs:
     with:
       release: ${{ needs.get-publish-version.outputs.release }}
       preRelease: ${{ needs.get-publish-version.outputs.preRelease }}
-
-  build-power-apps:
-    uses: ./.github/workflows/01-build-power-apps.yml
-    needs: [get-publish-version, checks-done, build-packages]
-    secrets: inherit
-    with:
-      version: ${{ needs.get-publish-version.outputs.version }}
 
   publishpackages:
     uses: ./.github/workflows/03-publish-packages.yml
