@@ -75,7 +75,7 @@
 		@extend %bg-transparent-hover;
 		@extend %default-interactive-component;
 		@extend %component-border;
-		@extend %db-body-md;
+		@extend %db-overwrite-font-size-md;
 		@include get-variant-bg-color(0.08);
 
 		// height: $db-sizing-md;
