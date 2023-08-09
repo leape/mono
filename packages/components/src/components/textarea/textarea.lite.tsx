@@ -1,14 +1,14 @@
 import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBTextareaState, DBTextareaProps } from './model';
 import { DBInfotext } from '../infotext';
-import { uuid } from '../../utils';
-import { cls } from '../../utils';
+import { cls, uuid } from '../../utils';
 import { DEFAULT_ID, DEFAULT_LABEL } from '../../shared/constants';
 import { DefaultVariantType, DefaultVariantsIcon } from '../../shared/model';
 
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
+		// MS Power Apps
 		includeIcon: false,
 		hasDisabledProp: true,
 		properties: [
@@ -68,7 +68,7 @@ export default function DBTextarea(props: DBTextareaProps) {
 			state.stylePath = props.stylePath;
 		}
 
-		state._id = props.id ? props.id : 'textarea-' + uuid();
+		state._id = props.id || 'textarea-' + uuid();
 
 		if (props.value) {
 			state._value = props.value;
