@@ -17,15 +17,7 @@
  */
 const getComponents = () => [
 	{
-		name: 'textarea',
-		config: {
-			vue: {
-				vModel: [{ modelValue: 'value', binding: ':value' }]
-			},
-			angular: {
-				controlValueAccessor: 'value'
-			}
-		}
+		name: 'textarea'
 	},
 	{
 		name: 'navigation-item'
