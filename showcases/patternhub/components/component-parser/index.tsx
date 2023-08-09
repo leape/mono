@@ -214,6 +214,14 @@ const ComponentSwitch = ({
 		);
 	}
 
+	if (type === 'textarea') {
+		return (
+			<DBTextarea className={className} {...props}>
+				{resolvedContent}
+			</DBTextarea>
+		);
+	}
+
 	// hygen before
 
 	return <span className={className}>{resolvedContent}</span>;

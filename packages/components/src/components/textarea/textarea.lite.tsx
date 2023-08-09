@@ -31,7 +31,6 @@ export default function DBTextarea(props: DBTextareaProps) {
 		_value: '',
 		_infomsg: '',
 		_id: DEFAULT_ID,
-		_isValid: undefined,
 		defaultValues: {
 			label: DEFAULT_LABEL,
 			placeholder: ' ',
@@ -57,41 +56,11 @@ export default function DBTextarea(props: DBTextareaProps) {
 				props.change(event);
 			}
 
-			if (event.target?.validity?.valid != state._isValid) {
-				state._isValid = event.target?.validity?.valid;
-				if (props.validityChange) {
-					props.validityChange(!!event.target?.validity?.valid);
-				}
-			}
-
-			// TODO: Replace this with the solution out of https://github.com/BuilderIO/mitosis/issues/833 after this has been "solved"
-			// VUE:this.$emit("update:value", event.target.value);
-
-			// Angular: propagate change event to work with reactive and template driven forms
-			this.propagateChange(event.target.value);
-
 			// using controlled components for react forces us to use state for value
 			state._value = event.target.value;
 		},
-		handleBlur: (event: any) => {
-			if (props.onBlur) {
-				props.onBlur(event);
-			}
-
-			if (props.blur) {
-				props.blur(event);
-			}
-		},
-		handleFocus: (event: any) => {
-			if (props.onFocus) {
-				props.onFocus(event);
-			}
-
-			if (props.focus) {
-				props.focus(event);
-			}
-		},
-		propagateChange: (_: any) => {}
+		handleBlur: (event: any) => {},
+		handleFocus: (event: any) => {}
 	});
 
 	onMount(() => {
@@ -128,16 +97,13 @@ export default function DBTextarea(props: DBTextareaProps) {
 				id={state._id}
 				disabled={props.disabled}
 				onChange={(event) => state.handleChange(event)}
-				onBlur={(event) => state.handleBlur(event)}
-				onFocus={(event) => state.handleFocus(event)}
 				value={state._value}
 				rows={props.rows ?? state.defaultValues.rows}
 				cols={props.cols ?? state.defaultValues.cols}
 				placeholder={
 					props.placeholder ?? state.defaultValues.placeholder
-				}>
-				{props.children}
-			</textarea>
+				}
+			/>
 			<DBInfotext
 				size="medium"
 				variant={props.variant}
