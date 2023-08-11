@@ -50,6 +50,11 @@
     <ProjectReference Include="..\alert\DBAlert.pcfproj" />
     <ProjectReference Include="..\link\DBLink.pcfproj" />
     <ProjectReference Include="..\card\DBCard.pcfproj" />
+    <ProjectReference Include="..\checkbox\DBCheckbox.pcfproj" />
+    <ProjectReference Include="..\radio\DBRadio.pcfproj" />
+    <ProjectReference Include="..\infotext\DBInfotext.pcfproj" />
+    <ProjectReference Include="..\brand\DBBrand.pcfproj" />
+	<ProjectReference Include="..\tag\DBTag.pcfproj" />
   </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

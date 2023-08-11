@@ -15,6 +15,7 @@
 		"**/output/**",
 		"**/node_modules/**",
 		"**/__snapshots__/**",
+		"**/test-results/**",
 		"**/*.spec.tsx",
 		"**/.next/**",
 		"**/.github/**",
@@ -28,6 +29,7 @@
 		"**/README.md",
 		"**/generated/**",
 		"showcases/shared/*.json",
+		"showcases/patternhub/out/**",
 		"packages/components/src/components/alert/alert.lite.tsx",
 		"showcases/react-showcase/src/components/alert/index.tsx",
 		"packages/components/src/components/checkbox/checkbox.lite.tsx",
@@ -38,7 +40,9 @@
 		"showcases/react-showcase/src/components/alert/index.tsx",
 		"showcases/vue-showcase/src/components/form/Form.vue",
 		"packages/components/src/components/**/*.spec.tsx",
-		"**/**config.ts"
+		"packages/components/src/components/tag/tag.spec.tsx",
+		"**/**config.ts",
+		"packages/foundations/assets/icons/functional/fonts/sources/*.json"
 	],
 	"absolute": true
 }

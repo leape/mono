@@ -1,6 +1,6 @@
 ## Vue
 
-For general installation and configuration look at the [v-components](https://www.npmjs.com/package/@db-ui/v-components) package.
+For general installation and configuration take a look at the [v-components](https://www.npmjs.com/package/@db-ui/v-components) package.
 
 ### Use component
 
@@ -17,7 +17,11 @@ const radioNames = ["X", "Y", "Z"];
 <template>
 	<ul>
 		<li v-for="radioName in radioNames">
-			<DBRadio @change="radio = radioName" name="radio-group">
+			<DBRadio
+				@change="radio = radioName"
+				name="radio-group"
+				:value="radioName"
+			>
 				Radio {{ radioName }}
 			</DBRadio>
 		</li>

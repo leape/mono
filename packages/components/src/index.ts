@@ -17,3 +17,6 @@ export * from './components/drawer';
 export * from './components/radio';
 export * from './components/code-docs';
 export * from './components/select';
+export * from './components/tag';
+export * from './components/navigation-item';
+export * from './components/badge';

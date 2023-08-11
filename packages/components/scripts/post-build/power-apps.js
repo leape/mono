@@ -44,6 +44,18 @@ const updateNestedComponents = (input, rootComponentName, powerAppsFolder) => {
 				from: `../../shared/constants`,
 				to: `../shared/constants`
 			});
+  
+			Replace.sync({
+				files: `../../output/power-apps/${rootComponentName}/${nestedComponent.name}/${nestedComponent.name}.scss`,
+				from: /\.\.\/\.\.\//g,
+				to: `../`
+			});
+
+			Replace.sync({
+				files: `../../output/power-apps/${rootComponentName}/${nestedComponent.name}/${nestedComponent.name}.tsx`,
+				from: /\.\.\/\.\.\//g,
+				to: `../`
+			});
 		}
 	}
 
@@ -80,6 +92,11 @@ module.exports = () => {
 			}
 
 			Fse.copySync(
+				`./src/styles`,
+				`../../output/power-apps/${cleanName}/styles`
+			);
+
+			Fse.copySync(
 				`./src/components/${component.name}/${component.name}.scss`,
 				`../../output/power-apps/${cleanName}/${powerAppsFolder}/${component.name}.scss`
 			);
@@ -102,7 +119,7 @@ module.exports = () => {
 
 			Replace.sync({
 				files: `../../output/power-apps/${cleanName}/${powerAppsFolder}/${component.name}.tsx`,
-				from: [`../../`, `../../`, `../../`],
+				from: /\.\.\/\.\.\//g,
 				to: `../`
 			});
 
@@ -110,6 +127,12 @@ module.exports = () => {
 				files: `../../output/power-apps/${cleanName}/${powerAppsFolder}/${component.name}.tsx`,
 				from: `import * as React from "react";`,
 				to: `import * as React from "react";\nimport "./index.scss";`
+			});
+
+			Replace.sync({
+				files: `../../output/power-apps/${cleanName}/${powerAppsFolder}/${component.name}.scss`,
+				from: /\.\.\/\.\.\//g,
+				to: `../`
 			});
 		} catch (error) {
 			console.error('Error occurred:', error);

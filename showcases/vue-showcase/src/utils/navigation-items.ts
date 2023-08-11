@@ -1,5 +1,7 @@
+import Badge from '../components/badge/Badge.vue';
+import NavigationItem from '../components/navigation-item/NavigationItem.vue';
 import Select from '../components/select/Select.vue';
-
+import Tag from '../components/tag/Tag.vue';
 import Form from '../components/form/Form.vue';
 import Button from '../components/button/Button.vue';
 import Input from '../components/input/Input.vue';
@@ -14,6 +16,15 @@ import Card from '../components/card/Card.vue';
 import Drawer from '../components/drawer/Drawer.vue';
 
 export const navigationItems: any[] = [
+	{ path: '/badge', label: 'Badge', component: Badge },
+
+	{
+		path: '/navigation-item',
+		label: 'NavigationItem',
+		component: NavigationItem
+	},
+
+	{ path: '/tag', label: 'Tag', component: Tag },
 	{ path: '/', label: 'Home', component: Form },
 	{ path: '/divider', label: 'Divider', component: Divider },
 	{ path: '/select', label: 'Select', component: Select },

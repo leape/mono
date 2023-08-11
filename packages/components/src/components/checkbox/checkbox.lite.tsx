@@ -8,15 +8,28 @@ import {
 import { DBCheckboxProps, DBCheckboxState } from './model';
 import { uuid } from '../../utils';
 import { DEFAULT_ID } from '../../shared/constants';
-import classNames from 'classnames';
+import { cls } from '../../utils';
 
 useMetadata({
 	isAttachedToShadowDom: true,
 	component: {
 		// MS Power Apps
-		includeIcon: false,
+		includeIcon: true,
 		hasDisabledProp: true,
-		properties: []
+		properties: [
+			// jscpd:ignore-start
+			{
+				name: 'children',
+				type: 'SingleLine.Text',
+				defaultValue: 'Checkbox'
+			},
+			{ name: 'name', type: 'SingleLine.Text' },
+			// { name: 'checked', type: 'TwoOptions' },
+			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' }, // $event.target["value"|"checked"|...]
+			// { name: 'disabled', type: 'TwoOptions' },
+			{ name: 'id', type: 'SingleLine.Text' }
+			// jscpd:ignore-end
+		]
 	}
 });
 
@@ -47,6 +60,9 @@ export default function DBCheckbox(props: DBCheckboxProps) {
 
 			// TODO: Replace this with the solution out of https://github.com/BuilderIO/mitosis/issues/833 after this has been "solved"
 			// VUE:this.$emit("update:checked", event.target.checked);
+
+			// Angular: propagate change event to work with reactive and template driven forms
+			this.propagateChange(event.target.checked);
 		},
 		handleBlur: (event: any) => {
 			if (props.onBlur) {
@@ -66,14 +82,13 @@ export default function DBCheckbox(props: DBCheckboxProps) {
 				props.focus(event);
 			}
 		},
-		getClassNames: (...args: classNames.ArgumentArray) => {
-			return classNames(args);
-		}
+		// callback for controlValueAccessor's onChange handler
+		propagateChange: (_: any) => {}
 	});
 
 	onMount(() => {
 		state.initialized = true;
-		state._id = props.id ? props.id : 'checkbox-' + uuid();
+		state._id = props.id || 'checkbox-' + uuid();
 
 		if (props.stylePath) {
 			state.stylePath = props.stylePath;
@@ -111,7 +126,7 @@ export default function DBCheckbox(props: DBCheckboxProps) {
 			<input
 				ref={component}
 				type="checkbox"
-				class={state.getClassNames('db-checkbox', props.className)}
+				class={cls('db-checkbox', props.className)}
 				id={state._id}
 				name={props.name}
 				checked={props.checked}
