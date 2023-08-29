@@ -24,6 +24,8 @@
 	text-underline-position: from-font;
 	text-decoration-thickness: to-rem($pxValue: 1);
 
+	white-space: nowrap;
+
 	&:hover {
 		color: color-mix(in srgb, transparent 25%, $db-colors-neutral-on-bg);
 	}
@@ -46,11 +48,11 @@
 
 	&:not([data-variant="inline"]) {
 		&[data-content="internal"] {
-			@include icon(glyph(arrow-forward), 24, "outline", "after");
+			@include icon(arrow-forward, "after");
 		}
 
 		&[data-content="external"] {
-			@include icon(glyph(link-external), 24, "outline", "after");
+			@include icon(link-external, "after");
 		}
 	}
 

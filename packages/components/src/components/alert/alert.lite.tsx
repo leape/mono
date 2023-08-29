@@ -1,7 +1,5 @@
 import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
 import { DBAlertProps, DBAlertState } from './model';
-import { DBIcon } from '../icon';
-import { DefaultVariantsIcon } from '../../shared/model';
 import { DBButton } from '../button';
 import { DBLink } from '../link';
 import { DEFAULT_CLOSE_BUTTON } from '../../shared/constants';
@@ -26,11 +24,13 @@ useMetadata({
 			},
 			{
 				name: 'icon',
-				type: 'Icon' // this is a custom type not provided by ms
+				type: 'Icon', // this is a custom type not provided by ms
+				defaultValue: 'info'
 			},
 			{
 				name: 'variant',
-				type: 'DefaultVariant' // this is a custom type not provided by ms
+				type: 'DefaultVariant', // this is a custom type not provided by ms
+				defaultValue: 'adaptive'
 			}
 		]
 	}
@@ -45,16 +45,6 @@ export default function DBAlert(props: DBAlertProps) {
 			if (props.onClick) {
 				props.onClick(event);
 			}
-		},
-		getIcon: (icon?: string, variant?: string) => {
-			if (state.iconVisible(icon)) {
-				return icon;
-			}
-
-			return (variant && DefaultVariantsIcon[variant]) || 'info';
-		},
-		iconVisible: (icon?: string) => {
-			return Boolean(icon && icon !== '_' && icon !== 'none');
 		}
 	});
 
@@ -68,11 +58,12 @@ export default function DBAlert(props: DBAlertProps) {
 	return (
 		<div
 			ref={component}
+			id={props.id}
 			class={cls('db-alert', props.className)}
 			aria-live={props.ariaLive}
 			data-variant={props.variant}
 			data-type={props.type}
-			data-icon={state.getIcon(props.icon, props.variant)}
+			data-icon={props.icon}
 			data-elevation={props.elevation}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />

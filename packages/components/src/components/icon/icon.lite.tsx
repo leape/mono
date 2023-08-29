@@ -11,7 +11,7 @@ useMetadata({
 			{
 				name: 'icon',
 				type: 'Icon',
-				defaultValue: 'account'
+				defaultValue: 'None'
 			},
 			{ name: 'title', type: 'SingleLine.Text' }
 		]
@@ -34,6 +34,7 @@ export default function DBIcon(props: DBIconProps) {
 	return (
 		<span
 			ref={component}
+			id={props.id}
 			class={cls('db-icon', props.className)}
 			data-icon={props.icon}
 			aria-hidden="true"
