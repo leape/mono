@@ -93,7 +93,17 @@ module.exports = (tmp) => {
 				});
 			}
 
-			runReplacements([], component, 'vue', vueFile);
+			runReplacements(
+				[
+					{
+						from: /immediate: true,/g,
+						to: 'immediate: true,\nflush: "post"'
+					}
+				],
+				component,
+				'vue',
+				vueFile
+			);
 		} catch (error) {
 			console.error('Error occurred:', error);
 		}

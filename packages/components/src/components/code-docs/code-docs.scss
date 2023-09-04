@@ -4,10 +4,13 @@
 @use "@db-ui/foundations/build/scss/variables.global" as *;
 @use "@db-ui/foundations/build/scss/color-placeholder" as *;
 @use "@db-ui/foundations/build/scss/tonality" as *;
+@use "@db-ui/foundations/build/scss/color/color-variants" as *;
+
+/* TODO: Adapt this colors as well */
 
 %code-docs {
-	@extend %db-bg-neutral-1;
-	min-height: $db-sizing-3xl;
+	@extend %db-bg-neutral-transparent-semi;
+	min-block-size: $db-sizing-3xl;
 	align-items: center;
 	justify-content: center;
 	padding: $db-spacing-fixed-xl;
@@ -16,20 +19,20 @@
 
 	.code-details {
 		position: absolute;
-		bottom: 0;
-		right: 0;
-		width: 100%;
+		inset-block-end: 0;
+		inset-inline-end: 0;
+		inline-size: 100%;
 		display: flex;
 
 		&[open] {
-			left: 0;
-			top: 0;
+			inset-inline-start: 0;
+			inset-block-start: 0;
 		}
 
 		.code-button {
 			position: absolute;
-			bottom: 0;
-			right: 0;
+			inset-block-end: 0;
+			inset-inline-end: 0;
 			z-index: 1;
 		}
 
@@ -38,16 +41,15 @@
 		}
 
 		.code {
-			@extend %db-bg-secondary;
+			@extend %db-bg-inverted;
 			overflow: auto;
 			position: absolute;
-			right: 0;
-			top: 0;
-			bottom: 0;
+			inset-inline-end: 0;
+			inset-block: 0;
 			padding-block-end: $db-spacing-fixed-md;
 
 			@media screen and (min-width: $db-screens-s) {
-				width: 50%;
+				inline-size: 50%;
 			}
 		}
 	}

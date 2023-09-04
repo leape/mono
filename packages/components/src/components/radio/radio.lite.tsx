@@ -8,7 +8,7 @@ import {
 import { DBRadioProps, DBRadioState } from './model';
 import { uuid } from '../../utils';
 import { DEFAULT_ID } from '../../shared/constants';
-import classNames from 'classnames';
+import { cls } from '../../utils';
 
 useMetadata({
 	isAttachedToShadowDom: true,
@@ -18,7 +18,11 @@ useMetadata({
 		hasDisabledProp: true,
 		properties: [
 			// jscpd:ignore-start
-			{ name: 'children', type: 'SingleLine.Text' },
+			{
+				name: 'children',
+				type: 'SingleLine.Text',
+				defaultValue: 'Radio'
+			},
 			{ name: 'name', type: 'SingleLine.Text' },
 			{ name: 'id', type: 'SingleLine.Text' },
 			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' } // $event.target["value"|"checked"|...]
@@ -57,8 +61,9 @@ export default function DBRadio(props: DBRadioProps) {
 			// TODO: Replace this with the solution out of https://github.com/BuilderIO/mitosis/issues/833 after this has been "solved"
 			// VUE:this.$emit("update:checked", event.target.checked);
 
-			// Angular: propagate change event to work with reactive and template driven forms
-			this.propagateChange(event.target.checked);
+			// Change event to work with reactive and template driven forms
+			// ANGULAR: this.propagateChange(event.target.checked);
+			// ANGULAR: this.writeValue(event.target.checked);
 		},
 		handleBlur: (event: any) => {
 			if (props.onBlur) {
@@ -77,12 +82,7 @@ export default function DBRadio(props: DBRadioProps) {
 			if (props.focus) {
 				props.focus(event);
 			}
-		},
-		getClassNames: (...args: classNames.ArgumentArray) => {
-			return classNames(args);
-		},
-		// callback for controlValueAccessor's onChange handler
-		propagateChange: (_: any) => {}
+		}
 	});
 
 	onMount(() => {
@@ -115,7 +115,7 @@ export default function DBRadio(props: DBRadioProps) {
 			<input
 				ref={component}
 				type="radio"
-				class={state.getClassNames('db-radio', props.className)}
+				class={cls('db-radio', props.className)}
 				id={state._id}
 				name={props.name}
 				checked={props.checked}

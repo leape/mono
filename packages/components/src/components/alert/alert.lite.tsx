@@ -1,17 +1,9 @@
-import {
-	onMount,
-	Show,
-	Slot,
-	useMetadata,
-	useStore
-} from '@builder.io/mitosis';
-import { DBAlertState, DBAlertProps } from './model';
-import { DBIcon } from '../icon';
-import { DefaultVariantsIcon } from '../../shared/model';
+import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import { DBAlertProps, DBAlertState } from './model';
 import { DBButton } from '../button';
 import { DBLink } from '../link';
-import classNames from 'classnames';
 import { DEFAULT_CLOSE_BUTTON } from '../../shared/constants';
+import { cls } from '../../utils';
 
 useMetadata({
 	isAttachedToShadowDom: true,
@@ -19,16 +11,26 @@ useMetadata({
 		// MS Power Apps
 		includeIcon: true,
 		hasOnClick: true,
+		canvasSize: {
+			height: 'fixed', // 'fixed', 'controlled'
+			width: 'controlled' // 'fixed', 'dynamic' (requires width property), 'controlled'
+		},
 		properties: [
 			{ name: 'headline', type: 'SingleLine.Text' },
-			{ name: 'children', type: 'SingleLine.Text' },
+			{
+				name: 'children',
+				type: 'SingleLine.Text',
+				defaultValue: 'Alert'
+			},
 			{
 				name: 'icon',
-				type: 'Icon' // this is a custom type not provided by ms
+				type: 'Icon', // this is a custom type not provided by ms
+				defaultValue: 'info'
 			},
 			{
 				name: 'variant',
-				type: 'DefaultVariant' // this is a custom type not provided by ms
+				type: 'DefaultVariant', // this is a custom type not provided by ms
+				defaultValue: 'adaptive'
 			}
 		]
 	}
@@ -43,19 +45,6 @@ export default function DBAlert(props: DBAlertProps) {
 			if (props.onClick) {
 				props.onClick(event);
 			}
-		},
-		getIcon: (icon?: string, variant?: string) => {
-			if (state.iconVisible(icon)) {
-				return icon;
-			}
-
-			return (variant && DefaultVariantsIcon[variant]) || 'info';
-		},
-		iconVisible: (icon?: string) => {
-			return Boolean(icon && icon !== '_' && icon !== 'none');
-		},
-		getClassNames: (...args: classNames.ArgumentArray) => {
-			return classNames(args);
 		}
 	});
 
@@ -69,24 +58,21 @@ export default function DBAlert(props: DBAlertProps) {
 	return (
 		<div
 			ref={component}
-			class={state.getClassNames('db-alert', props.className)}
+			id={props.id}
+			class={cls('db-alert', props.className)}
 			aria-live={props.ariaLive}
 			data-variant={props.variant}
 			data-type={props.type}
+			data-icon={props.icon}
 			data-elevation={props.elevation}>
 			<Show when={state.stylePath}>
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
 
-			<DBIcon
-				className="db-alert-icon"
-				icon={state.getIcon(props.icon, props.variant)}
-			/>
-
 			<Show when={props.headline}>
 				<strong class="db-alert-headline">{props.headline}</strong>
 			</Show>
-			<span class="db-alert-content">{props.children}</span>
+			<p class="db-alert-content">{props.children}</p>
 
 			<Show when={props.link}>
 				<DBLink

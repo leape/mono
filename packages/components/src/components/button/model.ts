@@ -4,7 +4,7 @@ import {
 	GlobalProps,
 	GlobalState,
 	IconProps,
-	IconState
+	WidthProps
 } from '../../shared/model';
 
 // TODO: 👇 Find a way to make react-docgen work without duplicating the types below
@@ -69,11 +69,6 @@ export type DBButtonDefaultProps = {
 	size?: 'small';
 
 	/**
-	 * Width of the button. Auto width based on text size, full width based on parent elements width.
-	 */
-	width?: 'full' | 'auto';
-
-	/**
 	 * Variant of the button. Use only 1 primary button on a page as CTA otherwise use one of the adaptive buttons.
 	 */
 	variant?: ButtonVariantsType;
@@ -82,11 +77,11 @@ export type DBButtonDefaultProps = {
 export type DBButtonProps = DBButtonDefaultProps &
 	GlobalProps &
 	ClickEventProps &
-	IconProps;
+	IconProps &
+	WidthProps;
 
 export type DBButtonDefaultState = {};
 
 export type DBButtonState = DBButtonDefaultState &
 	GlobalState &
-	ClickEventState &
-	IconState;
+	ClickEventState;

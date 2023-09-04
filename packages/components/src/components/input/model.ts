@@ -1,39 +1,45 @@
 import {
+	ChangeEventProps,
+	ChangeEventState,
+	DefaultVariantProps,
 	FocusEventProps,
 	FocusEventState,
-	GlobalTextProps,
-	ValidEventProps,
-	ChangeEventState,
-	ChangeEventProps,
+	FormMessageProps,
+	FormProps,
+	FormReadonlyProps,
+	FormState,
 	GlobalProps,
 	GlobalState,
-	DefaultVariantType,
-	FormProps,
-	FormState,
+	GlobalTextProps,
+	IconAfterProps,
 	IconProps,
-	IconState,
-	DefaultVariantProps,
-	KeyValueType
+	IconVisibleState,
+	KeyValueType,
+	ValidEventProps
 } from '../../shared/model';
 
 export type DBInputDefaultProps = {
 	dataList?: KeyValueType[];
 	dataListId?: string;
-	description?: string;
-	iconAfter?: string;
 	type?:
-		| 'text'
-		| 'search'
-		| 'number'
-		| 'tel'
-		| 'url'
-		| 'email'
-		| 'password'
-		| 'hidden'
+		| 'color'
 		| 'date'
 		| 'datetime-local'
-		| 'week';
-	value?: any;
+		| 'email'
+		| 'file' // TODO: move this to own component
+		| 'hidden'
+		| 'month'
+		| 'number'
+		| 'password'
+		| 'range' // TODO: move this to own component
+		| 'search'
+		| 'tel'
+		| 'text'
+		| 'time'
+		| 'url'
+		| 'week'
+		| string;
+	step?: number | string;
 	variant?: DefaultVariantProps;
 };
 
@@ -45,12 +51,13 @@ export type DBInputProps = DBInputDefaultProps &
 	ValidEventProps &
 	FormProps &
 	IconProps &
-	DefaultVariantProps;
+	IconAfterProps &
+	DefaultVariantProps &
+	FormMessageProps &
+	FormReadonlyProps;
 
 export type DBInputDefaultState = {
 	_dataListId?: string;
-	_value?: any;
-	getIcon: (variant?: DefaultVariantType) => string;
 };
 
 export type DBInputState = DBInputDefaultState &
@@ -58,4 +65,4 @@ export type DBInputState = DBInputDefaultState &
 	ChangeEventState &
 	FocusEventState &
 	FormState &
-	IconState;
+	IconVisibleState;

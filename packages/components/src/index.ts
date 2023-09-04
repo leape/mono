@@ -18,3 +18,9 @@ export * from './components/radio';
 export * from './components/code-docs';
 export * from './components/select';
 export * from './components/tag';
+export * from './components/navigation-item';
+export * from './components/accordion';
+
+export * from './components/accordion-item';
+export * from './components/main-navigation';
+export * from './components/badge';

@@ -10,6 +10,8 @@
 .db-brand {
 	@extend %brand-display;
 
+	font-weight: 700;
+
 	a {
 		@extend %brand-display;
 		color: inherit;
@@ -19,8 +21,6 @@
 }
 
 .db-logo {
-	height: $db-sizing-sm;
-	@media screen and (min-width: $db-screens-m) {
-		height: $db-sizing-md;
-	}
+	max-inline-size: none;
+	block-size: $db-sizing-sm;
 }
