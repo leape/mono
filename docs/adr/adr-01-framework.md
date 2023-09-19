@@ -16,14 +16,14 @@ To achieve this we started with [web-components](https://github.com/db-ui/elemen
 
 ### General conditions
 
--   Native components for every framework
+-   "Native" components for every framework
 -   Encapsulated from styling
 -   Code once, build for many
 
 ### Decision Criteria
 
 -   Mitosis generates `.json` files that are compiled into native components for each framework.
--   The plugin structure helps us to create custom outputs for frameworks like MS Power-Apps.
+-   The plugin structure helps us to create custom outputs for frameworks like Microsoft Power-Apps.
 -   It's open source and backed by a company.
 -   Supports most frameworks and Web Components
 -   Issues or pull requests can be created in the Mitosis repo to solve problems.
