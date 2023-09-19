@@ -2,15 +2,15 @@
 
 ## Decision and Rationale
 
-To reduce the amount of time spent writing components for each framework, we use [Mitosis](https://github.com/BuilderIO/mitosis) to build native framework components.
+To reduce the amount of time spent writing components for each framework, we use [Mitosis](https://github.com/BuilderIO/mitosis) to build "native" JavaScript framework components.
 
 We chose Mitosis because it is flexible and open source. We took the risk that it is quite new at the moment.
 
 ## Problem description and context
 
-We want to ship our DB UX styles based on css and scss for common frameworks like [Angular](https://angular.io/), [React](https://reactjs.org/), [Vue](https://vuejs.org/) and so on.
+We want to ship our DB UX styles based on `css` and `scss` for common frameworks like [Angular](https://angular.io/), [React](https://reactjs.org/), [Vue](https://vuejs.org/) and so on.
 
-To achieve this we started with [web-components](https://github.com/db-ui/elements) wrapped in native components. But we've encountered a number of problems with this approach.
+To achieve this we started with [web-components](https://github.com/db-ui/elements) wrapped in "native" components. But we've encountered a number of problems with this approach.
 
 ## General conditions and decision criteria
 
