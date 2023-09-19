@@ -34,8 +34,8 @@ To achieve this we started with [web-components](https://github.com/db-ui/elemen
 
 #### Evaluation
 
--   Generated artefacts are native to each framework
--   Flexible build system with plugin
+-   Generated artefacts are "native" to each framework
+-   Flexible build system with plugins
 -   Builder.io as maintainer
 -   TypeScript (tsx)
 -   No wired wrappers around Web Components
