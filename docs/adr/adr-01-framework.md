@@ -48,7 +48,7 @@ To achieve this we started with [web-components](https://github.com/db-ui/elemen
 -   Polyfills are handled automatically
 -   Flexible build system
 -   With Ionic, a larger project is behind it as a maintainer
--   Supports Sass
+-   Supports `Sass`
 -   TypeScript
 
 ## Consequences
