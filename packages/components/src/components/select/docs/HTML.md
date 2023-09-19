@@ -1,6 +1,6 @@
 ## HTML
 
-For general installation and configuration look at the [components](https://www.npmjs.com/package/@db-ui/components) package.
+For general installation and configuration take a look at the [components](https://www.npmjs.com/package/@db-ui/components) package.
 
 ### Use component
 
@@ -9,8 +9,11 @@ For general installation and configuration look at the [components](https://www.
 ...
 <body>
 	<div class="db-select">
-		<option value="test1">Test1</option>
-		<option value="test2">Test2</option>
+		<label for="test">Label</label>
+		<select id="test">
+			<option value="test1">Test1</option>
+			<option value="test2">Test2</option>
+		</select>
 	</div>
 </body>
 ```
