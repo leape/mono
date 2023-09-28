@@ -15,3 +15,7 @@ You can find more design systems here:
 
 -   <https://component.gallery/>
 -   <https://github.com/alexpate/awesome-design-systems>
+
+Further inspirational links:
+
+- <https://handreichungen.bfit-bund.de/barrierefreie-uie/>
