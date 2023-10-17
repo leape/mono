@@ -99,4 +99,19 @@ export const getColorVariants = () => [
 	'informational-transparent-semi'
 ];
 
-export default { getUnionElements, getCodeByFramework, getColorVariants };
+/**
+ * @param string {string}
+ * @returns {string}
+ */
+export const getSpacesReplacedString = (string) => {
+	return string.replaceAll(/\s[a-z\d]/gi, (match) =>
+		match.trim().toUpperCase()
+	);
+};
+
+export default {
+	getUnionElements,
+	getCodeByFramework,
+	getColorVariants,
+	getSpacesReplacedString
+};
