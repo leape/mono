@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import type {
 	DefaultComponentExample,
 	DefaultComponentVariants
@@ -5,15 +6,19 @@ import type {
 
 export const getVariants = (
 	defaultComponentVariants: DefaultComponentVariants[],
-	getExampleMatrix: (exampleName: string) => DefaultComponentExample[][],
+	getExample: (props: any) => ReactElement,
 	codeSlots: any[]
 ): DefaultComponentVariants[] => {
 	return defaultComponentVariants.map((variant, index) => ({
 		...variant,
 		slotCode: codeSlots?.at(index) ?? 'No code available',
-		examples: variant.examples.map((example: any, exampleIndex: any) => ({
+		examples: variant.examples.map((example: DefaultComponentExample) => ({
 			...example,
-			...getExampleMatrix(example.name ?? '')[index][exampleIndex]
+			example: getExample({
+				...example.props,
+				id: example.props.id ?? example.name,
+				children: example.props.children ?? example.name
+			})
 		}))
 	}));
 };

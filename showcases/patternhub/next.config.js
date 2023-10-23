@@ -12,15 +12,18 @@ const withMDX = generated({
 				remarkCodeHike,
 				{
 					theme: getTheme(),
-					showCopyButton: true
+					showCopyButton: true,
+					showExpandButton: true
 				}
 			]
 		],
-		rehypePlugins: []
+		rehypePlugins: [],
+		providerImportSource: '@mdx-js/react'
 	}
 });
 
 const config = {
+	output: 'export',
 	basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 	transpilePackages: ['@db-ui'],
 	...withMDX({

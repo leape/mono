@@ -1,35 +1,66 @@
 [
 	{
+		"name": "Tonality",
+		"examples": [
+			{
+				"name": "functional",
+				"className": "db-ui-functional",
+				"props": {
+					"label": "Label"
+				}
+			},
+			{
+				"name": "regular (Default)",
+				"className": "db-ui-regular",
+				"props": {
+					"label": "Label"
+				}
+			},
+			{
+				"name": "expressive",
+				"className": "db-ui-expressive",
+				"props": {
+					"label": "Label"
+				}
+			}
+		]
+	},
+	{
 		"name": "Variant",
 		"examples": [
 			{
 				"name": "(Default) Basic",
-				"code": {
-					"default": "<DBInput label=\"Label\" description=\"Description\" />"
+				"props": {
+					"label": "Label",
+					"placeholder": "I am a placeholder"
 				}
 			},
 			{
 				"name": "Informational",
-				"code": {
-					"default": "<DBInput label=\"Label\" description=\"Description\" variant=\"informational\"/>"
+				"props": {
+					"label": "Label",
+					"variant": "informational"
 				}
 			},
 			{
 				"name": "Warning",
-				"code": {
-					"default": "<DBInput label=\"Label\" description=\"Description\" variant=\"warning\"/>"
+				"props": {
+					"label": "Label",
+					"variant": "warning"
 				}
 			},
 			{
 				"name": "Critical",
-				"code": {
-					"default": "<DBInput label=\"Label\" description=\"Description\" variant=\"critical\"/>"
+				"props": {
+					"label": "Label",
+					"variant": "critical"
 				}
 			},
 			{
 				"name": "Successful",
-				"code": {
-					"default": "<DBInput label=\"Label\" description=\"Description\" variant=\"successful\"/>"
+				"props": {
+					"label": "Label",
+					"variant": "successful"
 				}
 			}
 		]
@@ -39,44 +70,54 @@
 		"examples": [
 			{
 				"name": "Default",
-				"code": {
-					"default": "<DBInput label=\"Label\" description=\"Description\" />"
+				"props": {
+					"label": "Label"
 				}
 			},
 			{
 				"name": "Filled",
-				"code": {
-					"default": "<DBInput label=\"Label\" value=\"Input Text\"/>"
+				"props": {
+					"label": "Label",
+					"value": "Input Text"
 				}
 			},
 			{
 				"name": "Filled Number",
-				"code": {
-					"default": "<DBInput label=\"Label\" value=\"123456\" type=\"number\"/>"
+				"props": {
+					"label": "Label",
+					"value": "123456",
+					"type": "number"
 				}
 			},
 			{
 				"name": "Invalid",
-				"code": {
-					"default": "<DBInput label=\"Label\" minLength={5} required description=\"minLength=5\"/>"
+				"props": {
+					"label": "Label",
+					"required": true,
+					"minLength": 5
 				}
 			},
 			{
 				"name": "Disabled",
-				"code": {
-					"default": "<DBInput label=\"Label\" disabled/>"
+				"props": {
+					"label": "Label",
+					"disabled": true
 				}
 			},
 			{
-				"name": "Disabled with value",
-				"code": {
-					"default": "<DBInput label=\"Label\" value=\"Input Text\" disabled/>"
+				"name": "Disabled filled",
+				"props": {
+					"label": "Label",
+					"value": "Input Text",
+					"disabled": true
 				}
 			},
 			{
 				"name": "Required",
-				"code": {
-					"default": "<DBInput label=\"Label\" value=\"Input Text\" disabled required/>"
+				"props": {
+					"label": "Label",
+					"value": "Input Text",
+					"required": true
 				}
 			}
 		]
@@ -86,32 +127,126 @@
 		"examples": [
 			{
 				"name": "(Default) Text",
-				"code": {
-					"default": "<DBInput label=\"Label\"/>"
+				"props": {
+					"label": "Label"
 				}
 			},
 			{
 				"name": "Leading Icon + Text",
-				"code": {
-					"default": "<DBInput icon=\"account\" label=\"Label\"/>"
+				"props": {
+					"label": "Label",
+					"icon": "account"
 				}
 			},
 			{
 				"name": "Leading Icon + Text + Trailing Icon",
-				"code": {
-					"default": "<DBInput icon=\"account\" label=\"Label\" iconAfter=\"edit\"/>"
+				"props": {
+					"label": "Label",
+					"icon": "account",
+					"iconAfter": "edit"
 				}
 			},
 			{
 				"name": "Text + Trailing Icon",
-				"code": {
-					"default": "<DBInput label=\"Label\" iconAfter=\"edit\"/>"
+				"props": {
+					"label": "Label",
+					"iconAfter": "edit"
 				}
 			},
 			{
 				"name": "Text + Trailing Icon + Variant:Successful",
-				"code": {
-					"default": "<DBInput label=\"Label\" iconAfter=\"edit\" variant=\"successful\"/>"
+				"props": {
+					"label": "Label",
+					"variant": "successful",
+					"iconAfter": "edit"
+				}
+			}
+		]
+	},
+	{
+		"name": "Types",
+		"examples": [
+			{
+				"name": "(Default) Text",
+				"props": {
+					"label": "Label"
+				}
+			},
+			{
+				"name": "Password",
+				"props": {
+					"label": "Label",
+					"type": "password"
+				}
+			},
+			{
+				"name": "Search",
+				"props": {
+					"label": "Label",
+					"type": "search"
+				}
+			},
+			{
+				"name": "E-Mail",
+				"props": {
+					"label": "Label",
+					"type": "email"
+				}
+			},
+			{
+				"name": "Number",
+				"props": {
+					"label": "Label",
+					"type": "number"
+				}
+			},
+			{
+				"name": "Tel",
+				"props": {
+					"label": "Label",
+					"type": "tel"
+				}
+			},
+			{
+				"name": "URL",
+				"props": {
+					"label": "Label",
+					"type": "url"
+				}
+			},
+			{
+				"name": "Date",
+				"props": {
+					"label": "Label",
+					"type": "date"
+				}
+			},
+			{
+				"name": "Datetime Local",
+				"props": {
+					"label": "Label",
+					"type": "datetime-local"
+				}
+			},
+			{
+				"name": "Month",
+				"props": {
+					"label": "Label",
+					"type": "month"
+				}
+			},
+			{
+				"name": "Time",
+				"props": {
+					"label": "Label",
+					"type": "time"
+				}
+			},
+			{
+				"name": "Week",
+				"props": {
+					"label": "Label",
+					"type": "week"
 				}
 			}
 		]

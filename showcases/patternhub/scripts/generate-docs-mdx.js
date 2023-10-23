@@ -6,6 +6,7 @@ import getExampleFile from './get-example-file.js';
 import getPropertiesFile from './get-properties-file.js';
 import getHowToFile from './get-how-to-file.js';
 import writeCodeFiles from './get-code-files.js';
+import getMigrationFile from './get-migration-file.js';
 
 const componentsPath = './pages/components';
 
@@ -49,11 +50,20 @@ const generateDocsMdx = async () => {
 				getHowToFile(componentName, componentValue.displayName)
 			);
 
+			FS.writeFileSync(
+				`${componentPath}/migration.mdx`,
+				getMigrationFile(componentName, componentValue.displayName)
+			);
+
 			const reactComponent = await writeCodeFiles(
 				componentPath,
 				componentName
 			);
 			if (reactComponent) {
+				FS.writeFileSync(
+					`${componentPath}/overview.tsx`,
+					reactComponent
+				);
 				FS.writeFileSync(`${componentPath}/index.tsx`, reactComponent);
 			}
 		}

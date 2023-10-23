@@ -1,3 +1,16 @@
+@use "@db-ui/foundations/build/scss/icons";
+
 .db-icon {
+	@include icons.is-icon-text-replace();
+
 	display: flex;
+
+	/* Safari hack */
+	@supports (-webkit-hyphens: none) {
+		display: inline-block;
+
+		&::before {
+			block-size: auto;
+		}
+	}
 }
