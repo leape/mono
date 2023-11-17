@@ -2,7 +2,7 @@ import {
 	onMount,
 	onUpdate,
 	Show,
-	useMetadata,
+	useMetadata, useRef,
 	useStore
 } from '@builder.io/mitosis';
 import { DBRadioProps, DBRadioState } from './model';
@@ -11,32 +11,11 @@ import { DEFAULT_ID } from '../../shared/constants';
 import { cls } from '../../utils';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: false,
-		hasDisabledProp: true,
-		properties: [
-			// jscpd:ignore-start
-			{
-				name: 'children',
-				type: 'SingleLine.Text',
-				defaultValue: 'Radio'
-			},
-			{ name: 'name', type: 'SingleLine.Text' },
-			{ name: 'id', type: 'SingleLine.Text' },
-			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' } // $event.target["value"|"checked"|...]
-			// TODO: We'll most likely need these later on
-			// { name: 'checked', type: 'TwoOptions' },
-			// { name: 'disabled', type: 'TwoOptions' },
-			// jscpd:ignore-end
-		]
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBRadio(props: DBRadioProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLInputElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBRadioState>({
 		initialized: false,
@@ -104,11 +83,6 @@ export default function DBRadio(props: DBRadioProps) {
 				if (props.checked != undefined) {
 					radioElement.checked = true;
 				}
-
-				if (props.defaultChecked !== undefined) {
-					// only set by JS: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#instance_properties_that_apply_only_to_elements_of_type_checkbox_or_radio
-					radioElement.defaultChecked = props.defaultChecked;
-				}
 			}
 		}
 	}, [state.initialized]);
@@ -123,7 +97,7 @@ export default function DBRadio(props: DBRadioProps) {
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
 			<input
-				ref={component}
+				ref={ref}
 				type="radio"
 				id={state._id}
 				name={props.name}

@@ -7,17 +7,12 @@ import { cls, uuid } from "../../utils";
 import {DEFAULT_ID} from "../../shared/constants";
 
 useMetadata({
-  isAttachedToShadowDom: true,
-  component: {
-	// MS Power Apps
-    includeIcon: false,
-    properties: [],
-  },
+  isAttachedToShadowDom: true
 });
 
 export default function DB<%= h.changeCase.pascal(name) %>(props: DB<%= h.changeCase.pascal(name) %>Props) {
   // This is used as forwardRef
-  let component: any;
+  const ref = useRef<HTMLDivElement>(null);
   // jscpd:ignore-start
   const state = useStore<DB<%= h.changeCase.pascal(name) %>State>({
 		_id: DEFAULT_ID,
@@ -77,7 +72,7 @@ export default function DB<%= h.changeCase.pascal(name) %>(props: DB<%= h.change
 
   return (
     <div
-    	ref={component}
+    	ref={ref}
     	id={state._id}
     	class={cls('db-<%= name %>', props.className)}
 <% if(formValue!=="no"){   -%>

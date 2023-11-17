@@ -11,28 +11,11 @@ import { uuid } from '../../utils';
 import { cls } from '../../utils';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: false,
-		properties: [
-			{ name: 'name', type: 'SingleLine.Text' },
-			{ name: 'label', type: 'SingleLine.Text' },
-			{
-				name: 'active',
-				type: 'Enum',
-				values: [
-					{ key: 'False', name: 'False', value: 'false' },
-					{ key: 'True', name: 'True', value: 'true' }
-				]
-			}
-		]
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBTab(props: DBTabProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLDivElement>(null);
 	const formRef = useRef<HTMLInputElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBTabState>({
@@ -52,7 +35,7 @@ export default function DBTab(props: DBTabProps) {
 	// jscpd:ignore-end
 
 	return (
-		<div ref={component}
+		<div ref={ref}
 			 id={props.id}
 			 class={cls('db-tab', props.className)}>
 			<Show when={state.stylePath}>

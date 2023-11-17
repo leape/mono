@@ -1,20 +1,14 @@
-import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import {onMount, Show, useMetadata, useRef, useStore} from '@builder.io/mitosis';
 import { DBPopoverState, DBPopoverProps } from './model';
 import { cls, uuid } from '../../utils';
 import { DEFAULT_ID } from '../../shared/constants';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: false,
-		properties: []
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBPopover(props: DBPopoverProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLDivElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBPopoverState>({
 		_id: DEFAULT_ID,
@@ -33,7 +27,7 @@ export default function DBPopover(props: DBPopoverProps) {
 
 	return (
 		<i
-			ref={component}
+			ref={ref}
 			id={state._id}
 			class={cls('db-popover', props.className)}
 			data-spacing={props.spacing}

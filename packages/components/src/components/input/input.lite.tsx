@@ -1,4 +1,4 @@
-import { For, onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import {For, onMount, Show, useMetadata, useRef, useStore} from '@builder.io/mitosis';
 import { DBIcon } from '../icon';
 import { cls, getMessageIcon, uuid } from '../../utils';
 import { DBInputProps, DBInputState } from './model';
@@ -11,44 +11,11 @@ import { KeyValueType } from '../../shared/model';
 import { DBInfotext } from '../infotext';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: true,
-		hasDisabledProp: true,
-		canvasSize: {
-			height: 'fixed', // 'fixed', 'controlled'
-			width: 'controlled' // 'fixed', 'dynamic' (requires width property), 'controlled'
-		},
-		properties: [
-			{
-				name: 'label',
-				type: 'SingleLine.Text',
-				required: true,
-				defaultValue: 'Input'
-			},
-			{ name: 'placeholder', type: 'SingleLine.Text' },
-			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' }, // $event.target["value"|"checked"|...]
-			{
-				name: 'icon',
-				type: 'Icon' // this is a custom type not provided by ms
-			},
-			{
-				name: 'iconAfter',
-				type: 'Icon'
-			},
-			{
-				name: 'variant',
-				type: 'DefaultVariant', // this is a custom type not provided by ms
-				defaultValue: 'adaptive'
-			}
-		]
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBInput(props: DBInputProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLInputElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBInputState>({
 		_id: DEFAULT_ID,
@@ -127,7 +94,7 @@ export default function DBInput(props: DBInputProps) {
 				{props.label ?? state.defaultValues.label}
 			</label>
 			<input
-				ref={component}
+				ref={ref}
 				id={state._id}
 				name={props.name}
 				type={props.type || 'text'}
@@ -136,7 +103,6 @@ export default function DBInput(props: DBInputProps) {
 				}
 				disabled={props.disabled}
 				required={props.required}
-				defaultValue={props.defaultValue}
 				step={props.step}
 				value={props.value}
 				aria-invalid={props.invalid}
@@ -146,8 +112,6 @@ export default function DBInput(props: DBInputProps) {
 				min={props.min}
 				readOnly={props.readOnly}
 				form={props.form}
-				autoComplete={props.autoComplete}
-				autoFocus={props.autoFocus}
 				pattern={props.pattern}
 				onChange={(event) => state.handleChange(event)}
 				onBlur={(event) => state.handleBlur(event)}

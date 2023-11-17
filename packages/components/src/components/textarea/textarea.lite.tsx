@@ -1,4 +1,4 @@
-import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import {onMount, Show, useMetadata, useRef, useStore} from '@builder.io/mitosis';
 import { DBTextareaProps, DBTextareaState } from './model';
 import { DBInfotext } from '../infotext';
 import { cls, getMessageIcon, uuid } from '../../utils';
@@ -9,36 +9,11 @@ import {
 } from '../../shared/constants';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: false,
-		hasDisabledProp: true,
-		canvasSize: {
-			height: 'controlled', // 'fixed', 'controlled'
-			width: 'controlled' // 'fixed', 'dynamic' (requires width property), 'controlled'
-		},
-		properties: [
-			{
-				name: 'label',
-				type: 'SingleLine.Text',
-				defaultValue: 'Textarea',
-				required: true
-			},
-			{ name: 'placeholder', type: 'SingleLine.Text' },
-			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' }, // $event.target["value"|"checked"|...]
-			{
-				name: 'variant',
-				type: 'DefaultVariant', // this is a custom type not provided by ms
-				defaultValue: 'adaptive'
-			}
-		]
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBTextarea(props: DBTextareaProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLTextAreaElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBTextareaState>({
 		_id: DEFAULT_ID,
@@ -104,7 +79,6 @@ export default function DBTextarea(props: DBTextareaProps) {
 
 	return (
 		<div
-			ref={component}
 			class={cls('db-textarea', props.className)}
 			data-label-variant={props.labelVariant}
 			data-variant={props.variant}>
@@ -117,10 +91,9 @@ export default function DBTextarea(props: DBTextareaProps) {
 			</label>
 
 			<textarea
+				ref={ref}
 				id={state._id}
 				data-resize={props.resize}
-				autoComplete={props.autoComplete}
-				autoFocus={props.autoFocus}
 				disabled={props.disabled}
 				required={props.required}
 				readOnly={props.readOnly}
@@ -134,7 +107,6 @@ export default function DBTextarea(props: DBTextareaProps) {
 				onChange={(event) => state.handleChange(event)}
 				onBlur={(event) => state.handleBlur(event)}
 				onFocus={(event) => state.handleFocus(event)}
-				defaultValue={props.defaultValue ?? props.children}
 				value={props.value}
 				aria-describedby={props.message && state._messageId}
 				placeholder={

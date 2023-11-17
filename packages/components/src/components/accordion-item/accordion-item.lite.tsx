@@ -4,6 +4,7 @@ import {
 	Show,
 	Slot,
 	useMetadata,
+	useRef,
 	useStore
 } from '@builder.io/mitosis';
 import { DBAccordionItemState, DBAccordionItemProps } from './model';
@@ -20,8 +21,7 @@ useMetadata({
 });
 
 export default function DBAccordionItem(props: DBAccordionItemProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLDetailsElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBAccordionItemState>({
 		_id: DEFAULT_ID,
@@ -44,7 +44,7 @@ export default function DBAccordionItem(props: DBAccordionItemProps) {
 
 	return (
 		<details
-			ref={component}
+			ref={ref}
 			id={state._id}
 			class={cls('db-accordion-item', props.className)}
 			aria-disabled={props.disabled}

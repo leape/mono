@@ -154,11 +154,6 @@ export type EmphasisProps = {
 
 export type FormProps = {
 	/**
-	 * React specific attribute to set default value.
-	 */
-	defaultValue?: any;
-
-	/**
 	 * The disabled attribute can be set to keep a user from clicking on the form element.
 	 */
 	disabled?: boolean;
@@ -192,14 +187,6 @@ export type FormProps = {
 
 export type FormTextProps = {
 	/**
-	 * This attribute indicates whether the value of the control can be automatically completed by the browser.
-	 */
-	autoComplete?: 'on' | 'off';
-	/**
-	 * This Boolean attribute lets you specify that a form control should have input focus when the page loads. Only one form-associated element in a document can have this attribute specified.
-	 */
-	autoFocus?: boolean;
-	/**
 	 * Maximum length (number of characters) of value
 	 */
 	maxLength?: number;
@@ -218,13 +205,6 @@ export type FormCheckProps = {
 	 * Define the radio or checkbox elements checked state
 	 */
 	checked?: boolean;
-
-	/**
-	 * Returns / Sets the default state of a radio button or checkbox as originally specified in HTML that created this object.
-	 * Vue: according to our research this property should not be used. Please refer to v-model instead.
-	 * cf. https://react.carbondesignsystem.com/?path=/docs/components-checkbox--overview#component-api vs. https://vue.carbondesignsystem.com/?path=/story/components-cvcheckbox--default
-	 */
-	defaultChecked?: boolean;
 
 	/**
 	 * Hide the label of a radio/checkbox.

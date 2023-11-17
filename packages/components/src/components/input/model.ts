@@ -7,14 +7,13 @@ import {
 	FormMessageProps,
 	FormProps,
 	FormState,
+	FormTextProps,
 	GlobalProps,
 	GlobalState,
-	FormTextProps,
 	IconAfterProps,
 	IconProps,
 	KeyValueType,
-	ValidEventProps,
-	OverflowProps
+	ValidEventProps
 } from '../../shared/model';
 
 export type DBInputDefaultProps = {

@@ -1,58 +1,13 @@
-import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import {onMount, Show, useMetadata, useRef, useStore} from '@builder.io/mitosis';
 import { DBLinkState, DBLinkProps } from './model';
 import { cls } from '../../utils';
 
 useMetadata({
-	isAttachedToShadowDom: false,
-	component: {
-		// MS Power Apps
-		includeIcon: true,
-		properties: [
-			// jscpd:ignore-start
-			{
-				name: 'children',
-				type: 'SingleLine.Text',
-				defaultValue: 'Link'
-			},
-			{
-				name: 'href',
-				type: 'SingleLine.URL',
-				defaultValue: 'https://www.deutschebahn.com/'
-			},
-			{ name: 'title', type: 'SingleLine.Text' },
-			{
-				name: 'variant',
-				type: 'Enum',
-				values: [
-					{ key: 'Adaptive', name: 'Adaptive', value: 'adaptive' },
-					{ key: 'Primary', name: 'primary', value: 'primary' },
-					{
-						key: 'Inline',
-						name: 'Inline',
-						value: 'inline'
-					}
-				],
-				defaultValue: 'adaptive'
-			},
-			{
-				name: 'target',
-				type: 'Enum',
-				values: [
-					{ key: '_self', name: '_self', value: '_self' },
-					{ key: '_blank', name: '_blank', value: '_blank' },
-					{ key: '_parent', name: '_parent', value: '_parent' },
-					{ key: '_top', name: '_top', value: '_top' }
-				],
-				defaultValue: '_blank'
-			}
-			// jscpd:ignore-end
-		]
-	}
+	isAttachedToShadowDom: false
 });
 
 export default function DBLink(props: DBLinkProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLAnchorElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBLinkState>({
 		handleClick: (event: any) => {
@@ -71,7 +26,7 @@ export default function DBLink(props: DBLinkProps) {
 
 	return (
 		<a
-			ref={component}
+			ref={ref}
 			id={props.id}
 			class={cls('db-link', props.className)}
 			href={props.href}

@@ -74,12 +74,13 @@ const FormComponent = () => {
 							type="date"
 						/>
 						<DBTextarea
+							aria-atomic
 							label="Textarea Default value"
+							defaultValue="text area default value"
 							onChange={(event) => {
 								setTextareaChildren(event.target.value);
-							}}>
-							text area default value
-						</DBTextarea>
+							}}
+						/>
 						<p>Radio:</p>
 						<ul>
 							{['X', 'Y', 'Z'].map((radioName) => (

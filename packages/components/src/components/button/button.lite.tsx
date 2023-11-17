@@ -1,63 +1,13 @@
-import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import {onMount, Show, useMetadata, useRef, useStore} from '@builder.io/mitosis';
 import type { DBButtonProps, DBButtonState } from './model';
 import { cls } from '../../utils';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: true,
-		hasDisabledProp: true,
-		hasOnClick: true,
-		canvasSize: {
-			height: 'fixed', // 'fixed', 'controlled'
-			width: 'dynamic' // 'fixed', 'dynamic' (requires width property), 'controlled'
-		},
-		properties: [
-			{
-				name: 'children',
-				type: 'SingleLine.Text',
-				defaultValue: 'Button'
-			},
-			{
-				name: 'variant',
-				type: 'Enum',
-				values: [
-					{ key: 'Primary', name: 'Primary', value: 'primary' },
-					{ key: 'Outlined', name: 'Outlined', value: 'outlined' },
-					{
-						key: 'Text',
-						name: 'Text',
-						value: 'text'
-					},
-					{
-						key: 'Solid',
-						name: 'Solid',
-						value: 'solid'
-					}
-				],
-				defaultValue: 'primary'
-			},
-			{
-				name: 'icon',
-				type: 'Icon'
-			},
-			{ name: 'noText', type: 'TwoOptions' },
-			{
-				name: 'width',
-				powerAppsName: 'autoWidth', // width property is reserved in power apps
-				type: 'Enum',
-				defaultValue: 'auto',
-				values: [
-					{ key: 'Full', name: 'Full', value: 'full' },
-					{ key: 'Auto', name: 'Auto', value: 'auto' }
-				]
-			}
-		]
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBButton(props: DBButtonProps) {
+	const ref = useRef<HTMLButtonElement>(null);
 	// This is used as forwardRef
 	let component: any;
 	// jscpd:ignore-start
@@ -78,8 +28,8 @@ export default function DBButton(props: DBButtonProps) {
 
 	return (
 		<button
+			ref={ref}
 			id={props.id}
-			ref={component}
 			class={cls('db-button', props.className, {
 				'is-icon-text-replace': props.noText
 			})}

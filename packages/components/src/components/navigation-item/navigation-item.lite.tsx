@@ -3,7 +3,7 @@ import {
 	onUpdate,
 	Show,
 	Slot,
-	useMetadata,
+	useMetadata, useRef,
 	useStore
 } from '@builder.io/mitosis';
 import { DBNavigationItemState, DBNavigationItemProps } from './model';
@@ -12,17 +12,11 @@ import { cls, uuid } from '../../utils';
 import { DEFAULT_BACK } from '../../shared/constants';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: false,
-		properties: []
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBNavigationItem(props: DBNavigationItemProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLLIElement>(null);
 
 	// jscpd:ignore-start
 	const state = useStore<DBNavigationItemState>({
@@ -82,7 +76,7 @@ export default function DBNavigationItem(props: DBNavigationItemProps) {
 
 	return (
 		<li
-			ref={component}
+			ref={ref}
 			id={props.id}
 			class={cls('db-navigation-item', props.className)}
 			data-width={props.width}

@@ -1,20 +1,20 @@
-import { onMount, Show, useMetadata, useStore } from '@builder.io/mitosis';
+import {
+	onMount,
+	Show,
+	useMetadata,
+	useRef,
+	useStore
+} from '@builder.io/mitosis';
 import { DBTooltipProps, DBTooltipState } from './model';
 import { cls, uuid } from '../../utils';
 import { DEFAULT_ID } from '../../shared/constants';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: false,
-		properties: []
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBTooltip(props: DBTooltipProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLDivElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBTooltipState>({
 		_id: DEFAULT_ID,
@@ -35,7 +35,7 @@ export default function DBTooltip(props: DBTooltipProps) {
 	return (
 		<i
 			role="tooltip"
-			ref={component}
+			ref={ref}
 			className={cls('db-tooltip', props.className)}
 			id={state._id}
 			data-emphasis={props.emphasis}

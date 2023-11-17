@@ -2,7 +2,7 @@ import {
 	onMount,
 	onUpdate,
 	Show,
-	useMetadata,
+	useMetadata, useRef,
 	useStore
 } from '@builder.io/mitosis';
 import { DBCheckboxProps, DBCheckboxState } from './model';
@@ -11,31 +11,11 @@ import { DEFAULT_ID } from '../../shared/constants';
 import { cls } from '../../utils';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		// MS Power Apps
-		includeIcon: true,
-		hasDisabledProp: true,
-		properties: [
-			// jscpd:ignore-start
-			{
-				name: 'children',
-				type: 'SingleLine.Text',
-				defaultValue: 'Checkbox'
-			},
-			{ name: 'name', type: 'SingleLine.Text' },
-			// { name: 'checked', type: 'TwoOptions' },
-			{ name: 'value', type: 'SingleLine.Text', onChange: 'value' }, // $event.target["value"|"checked"|...]
-			// { name: 'disabled', type: 'TwoOptions' },
-			{ name: 'id', type: 'SingleLine.Text' }
-			// jscpd:ignore-end
-		]
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBCheckbox(props: DBCheckboxProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLInputElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBCheckboxState>({
 		initialized: false,
@@ -112,18 +92,12 @@ export default function DBCheckbox(props: DBCheckboxProps) {
 					// It has no accessibility or UX implications. (https://mui.com/material-ui/react-checkbox/)
 					checkboxElement.indeterminate = props.indeterminate;
 				}
-
-				if (props.defaultChecked !== undefined) {
-					// only set by JS: https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#instance_properties_that_apply_only_to_elements_of_type_checkbox_or_radio
-					checkboxElement.defaultChecked = props.defaultChecked;
-				}
 			}
 		}
 	}, [
 		state.initialized,
 		props.indeterminate,
-		props.checked,
-		props.defaultChecked
+		props.checked
 	]);
 
 	return (
@@ -136,7 +110,7 @@ export default function DBCheckbox(props: DBCheckboxProps) {
 				<link rel="stylesheet" href={state.stylePath} />
 			</Show>
 			<input
-				ref={component}
+				ref={ref}
 				type="checkbox"
 				id={state._id}
 				name={props.name}

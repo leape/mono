@@ -56,6 +56,31 @@ export const getMessageIcon = (
 	return messageIcon
 		? messageIcon
 		: !variant || variant === 'adaptive'
-		? 'none'
-		: undefined;
+		  ? 'none'
+		  : undefined;
+};
+
+export const filterPassingProps = (props: any): any => {
+	return Object.keys(props)
+		.filter((key) => {
+			return (
+				key.startsWith('data-') ||
+				key.startsWith('aria-') ||
+				key.startsWith('default') ||
+				key.startsWith('auto') ||
+				key.startsWith('on')
+			);
+		})
+		.reduce((obj, key) => {
+			obj[key] = props[key];
+			return obj;
+		}, {});
+};
+
+export default {
+	filterPassingProps,
+	getMessageIcon,
+	cls,
+	addAttributeToChildren,
+	uuid
 };

@@ -3,7 +3,7 @@ import {
 	onMount,
 	onUpdate,
 	Show,
-	useMetadata,
+	useMetadata, useRef,
 	useStore
 } from '@builder.io/mitosis';
 import { DBSelectOptionType, DBSelectProps, DBSelectState } from './model';
@@ -17,16 +17,11 @@ import {
 import { DBInfotext } from '../infotext';
 
 useMetadata({
-	isAttachedToShadowDom: true,
-	component: {
-		includeIcon: false,
-		properties: []
-	}
+	isAttachedToShadowDom: true
 });
 
 export default function DBSelect(props: DBSelectProps) {
-	// This is used as forwardRef
-	let component: any;
+	const ref = useRef<HTMLSelectElement>(null);
 	// jscpd:ignore-start
 	const state = useStore<DBSelectState>({
 		_id: DEFAULT_ID,
@@ -109,7 +104,7 @@ export default function DBSelect(props: DBSelectProps) {
 				{props.label ?? DEFAULT_LABEL}
 			</label>
 			<select
-				ref={component}
+				ref={ref}
 				aria-invalid={props.invalid}
 				required={props.required}
 				disabled={props.disabled}
