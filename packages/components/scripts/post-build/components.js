@@ -50,6 +50,13 @@ const getComponents = () => [
 			angular: {
 				controlValueAccessor: 'value'
 			}
+		},overwrites: {
+			angular: [
+				{
+					from: '</textarea>',
+					to: '{{value}}</textarea>'
+				}
+			]
 		}
 	},
 	{
