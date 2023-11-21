@@ -92,6 +92,7 @@
 		}
 
 		// Handle native radio and checkbox input elements, especially regarding focus-visible indicator
+		// TODO: Reevaluate whether we could use the standard HTML elements instead of our components
 		input {
 			inline-size: calc(100% + 2px);
 			block-size: calc(100% + 2px);
