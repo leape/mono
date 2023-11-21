@@ -91,8 +91,25 @@
 			}
 		}
 
+		// Handle native radio and checkbox input elements, especially regarding focus-visible indicator
 		input {
-			display: none;
+			inline-size: calc(100% + 2px);
+			block-size: calc(100% + 2px);
+			position: absolute;
+			margin-inline-end: initial;
+			border: none;
+			border-radius: inherit;
+			transform: translateX(
+				calc(
+					(
+							#{variables.$db-spacing-fixed-2xs} + #{variables.$db-border-height-sm}
+						) * -1
+				)
+			);
+
+			&:checked::before {
+				--db-icon: "";
+			}
 		}
 	}
 
